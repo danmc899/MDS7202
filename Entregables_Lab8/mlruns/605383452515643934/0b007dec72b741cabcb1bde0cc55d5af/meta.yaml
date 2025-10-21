@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/dlamu/Downloads/Lab8/mlruns/605383452515643934/0b007dec72b741cabcb1bde0cc55d5af/artifacts
+end_time: 1761078420942
+entry_point_name: ''
+experiment_id: '605383452515643934'
+lifecycle_stage: active
+run_id: 0b007dec72b741cabcb1bde0cc55d5af
+run_name: Best_Model_Artifacts
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761078420758
+status: 3
+tags: []
+user_id: dlamu

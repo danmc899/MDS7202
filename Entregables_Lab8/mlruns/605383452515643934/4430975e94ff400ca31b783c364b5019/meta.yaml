@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/dlamu/Downloads/Lab8/mlruns/605383452515643934/4430975e94ff400ca31b783c364b5019/artifacts
+end_time: 1761078381236
+entry_point_name: ''
+experiment_id: '605383452515643934'
+lifecycle_stage: active
+run_id: 4430975e94ff400ca31b783c364b5019
+run_name: XGBoost_lr_0.0568_depth_10
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761078371160
+status: 3
+tags: []
+user_id: dlamu

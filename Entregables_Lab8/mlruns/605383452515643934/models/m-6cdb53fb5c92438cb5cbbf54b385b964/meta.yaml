@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/dlamu/Downloads/Lab8/mlruns/605383452515643934/models/m-6cdb53fb5c92438cb5cbbf54b385b964/artifacts
+creation_timestamp: 1761077673555
+experiment_id: '605383452515643934'
+last_updated_timestamp: 1761077685792
+model_id: m-6cdb53fb5c92438cb5cbbf54b385b964
+model_type: null
+name: model
+source_run_id: 04269862f4c2413598c0fa7654af985a
+status: 2
+status_message: null

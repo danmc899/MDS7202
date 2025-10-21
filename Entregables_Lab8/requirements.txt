@@ -1,0 +1,9 @@
+pandas==2.3.1
+numpy==1.26.4
+scikit-learn==1.7.2
+xgboost==2.0.0
+optuna==3.4.0
+mlflow==3.5.0
+matplotlib==3.8.0
+plotly==5.17.0
+kaleido==0.2.1

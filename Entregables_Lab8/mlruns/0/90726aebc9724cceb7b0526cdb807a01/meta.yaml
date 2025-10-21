@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/dlamu/Downloads/Lab8/mlruns/0/90726aebc9724cceb7b0526cdb807a01/artifacts
+end_time: 1761048034465
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 90726aebc9724cceb7b0526cdb807a01
+run_name: classy-croc-819
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761048016085
+status: 3
+tags: []
+user_id: dlamu
