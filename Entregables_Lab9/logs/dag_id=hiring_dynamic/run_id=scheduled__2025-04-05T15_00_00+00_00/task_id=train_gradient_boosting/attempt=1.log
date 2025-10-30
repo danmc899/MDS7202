@@ -1,0 +1,30 @@
+[2025-10-28T00:44:32.386+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.train_gradient_boosting scheduled__2025-04-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:44:32.389+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.train_gradient_boosting scheduled__2025-04-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:44:32.389+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:44:32.395+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_gradient_boosting> on 2025-04-05 15:00:00+00:00
+[2025-10-28T00:44:32.399+0000] {standard_task_runner.py:57} INFO - Started process 2187 to run task
+[2025-10-28T00:44:32.402+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'train_gradient_boosting', 'scheduled__2025-04-05T15:00:00+00:00', '--job-id', '96', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpugoeg2jn']
+[2025-10-28T00:44:32.403+0000] {standard_task_runner.py:85} INFO - Job 96: Subtask train_gradient_boosting
+[2025-10-28T00:44:32.421+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.train_gradient_boosting scheduled__2025-04-05T15:00:00+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:44:32.455+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='train_gradient_boosting' AIRFLOW_CTX_EXECUTION_DATE='2025-04-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-04-05T15:00:00+00:00'
+[2025-10-28T00:44:32.461+0000] {logging_mixin.py:154} INFO - Entrenando modelo: gradient_boosting
+[2025-10-28T00:44:32.753+0000] {logging_mixin.py:154} INFO - Modelo gradient_boosting guardado en: /opt/airflow/data/dynamic/2025-04-05/models/gradient_boosting.joblib
+[2025-10-28T00:44:32.757+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T00:44:32.759+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=train_gradient_boosting, execution_date=20250405T150000, start_date=20251028T004432, end_date=20251028T004432
+[2025-10-28T00:44:32.790+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:44:32.800+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T01:31:21.679+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.train_gradient_boosting scheduled__2025-04-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:31:21.682+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.train_gradient_boosting scheduled__2025-04-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:31:21.682+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T01:31:21.688+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_gradient_boosting> on 2025-04-05 15:00:00+00:00
+[2025-10-28T01:31:21.692+0000] {standard_task_runner.py:57} INFO - Started process 2248 to run task
+[2025-10-28T01:31:21.695+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'train_gradient_boosting', 'scheduled__2025-04-05T15:00:00+00:00', '--job-id', '88', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpewt8odu1']
+[2025-10-28T01:31:21.696+0000] {standard_task_runner.py:85} INFO - Job 88: Subtask train_gradient_boosting
+[2025-10-28T01:31:21.715+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.train_gradient_boosting scheduled__2025-04-05T15:00:00+00:00 [running]> on host c46dbfd34b1f
+[2025-10-28T01:31:21.746+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='train_gradient_boosting' AIRFLOW_CTX_EXECUTION_DATE='2025-04-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-04-05T15:00:00+00:00'
+[2025-10-28T01:31:21.753+0000] {logging_mixin.py:154} INFO - Entrenando modelo: gradient_boosting
+[2025-10-28T01:31:22.031+0000] {logging_mixin.py:154} INFO - Modelo gradient_boosting guardado en: /opt/airflow/data/dynamic/2025-04-05/models/gradient_boosting.joblib
+[2025-10-28T01:31:22.036+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T01:31:22.039+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=train_gradient_boosting, execution_date=20250405T150000, start_date=20251028T013121, end_date=20251028T013122
+[2025-10-28T01:31:22.088+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T01:31:22.099+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

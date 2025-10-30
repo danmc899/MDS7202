@@ -1,0 +1,34 @@
+[2025-10-28T00:46:29.707+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.load_and_merge scheduled__2025-09-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:46:29.710+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.load_and_merge scheduled__2025-09-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:46:29.710+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:46:29.716+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_and_merge> on 2025-09-05 15:00:00+00:00
+[2025-10-28T00:46:29.721+0000] {standard_task_runner.py:57} INFO - Started process 2887 to run task
+[2025-10-28T00:46:29.723+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'load_and_merge', 'scheduled__2025-09-05T15:00:00+00:00', '--job-id', '124', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpwrasalmp']
+[2025-10-28T00:46:29.724+0000] {standard_task_runner.py:85} INFO - Job 124: Subtask load_and_merge
+[2025-10-28T00:46:29.743+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.load_and_merge scheduled__2025-09-05T15:00:00+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:46:29.769+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='load_and_merge' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T15:00:00+00:00'
+[2025-10-28T00:46:29.770+0000] {logging_mixin.py:154} INFO - Leyendo /opt/airflow/data/dynamic/2025-09-05/raw/data_1.csv
+[2025-10-28T00:46:29.774+0000] {logging_mixin.py:154} INFO - Leyendo /opt/airflow/data/dynamic/2025-09-05/raw/data_2.csv
+[2025-10-28T00:46:29.779+0000] {logging_mixin.py:154} INFO - Datos concatenados guardados en: /opt/airflow/data/dynamic/2025-09-05/preprocessed/merged_data.csv
+[2025-10-28T00:46:29.779+0000] {logging_mixin.py:154} INFO - Forma del dataset: (1500, 11)
+[2025-10-28T00:46:29.783+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T00:46:29.786+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=load_and_merge, execution_date=20250905T150000, start_date=20251028T004629, end_date=20251028T004629
+[2025-10-28T00:46:29.823+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:46:29.836+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T01:32:37.376+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.load_and_merge scheduled__2025-09-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:32:37.379+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.load_and_merge scheduled__2025-09-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:32:37.379+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T01:32:37.385+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_and_merge> on 2025-09-05 15:00:00+00:00
+[2025-10-28T01:32:37.391+0000] {standard_task_runner.py:57} INFO - Started process 2671 to run task
+[2025-10-28T01:32:37.395+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'load_and_merge', 'scheduled__2025-09-05T15:00:00+00:00', '--job-id', '105', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpqk_3a_64']
+[2025-10-28T01:32:37.396+0000] {standard_task_runner.py:85} INFO - Job 105: Subtask load_and_merge
+[2025-10-28T01:32:37.425+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.load_and_merge scheduled__2025-09-05T15:00:00+00:00 [running]> on host c46dbfd34b1f
+[2025-10-28T01:32:37.457+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='load_and_merge' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T15:00:00+00:00'
+[2025-10-28T01:32:37.458+0000] {logging_mixin.py:154} INFO - Leyendo /opt/airflow/data/dynamic/2025-09-05/raw/data_1.csv
+[2025-10-28T01:32:37.468+0000] {logging_mixin.py:154} INFO - Leyendo /opt/airflow/data/dynamic/2025-09-05/raw/data_2.csv
+[2025-10-28T01:32:37.474+0000] {logging_mixin.py:154} INFO - Datos concatenados guardados en: /opt/airflow/data/dynamic/2025-09-05/preprocessed/merged_data.csv
+[2025-10-28T01:32:37.474+0000] {logging_mixin.py:154} INFO - Forma del dataset: (1500, 11)
+[2025-10-28T01:32:37.478+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T01:32:37.481+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=load_and_merge, execution_date=20250905T150000, start_date=20251028T013237, end_date=20251028T013237
+[2025-10-28T01:32:37.494+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T01:32:37.506+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

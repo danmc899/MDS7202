@@ -1,0 +1,42 @@
+[2025-10-28T00:46:31.747+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.evaluate_models scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:46:31.750+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.evaluate_models scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:46:31.750+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:46:31.756+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): evaluate_models> on 2025-08-05 15:00:00+00:00
+[2025-10-28T00:46:31.759+0000] {standard_task_runner.py:57} INFO - Started process 2904 to run task
+[2025-10-28T00:46:31.763+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'evaluate_models', 'scheduled__2025-08-05T15:00:00+00:00', '--job-id', '125', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpmqqi6v0s']
+[2025-10-28T00:46:31.764+0000] {standard_task_runner.py:85} INFO - Job 125: Subtask evaluate_models
+[2025-10-28T00:46:31.781+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.evaluate_models scheduled__2025-08-05T15:00:00+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:46:31.811+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='evaluate_models' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-05T15:00:00+00:00'
+[2025-10-28T00:46:31.817+0000] {logging_mixin.py:154} INFO - Evaluando 3 modelos en experimento 'dynamic'...
+[2025-10-28T00:46:31.823+0000] {logging_mixin.py:154} INFO -   logistic_regression: Accuracy = 0.8700
+[2025-10-28T00:46:31.832+0000] {logging_mixin.py:154} INFO -   gradient_boosting: Accuracy = 0.9300
+[2025-10-28T00:46:31.945+0000] {logging_mixin.py:154} INFO -   random_forest: Accuracy = 0.9467
+[2025-10-28T00:46:31.945+0000] {logging_mixin.py:154} INFO - 
+✅ Mejor modelo (dynamic): random_forest
+[2025-10-28T00:46:31.945+0000] {logging_mixin.py:154} INFO -    Accuracy: 0.9467
+[2025-10-28T00:46:32.213+0000] {logging_mixin.py:154} INFO -    Guardado en: /opt/airflow/data/dynamic/2025-08-05/models/best_model.joblib
+[2025-10-28T00:46:32.223+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T00:46:32.225+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=evaluate_models, execution_date=20250805T150000, start_date=20251028T004631, end_date=20251028T004632
+[2025-10-28T00:46:32.262+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:46:32.270+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T01:33:46.314+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.evaluate_models scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:33:46.318+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.evaluate_models scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:33:46.319+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T01:33:46.327+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): evaluate_models> on 2025-08-05 15:00:00+00:00
+[2025-10-28T01:33:46.331+0000] {standard_task_runner.py:57} INFO - Started process 3024 to run task
+[2025-10-28T01:33:46.334+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'evaluate_models', 'scheduled__2025-08-05T15:00:00+00:00', '--job-id', '119', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmppvfatgzk']
+[2025-10-28T01:33:46.336+0000] {standard_task_runner.py:85} INFO - Job 119: Subtask evaluate_models
+[2025-10-28T01:33:46.357+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.evaluate_models scheduled__2025-08-05T15:00:00+00:00 [running]> on host c46dbfd34b1f
+[2025-10-28T01:33:46.390+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='evaluate_models' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-05T15:00:00+00:00'
+[2025-10-28T01:33:46.398+0000] {logging_mixin.py:154} INFO - Evaluando 3 modelos en experimento 'dynamic'...
+[2025-10-28T01:33:46.405+0000] {logging_mixin.py:154} INFO -   logistic_regression: Accuracy = 0.8700
+[2025-10-28T01:33:46.414+0000] {logging_mixin.py:154} INFO -   gradient_boosting: Accuracy = 0.9300
+[2025-10-28T01:33:46.539+0000] {logging_mixin.py:154} INFO -   random_forest: Accuracy = 0.9467
+[2025-10-28T01:33:46.539+0000] {logging_mixin.py:154} INFO - 
+✅ Mejor modelo (dynamic): random_forest
+[2025-10-28T01:33:46.539+0000] {logging_mixin.py:154} INFO -    Accuracy: 0.9467
+[2025-10-28T01:33:46.837+0000] {logging_mixin.py:154} INFO -    Guardado en: /opt/airflow/data/dynamic/2025-08-05/models/best_model.joblib
+[2025-10-28T01:33:46.847+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T01:33:46.849+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=evaluate_models, execution_date=20250805T150000, start_date=20251028T013346, end_date=20251028T013346
+[2025-10-28T01:33:46.901+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T01:33:46.913+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

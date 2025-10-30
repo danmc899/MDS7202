@@ -1,0 +1,28 @@
+[2025-10-28T00:41:10.518+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.create_folders scheduled__2025-05-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:41:10.521+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.create_folders scheduled__2025-05-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:41:10.521+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:41:10.527+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): create_folders> on 2025-05-05 15:00:00+00:00
+[2025-10-28T00:41:10.532+0000] {standard_task_runner.py:57} INFO - Started process 869 to run task
+[2025-10-28T00:41:10.538+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'create_folders', 'scheduled__2025-05-05T15:00:00+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpdi8bzv34']
+[2025-10-28T00:41:10.540+0000] {standard_task_runner.py:85} INFO - Job 38: Subtask create_folders
+[2025-10-28T00:41:10.561+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.create_folders scheduled__2025-05-05T15:00:00+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:41:10.596+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='create_folders' AIRFLOW_CTX_EXECUTION_DATE='2025-05-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-05-05T15:00:00+00:00'
+[2025-10-28T00:41:10.598+0000] {logging_mixin.py:154} INFO - Carpetas creadas en: /opt/airflow/data/dynamic/2025-05-05
+[2025-10-28T00:41:10.601+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T00:41:10.603+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=create_folders, execution_date=20250505T150000, start_date=20251028T004110, end_date=20251028T004110
+[2025-10-28T00:41:10.636+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:41:10.655+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T01:27:58.906+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.create_folders scheduled__2025-05-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:27:58.910+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.create_folders scheduled__2025-05-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:27:58.911+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T01:27:58.919+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): create_folders> on 2025-05-05 15:00:00+00:00
+[2025-10-28T01:27:58.933+0000] {standard_task_runner.py:57} INFO - Started process 1000 to run task
+[2025-10-28T01:27:58.972+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'create_folders', 'scheduled__2025-05-05T15:00:00+00:00', '--job-id', '32', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpznqz0c92']
+[2025-10-28T01:27:58.984+0000] {standard_task_runner.py:85} INFO - Job 32: Subtask create_folders
+[2025-10-28T01:27:59.079+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.create_folders scheduled__2025-05-05T15:00:00+00:00 [running]> on host c46dbfd34b1f
+[2025-10-28T01:27:59.145+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='create_folders' AIRFLOW_CTX_EXECUTION_DATE='2025-05-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-05-05T15:00:00+00:00'
+[2025-10-28T01:27:59.148+0000] {logging_mixin.py:154} INFO - Carpetas creadas en: /opt/airflow/data/dynamic/2025-05-05
+[2025-10-28T01:27:59.152+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T01:27:59.155+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=create_folders, execution_date=20250505T150000, start_date=20251028T012758, end_date=20251028T012759
+[2025-10-28T01:27:59.192+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T01:27:59.205+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

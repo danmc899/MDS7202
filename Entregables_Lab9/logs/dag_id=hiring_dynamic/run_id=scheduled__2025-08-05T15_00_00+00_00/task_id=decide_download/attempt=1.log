@@ -1,0 +1,34 @@
+[2025-10-28T00:43:46.575+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.decide_download scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:43:46.578+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.decide_download scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:43:46.578+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:43:46.585+0000] {taskinstance.py:1382} INFO - Executing <Task(BranchPythonOperator): decide_download> on 2025-08-05 15:00:00+00:00
+[2025-10-28T00:43:46.594+0000] {standard_task_runner.py:57} INFO - Started process 1873 to run task
+[2025-10-28T00:43:46.597+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'decide_download', 'scheduled__2025-08-05T15:00:00+00:00', '--job-id', '82', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmp65wis929']
+[2025-10-28T00:43:46.599+0000] {standard_task_runner.py:85} INFO - Job 82: Subtask decide_download
+[2025-10-28T00:43:46.623+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.decide_download scheduled__2025-08-05T15:00:00+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:43:46.656+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='decide_download' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-05T15:00:00+00:00'
+[2025-10-28T00:43:46.657+0000] {logging_mixin.py:154} INFO - Fecha 2025-08-05 >= 2024-11-01: descargando data_1 y data_2
+[2025-10-28T00:43:46.657+0000] {python.py:194} INFO - Done. Returned value was: ['download_data_1', 'download_data_2']
+[2025-10-28T00:43:46.657+0000] {python.py:227} INFO - Branch callable return ['download_data_1', 'download_data_2']
+[2025-10-28T00:43:46.657+0000] {skipmixin.py:173} INFO - Following branch ['download_data_1', 'download_data_2']
+[2025-10-28T00:43:46.660+0000] {skipmixin.py:239} INFO - Skipping tasks [('download_data_1_only', -1)]
+[2025-10-28T00:43:46.673+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=decide_download, execution_date=20250805T150000, start_date=20251028T004346, end_date=20251028T004346
+[2025-10-28T00:43:46.695+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:43:46.715+0000] {taskinstance.py:2778} INFO - 2 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T01:30:31.223+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.decide_download scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:30:31.226+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.decide_download scheduled__2025-08-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:30:31.226+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T01:30:31.231+0000] {taskinstance.py:1382} INFO - Executing <Task(BranchPythonOperator): decide_download> on 2025-08-05 15:00:00+00:00
+[2025-10-28T01:30:31.236+0000] {standard_task_runner.py:57} INFO - Started process 1917 to run task
+[2025-10-28T01:30:31.239+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'decide_download', 'scheduled__2025-08-05T15:00:00+00:00', '--job-id', '73', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpis857izq']
+[2025-10-28T01:30:31.240+0000] {standard_task_runner.py:85} INFO - Job 73: Subtask decide_download
+[2025-10-28T01:30:31.255+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.decide_download scheduled__2025-08-05T15:00:00+00:00 [running]> on host c46dbfd34b1f
+[2025-10-28T01:30:31.281+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='decide_download' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-05T15:00:00+00:00'
+[2025-10-28T01:30:31.282+0000] {logging_mixin.py:154} INFO - Fecha 2025-08-05 >= 2024-11-01: descargando data_1 y data_2
+[2025-10-28T01:30:31.282+0000] {python.py:194} INFO - Done. Returned value was: ['download_data_1', 'download_data_2']
+[2025-10-28T01:30:31.282+0000] {python.py:227} INFO - Branch callable return ['download_data_1', 'download_data_2']
+[2025-10-28T01:30:31.282+0000] {skipmixin.py:173} INFO - Following branch ['download_data_1', 'download_data_2']
+[2025-10-28T01:30:31.285+0000] {skipmixin.py:239} INFO - Skipping tasks [('download_data_1_only', -1)]
+[2025-10-28T01:30:31.296+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=decide_download, execution_date=20250805T150000, start_date=20251028T013031, end_date=20251028T013031
+[2025-10-28T01:30:31.341+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T01:30:31.357+0000] {taskinstance.py:2778} INFO - 2 downstream tasks scheduled from follow-on schedule check

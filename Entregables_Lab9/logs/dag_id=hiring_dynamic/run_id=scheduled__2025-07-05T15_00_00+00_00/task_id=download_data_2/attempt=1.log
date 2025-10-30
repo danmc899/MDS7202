@@ -1,0 +1,42 @@
+[2025-10-28T00:43:51.917+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.download_data_2 scheduled__2025-07-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:43:51.921+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.download_data_2 scheduled__2025-07-05T15:00:00+00:00 [queued]>
+[2025-10-28T00:43:51.921+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:43:51.927+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): download_data_2> on 2025-07-05 15:00:00+00:00
+[2025-10-28T00:43:51.930+0000] {standard_task_runner.py:57} INFO - Started process 1912 to run task
+[2025-10-28T00:43:51.934+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'download_data_2', 'scheduled__2025-07-05T15:00:00+00:00', '--job-id', '84', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpwrron7df']
+[2025-10-28T00:43:51.934+0000] {standard_task_runner.py:85} INFO - Job 84: Subtask download_data_2
+[2025-10-28T00:43:51.953+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.download_data_2 scheduled__2025-07-05T15:00:00+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:43:51.981+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='download_data_2' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-05T15:00:00+00:00'
+[2025-10-28T00:43:51.982+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-10-28T00:43:51.982+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        RAW_DIR="/opt/airflow/data/dynamic/2025-07-05/raw"\n        mkdir -p "$RAW_DIR"\n        curl -L -f -o "$RAW_DIR/data_2.csv" https://gitlab.com/eduardomoyab/laboratorio-13/-/raw/main/files/data_2.csv\n        echo \'✅ Archivo data_2.csv descargado exitosamente\'\n        ls -lh "$RAW_DIR/data_2.csv"\n    ']
+[2025-10-28T00:43:51.988+0000] {subprocess.py:86} INFO - Output:
+[2025-10-28T00:43:51.995+0000] {subprocess.py:93} INFO -   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[2025-10-28T00:43:51.995+0000] {subprocess.py:93} INFO -                                  Dload  Upload   Total   Spent    Left  Speed
+[2025-10-28T00:43:52.641+0000] {subprocess.py:93} INFO -   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 32687  100 32687    0     0  50599      0 --:--:-- --:--:-- --:--:-- 50520
+[2025-10-28T00:43:52.644+0000] {subprocess.py:93} INFO - ✅ Archivo data_2.csv descargado exitosamente
+[2025-10-28T00:43:52.646+0000] {subprocess.py:93} INFO - -rw-r--r-- 1 airflow root 32K Oct 28 00:43 /opt/airflow/data/dynamic/2025-07-05/raw/data_2.csv
+[2025-10-28T00:43:52.647+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-10-28T00:43:52.671+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=download_data_2, execution_date=20250705T150000, start_date=20251028T004351, end_date=20251028T004352
+[2025-10-28T00:43:52.712+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:43:52.726+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T01:30:37.470+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.download_data_2 scheduled__2025-07-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:30:37.473+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.download_data_2 scheduled__2025-07-05T15:00:00+00:00 [queued]>
+[2025-10-28T01:30:37.473+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T01:30:37.479+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): download_data_2> on 2025-07-05 15:00:00+00:00
+[2025-10-28T01:30:37.486+0000] {standard_task_runner.py:57} INFO - Started process 1956 to run task
+[2025-10-28T01:30:37.490+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'download_data_2', 'scheduled__2025-07-05T15:00:00+00:00', '--job-id', '75', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmpyzs7vnes']
+[2025-10-28T01:30:37.490+0000] {standard_task_runner.py:85} INFO - Job 75: Subtask download_data_2
+[2025-10-28T01:30:37.516+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.download_data_2 scheduled__2025-07-05T15:00:00+00:00 [running]> on host c46dbfd34b1f
+[2025-10-28T01:30:37.546+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='download_data_2' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-05T15:00:00+00:00'
+[2025-10-28T01:30:37.547+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-10-28T01:30:37.547+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        RAW_DIR="/opt/airflow/data/dynamic/2025-07-05/raw"\n        mkdir -p "$RAW_DIR"\n        curl -L -f -o "$RAW_DIR/data_2.csv" https://gitlab.com/eduardomoyab/laboratorio-13/-/raw/main/files/data_2.csv\n        echo \'✅ Archivo data_2.csv descargado exitosamente\'\n        ls -lh "$RAW_DIR/data_2.csv"\n    ']
+[2025-10-28T01:30:37.559+0000] {subprocess.py:86} INFO - Output:
+[2025-10-28T01:30:37.575+0000] {subprocess.py:93} INFO -   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[2025-10-28T01:30:37.575+0000] {subprocess.py:93} INFO -                                  Dload  Upload   Total   Spent    Left  Speed
+[2025-10-28T01:30:37.936+0000] {subprocess.py:93} INFO -   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 32687  100 32687    0     0  90545      0 --:--:-- --:--:-- --:--:-- 90545
+[2025-10-28T01:30:37.939+0000] {subprocess.py:93} INFO - ✅ Archivo data_2.csv descargado exitosamente
+[2025-10-28T01:30:37.941+0000] {subprocess.py:93} INFO - -rw-r--r-- 1 airflow root 32K Oct 28 01:30 /opt/airflow/data/dynamic/2025-07-05/raw/data_2.csv
+[2025-10-28T01:30:37.941+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-10-28T01:30:37.955+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=download_data_2, execution_date=20250705T150000, start_date=20251028T013037, end_date=20251028T013037
+[2025-10-28T01:30:37.969+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T01:30:37.982+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

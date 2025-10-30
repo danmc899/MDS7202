@@ -1,0 +1,15 @@
+[2025-10-28T00:41:46.576+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hiring_dynamic.train_logistic_regression manual__2025-10-28T00:39:37.435468+00:00 [queued]>
+[2025-10-28T00:41:46.579+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hiring_dynamic.train_logistic_regression manual__2025-10-28T00:39:37.435468+00:00 [queued]>
+[2025-10-28T00:41:46.579+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-10-28T00:41:46.584+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_logistic_regression> on 2025-10-28 00:39:37.435468+00:00
+[2025-10-28T00:41:46.589+0000] {standard_task_runner.py:57} INFO - Started process 1102 to run task
+[2025-10-28T00:41:46.593+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'hiring_dynamic', 'train_logistic_regression', 'manual__2025-10-28T00:39:37.435468+00:00', '--job-id', '49', '--raw', '--subdir', 'DAGS_FOLDER/dag_dynamic.py', '--cfg-path', '/tmp/tmp12as_s5s']
+[2025-10-28T00:41:46.595+0000] {standard_task_runner.py:85} INFO - Job 49: Subtask train_logistic_regression
+[2025-10-28T00:41:46.621+0000] {task_command.py:416} INFO - Running <TaskInstance: hiring_dynamic.train_logistic_regression manual__2025-10-28T00:39:37.435468+00:00 [running]> on host d1f69dfe6243
+[2025-10-28T00:41:46.649+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='hiring_dynamic' AIRFLOW_CTX_TASK_ID='train_logistic_regression' AIRFLOW_CTX_EXECUTION_DATE='2025-10-28T00:39:37.435468+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-28T00:39:37.435468+00:00'
+[2025-10-28T00:41:46.656+0000] {logging_mixin.py:154} INFO - Entrenando modelo: logistic_regression
+[2025-10-28T00:41:54.476+0000] {logging_mixin.py:154} INFO - Modelo logistic_regression guardado en: /opt/airflow/data/dynamic/2025-10-28/models/logistic_regression.joblib
+[2025-10-28T00:41:54.514+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-10-28T00:41:54.517+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=hiring_dynamic, task_id=train_logistic_regression, execution_date=20251028T003937, start_date=20251028T004146, end_date=20251028T004154
+[2025-10-28T00:41:54.540+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T00:41:54.553+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
