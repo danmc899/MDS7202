@@ -1,0 +1,16 @@
+artifact_uri: file:///opt/airflow/mlruns/102702860222531841/00801a5549af49c3a383ad011cb9aa82/artifacts
+deleted_time: 1761703761902
+end_time: null
+entry_point_name: ''
+experiment_id: '102702860222531841'
+lifecycle_stage: deleted
+run_id: 00801a5549af49c3a383ad011cb9aa82
+run_name: training_20251028_212646
+run_uuid: 00801a5549af49c3a383ad011cb9aa82
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761686808862
+status: 1
+tags: []
+user_id: default

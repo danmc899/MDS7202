@@ -1,0 +1,6 @@
+artifact_location: file:///opt/airflow/mlruns/102702860222531841
+creation_time: 1761686806484
+experiment_id: '102702860222531841'
+last_update_time: 1761686806484
+lifecycle_stage: active
+name: sodai_drinks_prediction

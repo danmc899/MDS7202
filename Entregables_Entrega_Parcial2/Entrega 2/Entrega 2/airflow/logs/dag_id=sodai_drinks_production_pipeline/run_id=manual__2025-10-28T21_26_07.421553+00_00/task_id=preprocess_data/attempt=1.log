@@ -1,0 +1,22 @@
+[2025-10-28T21:26:21.045+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.preprocess_data manual__2025-10-28T21:26:07.421553+00:00 [queued]>
+[2025-10-28T21:26:21.057+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.preprocess_data manual__2025-10-28T21:26:07.421553+00:00 [queued]>
+[2025-10-28T21:26:21.059+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-10-28T21:26:21.074+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): preprocess_data> on 2025-10-28 21:26:07.421553+00:00
+[2025-10-28T21:26:21.098+0000] {standard_task_runner.py:57} INFO - Started process 404 to run task
+[2025-10-28T21:26:21.105+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'preprocess_data', 'manual__2025-10-28T21:26:07.421553+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpxe912qx7']
+[2025-10-28T21:26:21.117+0000] {standard_task_runner.py:85} INFO - Job 4: Subtask preprocess_data
+[2025-10-28T21:26:21.187+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.preprocess_data manual__2025-10-28T21:26:07.421553+00:00 [running]> on host ee70ee0df05e
+[2025-10-28T21:26:21.385+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='preprocess_data' AIRFLOW_CTX_EXECUTION_DATE='2025-10-28T21:26:07.421553+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-28T21:26:07.421553+00:00'
+[2025-10-28T21:26:21.390+0000] {data_preprocessing.py:144} INFO - Iniciando preprocessing de datos...
+[2025-10-28T21:26:22.074+0000] {data_preprocessing.py:83} INFO - Iniciando feature engineering...
+[2025-10-28T21:26:26.972+0000] {data_preprocessing.py:66} INFO - IQR filter en cp_total_items: Removidos 3971 registros (13.01%)
+[2025-10-28T21:26:26.978+0000] {data_preprocessing.py:66} INFO - IQR filter en cp_avg_items: Removidos 1797 registros (6.77%)
+[2025-10-28T21:26:26.983+0000] {data_preprocessing.py:66} INFO - IQR filter en total_items: Removidos 2853 registros (11.53%)
+[2025-10-28T21:26:26.988+0000] {data_preprocessing.py:66} INFO - IQR filter en avg_items: Removidos 1077 registros (4.92%)
+[2025-10-28T21:26:26.991+0000] {data_preprocessing.py:129} INFO - Features generados: 15 columnas, 20816 filas
+[2025-10-28T21:26:27.037+0000] {data_preprocessing.py:164} INFO - Predicción para semana: 2025-01-07 00:00:00
+[2025-10-28T21:26:27.942+0000] {data_preprocessing.py:211} INFO - Preprocessing completado exitosamente
+[2025-10-28T21:26:27.980+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'processed_records': 94587, 'num_features': 22, 'prediction_week': '2025-01-07T00:00:00'}
+[2025-10-28T21:26:28.126+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=preprocess_data, execution_date=20251028T212607, start_date=20251028T212621, end_date=20251028T212628
+[2025-10-28T21:26:28.417+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T21:26:28.988+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

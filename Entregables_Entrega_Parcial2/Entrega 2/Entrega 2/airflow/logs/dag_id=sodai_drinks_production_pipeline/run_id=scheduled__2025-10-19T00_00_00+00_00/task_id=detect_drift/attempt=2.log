@@ -1,0 +1,84 @@
+[2025-10-28T21:45:11.534+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [queued]>
+[2025-10-28T21:45:11.544+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [queued]>
+[2025-10-28T21:45:11.545+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 3
+[2025-10-28T21:45:11.563+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): detect_drift> on 2025-10-19 00:00:00+00:00
+[2025-10-28T21:45:11.582+0000] {standard_task_runner.py:57} INFO - Started process 611 to run task
+[2025-10-28T21:45:11.595+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'detect_drift', 'scheduled__2025-10-19T00:00:00+00:00', '--job-id', '23', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpst_1xlnq']
+[2025-10-28T21:45:11.602+0000] {standard_task_runner.py:85} INFO - Job 23: Subtask detect_drift
+[2025-10-28T21:45:11.694+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [running]> on host ee70ee0df05e
+[2025-10-28T21:45:11.770+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='detect_drift' AIRFLOW_CTX_EXECUTION_DATE='2025-10-19T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-19T00:00:00+00:00'
+[2025-10-28T21:45:11.772+0000] {drift_detection.py:80} INFO - Iniciando detección de drift...
+[2025-10-28T21:45:11.920+0000] {drift_detection.py:110} INFO - Datos de referencia: 94587 registros
+[2025-10-28T21:45:11.921+0000] {drift_detection.py:111} INFO - Datos actuales: 94587 registros
+[2025-10-28T21:45:11.957+0000] {drift_detection.py:119} INFO - Analizando drift en 19 features numéricas
+[2025-10-28T21:45:11.979+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-10-28T21:45:11.989+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-10-28T21:45:12.003+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-10-28T21:45:12.012+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-10-28T21:45:12.022+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-10-28T21:45:12.027+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-10-28T21:45:12.037+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-10-28T21:45:12.041+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-10-28T21:45:12.053+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-10-28T21:45:12.060+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-10-28T21:45:12.062+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tasks/drift_detection.py", line 158, in detect_drift
+    json.dump(drift_results, f, indent=2)
+  File "/usr/local/lib/python3.10/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/local/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/local/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/local/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/local/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool_ is not JSON serializable
+[2025-10-28T21:45:12.084+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=sodai_drinks_production_pipeline, task_id=detect_drift, execution_date=20251019T000000, start_date=20251028T214511, end_date=20251028T214512
+[2025-10-28T21:45:12.094+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 23 for task detect_drift (Object of type bool_ is not JSON serializable; 611)
+[2025-10-28T21:45:12.149+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-10-28T21:45:12.196+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T22:53:19.573+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [queued]>
+[2025-10-28T22:53:19.579+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [queued]>
+[2025-10-28T22:53:19.580+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 3
+[2025-10-28T22:53:19.594+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): detect_drift> on 2025-10-19 00:00:00+00:00
+[2025-10-28T22:53:19.619+0000] {standard_task_runner.py:57} INFO - Started process 416 to run task
+[2025-10-28T22:53:19.629+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'detect_drift', 'scheduled__2025-10-19T00:00:00+00:00', '--job-id', '62', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmprrlibktg']
+[2025-10-28T22:53:19.633+0000] {standard_task_runner.py:85} INFO - Job 62: Subtask detect_drift
+[2025-10-28T22:53:19.692+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [running]> on host ee70ee0df05e
+[2025-10-28T22:53:19.737+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='detect_drift' AIRFLOW_CTX_EXECUTION_DATE='2025-10-19T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-19T00:00:00+00:00'
+[2025-10-28T22:53:19.739+0000] {drift_detection.py:80} INFO - Iniciando detección de drift...
+[2025-10-28T22:53:20.014+0000] {drift_detection.py:110} INFO - Datos de referencia: 94587 registros
+[2025-10-28T22:53:20.016+0000] {drift_detection.py:111} INFO - Datos actuales: 619380 registros
+[2025-10-28T22:53:20.340+0000] {drift_detection.py:119} INFO - Analizando drift en 15 features numéricas
+[2025-10-28T22:53:20.389+0000] {drift_detection.py:168} INFO - ✅ No se detectó drift significativo en los datos
+[2025-10-28T22:53:20.396+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'has_drift': False, 'features_analyzed': 15, 'drift_results': {}}
+[2025-10-28T22:53:20.413+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=detect_drift, execution_date=20251019T000000, start_date=20251028T225319, end_date=20251028T225320
+[2025-10-28T22:53:20.451+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T22:53:20.502+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-28T23:31:53.845+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [queued]>
+[2025-10-28T23:31:53.853+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [queued]>
+[2025-10-28T23:31:53.854+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 3
+[2025-10-28T23:31:53.868+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): detect_drift> on 2025-10-19 00:00:00+00:00
+[2025-10-28T23:31:53.918+0000] {standard_task_runner.py:57} INFO - Started process 451 to run task
+[2025-10-28T23:31:53.928+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'detect_drift', 'scheduled__2025-10-19T00:00:00+00:00', '--job-id', '97', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpz96h5kju']
+[2025-10-28T23:31:53.934+0000] {standard_task_runner.py:85} INFO - Job 97: Subtask detect_drift
+[2025-10-28T23:31:54.051+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.detect_drift scheduled__2025-10-19T00:00:00+00:00 [running]> on host ee70ee0df05e
+[2025-10-28T23:31:54.281+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='detect_drift' AIRFLOW_CTX_EXECUTION_DATE='2025-10-19T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-19T00:00:00+00:00'
+[2025-10-28T23:31:54.285+0000] {drift_detection.py:80} INFO - Iniciando detección de drift...
+[2025-10-28T23:31:54.833+0000] {drift_detection.py:110} INFO - Datos de referencia: 94587 registros
+[2025-10-28T23:31:54.835+0000] {drift_detection.py:111} INFO - Datos actuales: 619380 registros
+[2025-10-28T23:31:55.014+0000] {drift_detection.py:119} INFO - Analizando drift en 15 features numéricas
+[2025-10-28T23:31:55.071+0000] {drift_detection.py:168} INFO - ✅ No se detectó drift significativo en los datos
+[2025-10-28T23:31:55.098+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'has_drift': False, 'features_analyzed': 15, 'drift_results': {}}
+[2025-10-28T23:31:55.143+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=detect_drift, execution_date=20251019T000000, start_date=20251028T233153, end_date=20251028T233155
+[2025-10-28T23:31:55.201+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-10-28T23:31:55.286+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
