@@ -1,85 +1,0 @@
-[2025-10-28T23:50:16.169+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-10-28T23:44:15.275626+00:00 [queued]>
-[2025-10-28T23:50:16.173+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-10-28T23:44:15.275626+00:00 [queued]>
-[2025-10-28T23:50:16.173+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
-[2025-10-28T23:50:16.179+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_model> on 2025-10-28 23:44:15.275626+00:00
-[2025-10-28T23:50:16.187+0000] {standard_task_runner.py:57} INFO - Started process 1151 to run task
-[2025-10-28T23:50:16.193+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'train_model', 'manual__2025-10-28T23:44:15.275626+00:00', '--job-id', '112', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmp2b2pbox9']
-[2025-10-28T23:50:16.198+0000] {standard_task_runner.py:85} INFO - Job 112: Subtask train_model
-[2025-10-28T23:50:16.252+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-10-28T23:44:15.275626+00:00 [running]> on host ee70ee0df05e
-[2025-10-28T23:50:16.298+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-10-28T23:44:15.275626+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-28T23:44:15.275626+00:00'
-[2025-10-28T23:50:16.299+0000] {model_training.py:172} INFO - Iniciando entrenamiento del modelo...
-[2025-10-28T23:50:16.655+0000] {model_training.py:187} INFO - Features: 16, Registros: 619380
-[2025-10-28T23:50:16.666+0000] {model_training.py:188} INFO - Distribución de clases - 0: 412920, 1: 206460
-[2025-10-28T23:50:17.179+0000] {logging_mixin.py:154} WARNING - 2025/10/28 23:50:17 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
-The git executable must be specified in one of the following ways:
-    - be included in your $PATH
-    - be set via $GIT_PYTHON_GIT_EXECUTABLE
-    - explicitly set via git.refresh(<full-path-to-git-executable>)
-
-All git commands will error until this is rectified.
-
-This initial message can be silenced or aggravated in the future by setting the
-$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
-    - quiet|q|silence|s|silent|none|n|0: for no message or exception
-    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
-    - error|e|exception|raise|r|2: for a raised exception
-
-Example:
-    export GIT_PYTHON_REFRESH=quiet
-[2025-10-28T23:50:17.196+0000] {model_training.py:56} INFO - Iniciando optimización de hiperparámetros con 30 trials...
-[2025-10-28T23:50:17.205+0000] {logging_mixin.py:154} WARNING -   0%|          | 0/30 [00:00<?, ?it/s]
-[2025-10-28T23:50:17.817+0000] {model_training.py:107} WARNING - Error al entrenar modelo random_forest: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:17.819+0000] {logging_mixin.py:154} WARNING -                                       
-[2025-10-28T23:50:17.819+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:17.819+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:17,819] Trial 0 pruned. 
-[2025-10-28T23:50:17.819+0000] {logging_mixin.py:154} WARNING -   0%|          | 0/30 [00:00<?, ?it/s]
-[2025-10-28T23:50:17.820+0000] {logging_mixin.py:154} WARNING -   3%|3         | 1/30 [00:00<00:17,  1.63it/s]
-[2025-10-28T23:50:18.198+0000] {model_training.py:107} WARNING - Error al entrenar modelo gradient_boosting: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:18.201+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:18.201+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:18.201+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:18,201] Trial 1 pruned. 
-[2025-10-28T23:50:18.202+0000] {logging_mixin.py:154} WARNING -   3%|3         | 1/30 [00:00<00:17,  1.63it/s]
-[2025-10-28T23:50:18.202+0000] {logging_mixin.py:154} WARNING -   7%|6         | 2/30 [00:00<00:13,  2.09it/s]
-[2025-10-28T23:50:18.975+0000] {model_training.py:107} WARNING - Error al entrenar modelo gradient_boosting: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:18.977+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:18.977+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:18.977+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:18,976] Trial 2 pruned. 
-[2025-10-28T23:50:18.977+0000] {logging_mixin.py:154} WARNING -   7%|6         | 2/30 [00:01<00:13,  2.09it/s]
-[2025-10-28T23:50:18.977+0000] {logging_mixin.py:154} WARNING -  10%|#         | 3/30 [00:01<00:16,  1.63it/s]
-[2025-10-28T23:50:19.022+0000] {model_training.py:107} WARNING - Error al entrenar modelo xgboost: DataFrame.dtypes for data must be int, float, bool or category. When categorical type is supplied, The experimental DMatrix parameter`enable_categorical` must be set to `True`.  Invalid columns:brand: object
-[2025-10-28T23:50:19.022+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:19.905+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:19.906+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:19,022] Trial 3 pruned. 
-[2025-10-28T23:50:19.907+0000] {logging_mixin.py:154} WARNING -  10%|#         | 3/30 [00:02<00:16,  1.63it/s]
-[2025-10-28T23:50:19.907+0000] {logging_mixin.py:154} WARNING -  13%|#3        | 4/30 [00:02<00:19,  1.35it/s]
-[2025-10-28T23:50:19.942+0000] {model_training.py:107} WARNING - Error al entrenar modelo xgboost: DataFrame.dtypes for data must be int, float, bool or category. When categorical type is supplied, The experimental DMatrix parameter`enable_categorical` must be set to `True`.  Invalid columns:brand: object
-[2025-10-28T23:50:19.943+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:19.943+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:19.943+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:19,943] Trial 4 pruned. 
-[2025-10-28T23:50:19.943+0000] {logging_mixin.py:154} WARNING -  13%|#3        | 4/30 [00:02<00:19,  1.35it/s]
-[2025-10-28T23:50:20.392+0000] {model_training.py:107} WARNING - Error al entrenar modelo random_forest: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:20.393+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:20.393+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:20.393+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:20,393] Trial 5 pruned. 
-[2025-10-28T23:50:20.394+0000] {logging_mixin.py:154} WARNING -  17%|#6        | 5/30 [00:03<00:18,  1.35it/s]
-[2025-10-28T23:50:20.394+0000] {logging_mixin.py:154} WARNING -  20%|##        | 6/30 [00:03<00:11,  2.10it/s]
-[2025-10-28T23:50:20.730+0000] {model_training.py:107} WARNING - Error al entrenar modelo gradient_boosting: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:20.732+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:20.733+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:20.733+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:20,732] Trial 6 pruned. 
-[2025-10-28T23:50:20.733+0000] {logging_mixin.py:154} WARNING -  20%|##        | 6/30 [00:03<00:11,  2.10it/s]
-[2025-10-28T23:50:20.733+0000] {logging_mixin.py:154} WARNING -  23%|##3       | 7/30 [00:03<00:10,  2.28it/s]
-[2025-10-28T23:50:21.253+0000] {model_training.py:107} WARNING - Error al entrenar modelo gradient_boosting: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:21.262+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:21.262+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:21.263+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:21,261] Trial 7 pruned. 
-[2025-10-28T23:50:21.263+0000] {logging_mixin.py:154} WARNING -  23%|##3       | 7/30 [00:04<00:10,  2.28it/s]
-[2025-10-28T23:50:21.263+0000] {logging_mixin.py:154} WARNING -  27%|##6       | 8/30 [00:04<00:10,  2.15it/s]
-[2025-10-28T23:50:21.904+0000] {model_training.py:107} WARNING - Error al entrenar modelo random_forest: could not convert string to float: 'Brand 7'
-[2025-10-28T23:50:21.911+0000] {logging_mixin.py:154} WARNING -                                               
-[2025-10-28T23:50:21.911+0000] {logging_mixin.py:154} WARNING - 
-[2025-10-28T23:50:21.911+0000] {logging_mixin.py:154} INFO - [I 2025-10-28 23:50:21,910] Trial 8 pruned. 
-[2025-10-28T23:50:21.916+0000] {logging_mixin.py:154} WARNING -  27%|##6       | 8/30 [00:04<00:10,  2.15it/s]
-[2025-10-28T23:50:21.916+0000] {logging_mixin.py:154} WARNING -  30%|###       | 9/30 [00:04<00:10,  1.93it/s]
-[2025-10-28T23:50:22.247+0000] {local_task_job_runner.py:228} INFO - Task exited with return code -9
-[2025-10-28T23:50:22.356+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
