@@ -18,8 +18,9 @@ Esta rama sirve como visión global de todo el material evaluado del curso.
 Cada rama labn contiene solo la carpeta del laboratorio correspondiente, por ejemplo:
 - lab1 → Entregables_Lab1
 - lab2 → Entregables_Lab2
+  
 ...
-- lab10 → Entregables_Lab11
+- lab11 → Entregables_Lab11
 
 Estas ramas están diseñadas para mostrar únicamente el desarrollo de cada laboratorio de forma aislada.
 
