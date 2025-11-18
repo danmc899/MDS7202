@@ -1,0 +1,37 @@
+{
+  "Y": {
+    "ks_statistic": 0.12540605121250284,
+    "ks_p_value": 0.0,
+    "ks_drift": true,
+    "psi": 0.00962266063879653,
+    "psi_drift": false
+  },
+  "X": {
+    "ks_statistic": 0.13852077884335945,
+    "ks_p_value": 0.0,
+    "ks_drift": true,
+    "psi": 0.002752275994984549,
+    "psi_drift": false
+  },
+  "size": {
+    "ks_statistic": 0.3831218315089283,
+    "ks_p_value": 0.0,
+    "ks_drift": true,
+    "psi": 6.697522136727059,
+    "psi_drift": true
+  },
+  "num_deliver_per_week": {
+    "ks_statistic": 0.0015321773386289522,
+    "ks_p_value": 0.6053799277163772,
+    "ks_drift": false,
+    "psi": 0.0002027322949461055,
+    "psi_drift": false
+  },
+  "segment": {
+    "ks_statistic": 0.018152830249604457,
+    "ks_p_value": 2.3909618729486848e-71,
+    "ks_drift": true,
+    "psi": 2.4651903288156616e-32,
+    "psi_drift": false
+  }
+}

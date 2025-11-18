@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # BONUS 1: SISTEMA DE RECOMENDACIÓN CON SVD
+  # ============================================
+  
+  recsys-backend:
+    build:
+      context: ./recsys/backend
+      dockerfile: Dockerfile
+    container_name: sodai-recsys-backend
+    ports:
+      - "8001:8001"
+    volumes:
+      - ../airflow/data:/app/data:ro  # Datos de Airflow en modo lectura
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - sodai-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  recsys-frontend:
+    build:
+      context: ./recsys/frontend
+      dockerfile: Dockerfile
+    container_name: sodai-recsys-frontend
+    ports:
+      - "7861:7861"
+    environment:
+      - BACKEND_URL=http://recsys-backend:8001
+      - PYTHONUNBUFFERED=1
+    networks:
+      - sodai-network
+    depends_on:
+      - recsys-backend
+    restart: unless-stopped
+
+  # ============================================
+  # BONUS 2: CHATBOT CON GOOGLE GEMINI Y RAG
+  # ============================================
+  
+  llm-backend:
+    build:
+      context: ./llm/backend
+      dockerfile: Dockerfile
+    container_name: sodai-llm-backend
+    ports:
+      - "8002:8002"
+    volumes:
+      - ../airflow/data:/app/data:ro  # Datos de Airflow en modo lectura
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}  # Configurar en archivo .env
+    networks:
+      - sodai-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  llm-frontend:
+    build:
+      context: ./llm/frontend
+      dockerfile: Dockerfile
+    container_name: sodai-llm-frontend
+    ports:
+      - "7862:7862"
+    environment:
+      - BACKEND_URL=http://llm-backend:8002
+      - PYTHONUNBUFFERED=1
+    networks:
+      - sodai-network
+    depends_on:
+      - llm-backend
+    restart: unless-stopped
+
+networks:
+  sodai-network:
+    driver: bridge
+    name: sodai-bonus-network
+
+volumes:
+  airflow-data:
+    external: true

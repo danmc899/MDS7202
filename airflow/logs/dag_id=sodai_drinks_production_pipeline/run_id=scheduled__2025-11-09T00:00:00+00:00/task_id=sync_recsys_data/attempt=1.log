@@ -1,0 +1,30 @@
+[2025-11-18T02:31:22.144+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.sync_recsys_data scheduled__2025-11-09T00:00:00+00:00 [queued]>
+[2025-11-18T02:31:22.149+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.sync_recsys_data scheduled__2025-11-09T00:00:00+00:00 [queued]>
+[2025-11-18T02:31:22.149+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-11-18T02:31:22.156+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): sync_recsys_data> on 2025-11-09 00:00:00+00:00
+[2025-11-18T02:31:22.167+0000] {standard_task_runner.py:57} INFO - Started process 947 to run task
+[2025-11-18T02:31:22.170+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'sync_recsys_data', 'scheduled__2025-11-09T00:00:00+00:00', '--job-id', '154', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpaej9zps1']
+[2025-11-18T02:31:22.172+0000] {standard_task_runner.py:85} INFO - Job 154: Subtask sync_recsys_data
+[2025-11-18T02:31:22.207+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.sync_recsys_data scheduled__2025-11-09T00:00:00+00:00 [running]> on host 3618904be5d4
+[2025-11-18T02:31:22.255+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='sync_recsys_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-09T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-09T00:00:00+00:00'
+[2025-11-18T02:31:22.257+0000] {recsys_data_sync.py:26} INFO - 🔄 Iniciando sincronización con RecSys backend...
+[2025-11-18T02:31:22.487+0000] {recsys_data_sync.py:40} INFO - 📂 Directorio destino RecSys: /opt/***/shared_data/recsys
+[2025-11-18T02:31:22.490+0000] {recsys_data_sync.py:53} INFO - ✅ Copiado transacciones: /opt/***/data/raw/transacciones.parquet → /opt/***/shared_data/recsys/transacciones.parquet
+[2025-11-18T02:31:22.527+0000] {recsys_data_sync.py:57} INFO -    📊 Registros en transacciones: 254936
+[2025-11-18T02:31:22.528+0000] {recsys_data_sync.py:53} INFO - ✅ Copiado clientes: /opt/***/data/raw/clientes.parquet → /opt/***/shared_data/recsys/clientes.parquet
+[2025-11-18T02:31:22.531+0000] {recsys_data_sync.py:57} INFO -    📊 Registros en clientes: 1569
+[2025-11-18T02:31:22.532+0000] {recsys_data_sync.py:53} INFO - ✅ Copiado productos: /opt/***/data/raw/productos.parquet → /opt/***/shared_data/recsys/productos.parquet
+[2025-11-18T02:31:22.534+0000] {recsys_data_sync.py:57} INFO -    📊 Registros en productos: 971
+[2025-11-18T02:31:22.534+0000] {recsys_data_sync.py:68} INFO - 🔄 Llamando a RecSys retrain endpoint (intento 1/3)...
+[2025-11-18T02:31:25.193+0000] {recsys_data_sync.py:98} WARNING - ⚠️ No se pudo conectar con RecSys backend: HTTPConnectionPool(host='sodai-recsys-backend', port=8001): Max retries exceeded with url: /api/v1/retrain (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7d4e6853c0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2025-11-18T02:31:25.194+0000] {recsys_data_sync.py:100} INFO - Reintentando en 5 segundos...
+[2025-11-18T02:31:30.195+0000] {recsys_data_sync.py:68} INFO - 🔄 Llamando a RecSys retrain endpoint (intento 2/3)...
+[2025-11-18T02:31:31.411+0000] {recsys_data_sync.py:98} WARNING - ⚠️ No se pudo conectar con RecSys backend: HTTPConnectionPool(host='sodai-recsys-backend', port=8001): Max retries exceeded with url: /api/v1/retrain (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7d4e685390>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2025-11-18T02:31:31.412+0000] {recsys_data_sync.py:100} INFO - Reintentando en 5 segundos...
+[2025-11-18T02:31:36.418+0000] {recsys_data_sync.py:68} INFO - 🔄 Llamando a RecSys retrain endpoint (intento 3/3)...
+[2025-11-18T02:31:39.069+0000] {recsys_data_sync.py:98} WARNING - ⚠️ No se pudo conectar con RecSys backend: HTTPConnectionPool(host='sodai-recsys-backend', port=8001): Max retries exceeded with url: /api/v1/retrain (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f7d4e6853f0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2025-11-18T02:31:39.069+0000] {recsys_data_sync.py:103} ERROR - ❌ RecSys backend no disponible después de múltiples intentos
+[2025-11-18T02:31:39.080+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'warning', 'recsys_retrained': False, 'message': 'RecSys backend no disponible'}
+[2025-11-18T02:31:39.096+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=sync_recsys_data, execution_date=20251109T000000, start_date=20251118T023122, end_date=20251118T023139
+[2025-11-18T02:31:39.149+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-11-18T02:31:39.161+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,32 @@
+[2025-11-18T00:14:03.116+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift manual__2025-11-18T00:13:52.710922+00:00 [queued]>
+[2025-11-18T00:14:03.122+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift manual__2025-11-18T00:13:52.710922+00:00 [queued]>
+[2025-11-18T00:14:03.122+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-11-18T00:14:03.130+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): detect_drift> on 2025-11-18 00:13:52.710922+00:00
+[2025-11-18T00:14:03.141+0000] {standard_task_runner.py:57} INFO - Started process 539 to run task
+[2025-11-18T00:14:03.145+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'detect_drift', 'manual__2025-11-18T00:13:52.710922+00:00', '--job-id', '125', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpe_q_vit9']
+[2025-11-18T00:14:03.148+0000] {standard_task_runner.py:85} INFO - Job 125: Subtask detect_drift
+[2025-11-18T00:14:03.187+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.detect_drift manual__2025-11-18T00:13:52.710922+00:00 [running]> on host 96e055fb3ec9
+[2025-11-18T00:14:03.254+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='detect_drift' AIRFLOW_CTX_EXECUTION_DATE='2025-11-18T00:13:52.710922+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-18T00:13:52.710922+00:00'
+[2025-11-18T00:14:03.256+0000] {drift_detection.py:80} INFO - Iniciando detección de drift...
+[2025-11-18T00:14:03.587+0000] {drift_detection.py:110} INFO - Datos de referencia: 619380 registros
+[2025-11-18T00:14:03.587+0000] {drift_detection.py:111} INFO - Datos actuales: 7438 registros
+[2025-11-18T00:14:03.588+0000] {drift_detection.py:119} INFO - Analizando drift en 15 features numéricas
+[2025-11-18T00:14:03.652+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.1339, P-value: 0.0000
+[2025-11-18T00:14:03.691+0000] {drift_detection.py:65} INFO - PSI: 0.4228
+[2025-11-18T00:14:03.691+0000] {drift_detection.py:153} WARNING - Drift detectado en feature 'Y' - PSI: 0.4228, KS p-value: 0.0000
+[2025-11-18T00:14:03.786+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.1385, P-value: 0.0000
+[2025-11-18T00:14:03.881+0000] {drift_detection.py:65} INFO - PSI: 0.0807
+[2025-11-18T00:14:03.881+0000] {drift_detection.py:153} WARNING - Drift detectado en feature 'X' - PSI: 0.0807, KS p-value: 0.0000
+[2025-11-18T00:14:03.945+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.3681, P-value: 0.0000
+[2025-11-18T00:14:03.971+0000] {drift_detection.py:65} INFO - PSI: 5.8409
+[2025-11-18T00:14:03.972+0000] {drift_detection.py:153} WARNING - Drift detectado en feature 'size' - PSI: 5.8409, KS p-value: 0.0000
+[2025-11-18T00:14:04.002+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.8252, P-value: 0.0000
+[2025-11-18T00:14:04.022+0000] {drift_detection.py:65} INFO - PSI: 0.0146
+[2025-11-18T00:14:04.022+0000] {drift_detection.py:153} WARNING - Drift detectado en feature 'num_deliver_per_week' - PSI: 0.0146, KS p-value: 0.0000
+[2025-11-18T00:14:04.088+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0005, P-value: 1.0000
+[2025-11-18T00:14:04.113+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-11-18T00:14:04.138+0000] {drift_detection.py:165} WARNING - DRIFT DETECTADO - Se recomienda reentrenamiento del modelo
+[2025-11-18T00:14:04.146+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'has_drift': True, 'features_analyzed': 15, 'drift_results': {'Y': {'ks_statistic': 0.1339069642376983, 'ks_p_value': 2.141317669243686e-115, 'ks_drift': True, 'psi': 0.42279600443854365, 'psi_drift': True}, 'X': {'ks_statistic': 0.13852077884335945, 'ks_p_value': 1.7296895961061186e-123, 'ks_drift': True, 'psi': 0.08072994045974347, 'psi_drift': False}, 'size': {'ks_statistic': 0.368104883761191, 'ks_p_value': 0.0, 'ks_drift': True, 'psi': 5.840896089293691, 'psi_drift': True}, 'num_deliver_per_week': {'ks_statistic': 0.8252090922033415, 'ks_p_value': 0.0, 'ks_drift': True, 'psi': 0.014583560075673456, 'psi_drift': False}, 'segment': {'ks_statistic': 0.0004977641989846182, 'ks_p_value': 1.0, 'ks_drift': False, 'psi': 1.7454780123179408e-28, 'psi_drift': False}}}
+[2025-11-18T00:14:04.159+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=detect_drift, execution_date=20251118T001352, start_date=20251118T001403, end_date=20251118T001404
+[2025-11-18T00:14:04.247+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-11-18T00:14:04.268+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

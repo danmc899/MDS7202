@@ -1,0 +1,41 @@
+{
+  "model_type": "xgboost",
+  "best_params": {
+    "max_depth": 13,
+    "learning_rate": 0.2176335838016791,
+    "subsample": 0.7473540064360764,
+    "colsample_bytree": 0.8538136098696347,
+    "min_child_weight": 2,
+    "gamma": 0.6321800452596251,
+    "n_estimators": 275
+  },
+  "test_metrics": {
+    "test_accuracy": 0.8547297297297297,
+    "test_precision": 0.8295201457784976,
+    "test_recall": 0.8929816913687881,
+    "test_f1": 0.8600818725726882,
+    "test_roc_auc": 0.9238784478716138
+  },
+  "feature_names": [
+    "Y",
+    "X",
+    "size",
+    "num_deliver_per_week",
+    "segment",
+    "customer_type_CANAL FRIO",
+    "customer_type_MAYORISTA",
+    "customer_type_MINIMARKET",
+    "customer_type_RESTAURANT",
+    "customer_type_SUPERMERCADO",
+    "customer_type_TIENDA DE CONVENIENCIA",
+    "sub_category_GASEOSAS",
+    "package_KEG",
+    "package_LATA",
+    "brand_num"
+  ],
+  "training_date": "2025-11-18T02:31:12.989850",
+  "n_features": 15,
+  "train_size": 247752,
+  "val_size": 82584,
+  "test_size": 82584
+}
