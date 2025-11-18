@@ -11,11 +11,14 @@ RUN apt-get update && \
 
 USER airflow
 
-# Copiar requirements
+# Copy requirements file
 COPY requirements.txt /requirements.txt
 
-# Instalar dependencias de Python
+# Install Python dependencies
 RUN pip install --no-cache-dir -r /requirements.txt
+
+# Copy umask wrapper script (must have +x permissions on host)
+COPY entrypoint-wrapper.sh /entrypoint-wrapper.sh
 
 # Crear directorios necesarios
 RUN mkdir -p /opt/airflow/dags \
@@ -31,4 +34,10 @@ RUN mkdir -p /opt/airflow/dags \
 # Configurar permisos
 USER root
 RUN chown -R airflow: /opt/airflow
+# Configurar umask para que nuevos archivos/directorios sean grupo-escribibles
+RUN echo "umask 002" >> /etc/profile && \
+    echo "umask 002" >> /etc/bash.bashrc
 USER airflow
+
+# Configurar umask para el usuario airflow
+RUN echo "umask 002" >> ~/.bashrc

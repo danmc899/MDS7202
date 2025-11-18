@@ -5,6 +5,7 @@ x-airflow-common:
   build:
     context: .
     dockerfile: Dockerfile
+  entrypoint: ["/entrypoint-wrapper.sh"]
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -24,6 +25,7 @@ x-airflow-common:
     - ./mlruns:/opt/airflow/mlruns
     - ./diagrams:/opt/airflow/diagrams
     - ./config:/opt/airflow/config
+    - ../airflow/data:/opt/airflow/shared_data/recsys  # Volumen compartido con RecSys
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -47,9 +49,9 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
-    command: webserver
+    command: /entrypoint airflow webserver
     ports:
-      - 8080:8080
+      - "8080:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 10s
@@ -63,7 +65,7 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
-    command: scheduler
+    command: /entrypoint airflow scheduler
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
       interval: 10s
@@ -96,15 +98,13 @@ services:
 
   mlflow-server:
     image: python:3.10-slim
+    container_name: mlflow-server
     command: >
-      bash -c "pip install mlflow==2.8.1 &&
-               mlflow server --host 0.0.0.0 --port 5001 
-               --backend-store-uri /mlruns 
-               --default-artifact-root /mlruns"
+      bash -c "pip install mlflow==2.8.1 && mlflow server --host 0.0.0.0 --port 5001 --backend-store-uri /opt/airflow/mlruns --serve-artifacts"
     ports:
       - "5001:5001"
     volumes:
-      - ./mlruns:/mlruns
+      - ./mlruns:/opt/airflow/mlruns
     restart: always
 
 volumes:

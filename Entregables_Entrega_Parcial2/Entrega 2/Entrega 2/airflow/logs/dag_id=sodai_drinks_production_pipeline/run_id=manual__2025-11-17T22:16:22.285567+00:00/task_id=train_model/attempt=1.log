@@ -1,0 +1,534 @@
+[2025-11-17T22:16:38.115+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-11-17T22:16:22.285567+00:00 [queued]>
+[2025-11-17T22:16:38.122+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-11-17T22:16:22.285567+00:00 [queued]>
+[2025-11-17T22:16:38.122+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-11-17T22:16:38.132+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_model> on 2025-11-17 22:16:22.285567+00:00
+[2025-11-17T22:16:38.142+0000] {standard_task_runner.py:57} INFO - Started process 1096 to run task
+[2025-11-17T22:16:38.145+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'train_model', 'manual__2025-11-17T22:16:22.285567+00:00', '--job-id', '88', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpbl20a4ii']
+[2025-11-17T22:16:38.148+0000] {standard_task_runner.py:85} INFO - Job 88: Subtask train_model
+[2025-11-17T22:16:38.183+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-11-17T22:16:22.285567+00:00 [running]> on host 4a9d41c94249
+[2025-11-17T22:16:38.436+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-11-17T22:16:22.285567+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-17T22:16:22.285567+00:00'
+[2025-11-17T22:16:38.437+0000] {model_training.py:229} INFO - 🚀 Iniciando entrenamiento del modelo XGBoost...
+[2025-11-17T22:16:38.468+0000] {model_training.py:251} INFO - 📊 Dataset cargado:
+[2025-11-17T22:16:38.468+0000] {model_training.py:252} INFO -    - Features: 15
+[2025-11-17T22:16:38.468+0000] {model_training.py:253} INFO -    - Registros: 7438
+[2025-11-17T22:16:38.469+0000] {model_training.py:254} INFO -    - Distribución de clases - Clase 0: 3719, Clase 1: 3719
+[2025-11-17T22:16:38.474+0000] {model_training.py:264} INFO - 📂 Splits creados:
+[2025-11-17T22:16:38.474+0000] {model_training.py:265} INFO -    - Train: 4462 muestras
+[2025-11-17T22:16:38.474+0000] {model_training.py:266} INFO -    - Validation: 1488 muestras
+[2025-11-17T22:16:38.474+0000] {model_training.py:267} INFO -    - Test: 1488 muestras
+[2025-11-17T22:16:38.501+0000] {logging_mixin.py:154} WARNING - 2025/11/17 22:16:38 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-11-17T22:16:38.509+0000] {model_training.py:64} INFO - 🔍 Iniciando optimización de hiperparámetros con 50 trials...
+[2025-11-17T22:16:38.510+0000] {logging_mixin.py:154} WARNING -   0%|          | 0/50 [00:00<?, ?it/s]
+[2025-11-17T22:16:38.584+0000] {logging_mixin.py:154} WARNING -                                       
+[2025-11-17T22:16:38.585+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:38.585+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:38,584] Trial 0 finished with value: 0.7868641339343206 and parameters: {'max_depth': 7, 'learning_rate': 0.2536999076681772, 'subsample': 0.8659969709057025, 'colsample_bytree': 0.7993292420985183, 'min_child_weight': 2, 'gamma': 0.7799726016810132, 'n_estimators': 76}. Best is trial 0 with value: 0.7868641339343206.
+[2025-11-17T22:16:38.585+0000] {logging_mixin.py:154} WARNING -   0%|          | 0/50 [00:00<?, ?it/s]
+[2025-11-17T22:16:38.585+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.786864:   0%|          | 0/50 [00:00<?, ?it/s]
+[2025-11-17T22:16:38.679+0000] {logging_mixin.py:154} WARNING -                                                                            
+[2025-11-17T22:16:38.679+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:38.679+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:38,679] Trial 1 finished with value: 0.7949843260188088 and parameters: {'max_depth': 14, 'learning_rate': 0.07725378389307355, 'subsample': 0.8540362888980227, 'colsample_bytree': 0.5102922471479012, 'min_child_weight': 10, 'gamma': 4.162213204002109, 'n_estimators': 145}. Best is trial 1 with value: 0.7949843260188088.
+[2025-11-17T22:16:38.679+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.786864:   2%|2         | 1/50 [00:00<00:08,  5.93it/s]
+[2025-11-17T22:16:38.680+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   2%|2         | 1/50 [00:00<00:08,  5.91it/s]
+[2025-11-17T22:16:38.680+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   4%|4         | 2/50 [00:00<00:04, 11.82it/s]
+[2025-11-17T22:16:39.252+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:39.252+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:39.252+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:39,251] Trial 2 finished with value: 0.7931253978357734 and parameters: {'max_depth': 5, 'learning_rate': 0.018659959624904916, 'subsample': 0.6521211214797689, 'colsample_bytree': 0.762378215816119, 'min_child_weight': 5, 'gamma': 1.4561457009902097, 'n_estimators': 325}. Best is trial 1 with value: 0.7949843260188088.
+[2025-11-17T22:16:39.252+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   4%|4         | 2/50 [00:00<00:04, 11.82it/s]
+[2025-11-17T22:16:39.252+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   4%|4         | 2/50 [00:00<00:04, 11.82it/s]
+[2025-11-17T22:16:39.584+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:39.585+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:39.585+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:39,584] Trial 3 finished with value: 0.7916666666666667 and parameters: {'max_depth': 4, 'learning_rate': 0.027010527749605478, 'subsample': 0.6831809216468459, 'colsample_bytree': 0.728034992108518, 'min_child_weight': 8, 'gamma': 0.9983689107917987, 'n_estimators': 281}. Best is trial 1 with value: 0.7949843260188088.
+[2025-11-17T22:16:39.585+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   6%|6         | 3/50 [00:01<00:03, 11.82it/s]
+[2025-11-17T22:16:39.585+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   6%|6         | 3/50 [00:01<00:03, 11.82it/s]
+[2025-11-17T22:16:39.585+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   8%|8         | 4/50 [00:01<00:13,  3.32it/s]
+[2025-11-17T22:16:39.924+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:39.924+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:39.924+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:39,924] Trial 4 finished with value: 0.7889098928796472 and parameters: {'max_depth': 10, 'learning_rate': 0.011711509955524094, 'subsample': 0.8037724259507192, 'colsample_bytree': 0.5852620618436457, 'min_child_weight': 1, 'gamma': 4.7444276862666666, 'n_estimators': 485}. Best is trial 1 with value: 0.7949843260188088.
+[2025-11-17T22:16:39.924+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   8%|8         | 4/50 [00:01<00:13,  3.32it/s]
+[2025-11-17T22:16:39.925+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:   8%|8         | 4/50 [00:01<00:13,  3.32it/s]
+[2025-11-17T22:16:39.925+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:  10%|#         | 5/50 [00:01<00:14,  3.20it/s]
+[2025-11-17T22:16:40.685+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:40.685+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:40.685+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:40,684] Trial 5 finished with value: 0.7961290322580645 and parameters: {'max_depth': 13, 'learning_rate': 0.028180680291847244, 'subsample': 0.5488360570031919, 'colsample_bytree': 0.8421165132560784, 'min_child_weight': 5, 'gamma': 0.6101911742238941, 'n_estimators': 273}. Best is trial 5 with value: 0.7961290322580645.
+[2025-11-17T22:16:40.685+0000] {logging_mixin.py:154} WARNING - Best trial: 1. Best value: 0.794984:  10%|#         | 5/50 [00:02<00:14,  3.20it/s]
+[2025-11-17T22:16:40.685+0000] {logging_mixin.py:154} WARNING - Best trial: 5. Best value: 0.796129:  10%|#         | 5/50 [00:02<00:14,  3.20it/s]
+[2025-11-17T22:16:40.686+0000] {logging_mixin.py:154} WARNING - Best trial: 5. Best value: 0.796129:  12%|#2        | 6/50 [00:02<00:19,  2.24it/s]
+[2025-11-17T22:16:40.892+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:40.893+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:40.893+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:40,892] Trial 6 finished with value: 0.7961783439490446 and parameters: {'max_depth': 3, 'learning_rate': 0.22038218939289875, 'subsample': 0.6293899908000085, 'colsample_bytree': 0.831261142176991, 'min_child_weight': 4, 'gamma': 2.600340105889054, 'n_estimators': 296}. Best is trial 6 with value: 0.7961783439490446.
+[2025-11-17T22:16:40.893+0000] {logging_mixin.py:154} WARNING - Best trial: 5. Best value: 0.796129:  12%|#2        | 6/50 [00:02<00:19,  2.24it/s]
+[2025-11-17T22:16:40.893+0000] {logging_mixin.py:154} WARNING - Best trial: 6. Best value: 0.796178:  12%|#2        | 6/50 [00:02<00:19,  2.24it/s]
+[2025-11-17T22:16:40.893+0000] {logging_mixin.py:154} WARNING - Best trial: 6. Best value: 0.796178:  14%|#4        | 7/50 [00:02<00:16,  2.67it/s]
+[2025-11-17T22:16:41.105+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:41.105+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:41.105+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:41,105] Trial 7 finished with value: 0.797717184527584 and parameters: {'max_depth': 5, 'learning_rate': 0.27051668818999286, 'subsample': 0.8875664116805573, 'colsample_bytree': 0.9697494707820946, 'min_child_weight': 9, 'gamma': 2.9894998940554256, 'n_estimators': 465}. Best is trial 7 with value: 0.797717184527584.
+[2025-11-17T22:16:41.105+0000] {logging_mixin.py:154} WARNING - Best trial: 6. Best value: 0.796178:  14%|#4        | 7/50 [00:02<00:16,  2.67it/s]
+[2025-11-17T22:16:41.106+0000] {logging_mixin.py:154} WARNING - Best trial: 7. Best value: 0.797717:  14%|#4        | 7/50 [00:02<00:16,  2.67it/s]
+[2025-11-17T22:16:41.106+0000] {logging_mixin.py:154} WARNING - Best trial: 7. Best value: 0.797717:  16%|#6        | 8/50 [00:02<00:13,  3.06it/s]
+[2025-11-17T22:16:41.386+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:41.386+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:41.386+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:41,385] Trial 8 finished with value: 0.7906388361796332 and parameters: {'max_depth': 4, 'learning_rate': 0.01947558230629543, 'subsample': 0.522613644455269, 'colsample_bytree': 0.6626651653816322, 'min_child_weight': 4, 'gamma': 1.3567451588694794, 'n_estimators': 423}. Best is trial 7 with value: 0.797717184527584.
+[2025-11-17T22:16:41.386+0000] {logging_mixin.py:154} WARNING - Best trial: 7. Best value: 0.797717:  16%|#6        | 8/50 [00:02<00:13,  3.06it/s]
+[2025-11-17T22:16:41.386+0000] {logging_mixin.py:154} WARNING - Best trial: 7. Best value: 0.797717:  16%|#6        | 8/50 [00:02<00:13,  3.06it/s]
+[2025-11-17T22:16:41.386+0000] {logging_mixin.py:154} WARNING - Best trial: 7. Best value: 0.797717:  18%|#8        | 9/50 [00:02<00:12,  3.20it/s]
+[2025-11-17T22:16:42.740+0000] {logging_mixin.py:154} WARNING -                                                                                    
+[2025-11-17T22:16:42.741+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:42.741+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:42,740] Trial 9 finished with value: 0.802295918367347 and parameters: {'max_depth': 7, 'learning_rate': 0.026000059117302653, 'subsample': 0.7713480415791243, 'colsample_bytree': 0.5704621124873813, 'min_child_weight': 9, 'gamma': 0.3727532183988541, 'n_estimators': 495}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:42.741+0000] {logging_mixin.py:154} WARNING - Best trial: 7. Best value: 0.797717:  18%|#8        | 9/50 [00:04<00:12,  3.20it/s]
+[2025-11-17T22:16:42.742+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  18%|#8        | 9/50 [00:04<00:12,  3.20it/s]
+[2025-11-17T22:16:42.742+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  20%|##        | 10/50 [00:04<00:24,  1.60it/s]
+[2025-11-17T22:16:43.461+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:43.461+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:43.461+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:43,460] Trial 10 finished with value: 0.8020499679692504 and parameters: {'max_depth': 9, 'learning_rate': 0.050022091577274774, 'subsample': 0.9847685553939328, 'colsample_bytree': 0.5089809378074097, 'min_child_weight': 7, 'gamma': 0.19362599980591444, 'n_estimators': 379}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:43.461+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  20%|##        | 10/50 [00:04<00:24,  1.60it/s]
+[2025-11-17T22:16:43.461+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  20%|##        | 10/50 [00:04<00:24,  1.60it/s]
+[2025-11-17T22:16:43.462+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  22%|##2       | 11/50 [00:04<00:25,  1.53it/s]
+[2025-11-17T22:16:43.898+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:43.898+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:43.898+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:43,898] Trial 11 finished with value: 0.7966751918158568 and parameters: {'max_depth': 9, 'learning_rate': 0.05378356815268503, 'subsample': 0.998050295132841, 'colsample_bytree': 0.5043736834843053, 'min_child_weight': 7, 'gamma': 0.11757387798799368, 'n_estimators': 375}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:43.898+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  22%|##2       | 11/50 [00:05<00:25,  1.53it/s]
+[2025-11-17T22:16:43.898+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  22%|##2       | 11/50 [00:05<00:25,  1.53it/s]
+[2025-11-17T22:16:43.898+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  24%|##4       | 12/50 [00:05<00:22,  1.70it/s]
+[2025-11-17T22:16:44.600+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:44.601+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:44.601+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:44,600] Trial 12 finished with value: 0.7974193548387097 and parameters: {'max_depth': 10, 'learning_rate': 0.05421283096830384, 'subsample': 0.995800325533728, 'colsample_bytree': 0.5927234475789327, 'min_child_weight': 7, 'gamma': 0.01955562095026886, 'n_estimators': 406}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:44.601+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  24%|##4       | 12/50 [00:06<00:22,  1.70it/s]
+[2025-11-17T22:16:44.601+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  24%|##4       | 12/50 [00:06<00:22,  1.70it/s]
+[2025-11-17T22:16:44.602+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  26%|##6       | 13/50 [00:06<00:23,  1.61it/s]
+[2025-11-17T22:16:45.056+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:45.057+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:45.057+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:45,056] Trial 13 finished with value: 0.7969543147208122 and parameters: {'max_depth': 8, 'learning_rate': 0.04002834754638359, 'subsample': 0.748020656084857, 'colsample_bytree': 0.5890641831958864, 'min_child_weight': 10, 'gamma': 1.7472912901066726, 'n_estimators': 499}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:45.057+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  26%|##6       | 13/50 [00:06<00:23,  1.61it/s]
+[2025-11-17T22:16:45.057+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  26%|##6       | 13/50 [00:06<00:23,  1.61it/s]
+[2025-11-17T22:16:45.057+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  28%|##8       | 14/50 [00:06<00:20,  1.75it/s]
+[2025-11-17T22:16:45.593+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:45.594+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:45.594+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:45,593] Trial 14 finished with value: 0.7862694300518136 and parameters: {'max_depth': 12, 'learning_rate': 0.09465946337743743, 'subsample': 0.9318657440733, 'colsample_bytree': 0.5012553993955753, 'min_child_weight': 7, 'gamma': 0.1795351823831436, 'n_estimators': 360}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:45.594+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  28%|##8       | 14/50 [00:07<00:20,  1.75it/s]
+[2025-11-17T22:16:45.594+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  28%|##8       | 14/50 [00:07<00:20,  1.75it/s]
+[2025-11-17T22:16:45.594+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  30%|###       | 15/50 [00:07<00:19,  1.78it/s]
+[2025-11-17T22:16:46.435+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:46.435+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:46.435+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:46,434] Trial 15 finished with value: 0.7899371069182389 and parameters: {'max_depth': 7, 'learning_rate': 0.010457065772553613, 'subsample': 0.7762460564116191, 'colsample_bytree': 0.6500599391804969, 'min_child_weight': 8, 'gamma': 1.8694954037778246, 'n_estimators': 200}. Best is trial 9 with value: 0.802295918367347.
+[2025-11-17T22:16:46.435+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  30%|###       | 15/50 [00:07<00:19,  1.78it/s]
+[2025-11-17T22:16:46.436+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  30%|###       | 15/50 [00:07<00:19,  1.78it/s]
+[2025-11-17T22:16:46.436+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  32%|###2      | 16/50 [00:07<00:21,  1.55it/s]
+[2025-11-17T22:16:48.635+0000] {logging_mixin.py:154} WARNING -                                                                                     
+[2025-11-17T22:16:48.636+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:48.636+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:48,635] Trial 16 finished with value: 0.8038216560509555 and parameters: {'max_depth': 11, 'learning_rate': 0.03703772238189893, 'subsample': 0.9158022566129167, 'colsample_bytree': 0.5587404371074098, 'min_child_weight': 9, 'gamma': 0.7364943416771574, 'n_estimators': 439}. Best is trial 16 with value: 0.8038216560509555.
+[2025-11-17T22:16:48.636+0000] {logging_mixin.py:154} WARNING - Best trial: 9. Best value: 0.802296:  32%|###2      | 16/50 [00:10<00:21,  1.55it/s]
+[2025-11-17T22:16:48.636+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  32%|###2      | 16/50 [00:10<00:21,  1.55it/s]
+[2025-11-17T22:16:48.636+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  34%|###4      | 17/50 [00:10<00:36,  1.11s/it]
+[2025-11-17T22:16:49.256+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:49.256+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:49.256+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:49,256] Trial 17 finished with value: 0.7999999999999999 and parameters: {'max_depth': 11, 'learning_rate': 0.03228207355898402, 'subsample': 0.8314102086870525, 'colsample_bytree': 0.6597747511818023, 'min_child_weight': 9, 'gamma': 0.8560616035329855, 'n_estimators': 441}. Best is trial 16 with value: 0.8038216560509555.
+[2025-11-17T22:16:49.256+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  34%|###4      | 17/50 [00:10<00:36,  1.11s/it]
+[2025-11-17T22:16:49.256+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  34%|###4      | 17/50 [00:10<00:36,  1.11s/it]
+[2025-11-17T22:16:49.257+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  36%|###6      | 18/50 [00:10<00:30,  1.04it/s]
+[2025-11-17T22:16:49.464+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:49.464+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:49.464+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:49,464] Trial 18 finished with value: 0.801010739102969 and parameters: {'max_depth': 15, 'learning_rate': 0.018325226220449863, 'subsample': 0.920268595864156, 'colsample_bytree': 0.5658026415888999, 'min_child_weight': 9, 'gamma': 2.0592202798349284, 'n_estimators': 211}. Best is trial 16 with value: 0.8038216560509555.
+[2025-11-17T22:16:49.464+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  36%|###6      | 18/50 [00:10<00:30,  1.04it/s]
+[2025-11-17T22:16:49.465+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  36%|###6      | 18/50 [00:10<00:30,  1.04it/s]
+[2025-11-17T22:16:49.465+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  38%|###8      | 19/50 [00:10<00:22,  1.36it/s]
+[2025-11-17T22:16:49.738+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:49.738+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:49.738+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:49,737] Trial 19 finished with value: 0.7984742530197074 and parameters: {'max_depth': 7, 'learning_rate': 0.0793423791839793, 'subsample': 0.7457265639467195, 'colsample_bytree': 0.6371401945264097, 'min_child_weight': 10, 'gamma': 1.1505322625282899, 'n_estimators': 439}. Best is trial 16 with value: 0.8038216560509555.
+[2025-11-17T22:16:49.738+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  38%|###8      | 19/50 [00:11<00:22,  1.36it/s]
+[2025-11-17T22:16:49.738+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  38%|###8      | 19/50 [00:11<00:22,  1.36it/s]
+[2025-11-17T22:16:49.738+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  40%|####      | 20/50 [00:11<00:17,  1.67it/s]
+[2025-11-17T22:16:52.352+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:52.352+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:52.353+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:52,352] Trial 20 finished with value: 0.7873303167420814 and parameters: {'max_depth': 12, 'learning_rate': 0.0358949844934207, 'subsample': 0.8200300495029408, 'colsample_bytree': 0.6994307568140108, 'min_child_weight': 6, 'gamma': 0.4883783734495456, 'n_estimators': 490}. Best is trial 16 with value: 0.8038216560509555.
+[2025-11-17T22:16:52.353+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  40%|####      | 20/50 [00:13<00:17,  1.67it/s]
+[2025-11-17T22:16:52.353+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  40%|####      | 20/50 [00:13<00:17,  1.67it/s]
+[2025-11-17T22:16:52.353+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  42%|####2     | 21/50 [00:13<00:34,  1.20s/it]
+[2025-11-17T22:16:52.720+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:52.720+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:52.720+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:52,720] Trial 21 finished with value: 0.8028259473346179 and parameters: {'max_depth': 9, 'learning_rate': 0.043066667651212115, 'subsample': 0.942305739419524, 'colsample_bytree': 0.5573194938641721, 'min_child_weight': 8, 'gamma': 0.45377261503000543, 'n_estimators': 369}. Best is trial 16 with value: 0.8038216560509555.
+[2025-11-17T22:16:52.720+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  42%|####2     | 21/50 [00:14<00:34,  1.20s/it]
+[2025-11-17T22:16:52.720+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  42%|####2     | 21/50 [00:14<00:34,  1.20s/it]
+[2025-11-17T22:16:52.721+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  44%|####4     | 22/50 [00:14<00:26,  1.05it/s]
+[2025-11-17T22:16:52.930+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:52.930+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:52.930+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:52,930] Trial 22 finished with value: 0.8048315321042594 and parameters: {'max_depth': 8, 'learning_rate': 0.040359456141514524, 'subsample': 0.9206263246539036, 'colsample_bytree': 0.5449522872486244, 'min_child_weight': 8, 'gamma': 0.751691444508812, 'n_estimators': 332}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:52.930+0000] {logging_mixin.py:154} WARNING - Best trial: 16. Best value: 0.803822:  44%|####4     | 22/50 [00:14<00:26,  1.05it/s]
+[2025-11-17T22:16:52.931+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  44%|####4     | 22/50 [00:14<00:26,  1.05it/s]
+[2025-11-17T22:16:52.931+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  46%|####6     | 23/50 [00:14<00:19,  1.37it/s]
+[2025-11-17T22:16:53.270+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:53.270+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:53.270+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:53,270] Trial 23 finished with value: 0.8010236724248241 and parameters: {'max_depth': 10, 'learning_rate': 0.043176737971360485, 'subsample': 0.9402135174480032, 'colsample_bytree': 0.5635029394703334, 'min_child_weight': 8, 'gamma': 0.8008407117565207, 'n_estimators': 333}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:53.271+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  46%|####6     | 23/50 [00:14<00:19,  1.37it/s]
+[2025-11-17T22:16:53.271+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  46%|####6     | 23/50 [00:14<00:19,  1.37it/s]
+[2025-11-17T22:16:53.271+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  48%|####8     | 24/50 [00:14<00:15,  1.63it/s]
+[2025-11-17T22:16:53.992+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:53.992+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:53.993+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:53,992] Trial 24 finished with value: 0.8005050505050506 and parameters: {'max_depth': 8, 'learning_rate': 0.04052336378781284, 'subsample': 0.8950886266563672, 'colsample_bytree': 0.622883635063563, 'min_child_weight': 6, 'gamma': 1.3557877526082447, 'n_estimators': 335}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:53.993+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  48%|####8     | 24/50 [00:15<00:15,  1.63it/s]
+[2025-11-17T22:16:53.994+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  48%|####8     | 24/50 [00:15<00:15,  1.63it/s]
+[2025-11-17T22:16:53.994+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  50%|#####     | 25/50 [00:15<00:16,  1.55it/s]
+[2025-11-17T22:16:54.259+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:54.259+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:54.259+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:54,259] Trial 25 finished with value: 0.8010171646535283 and parameters: {'max_depth': 11, 'learning_rate': 0.06035179465852514, 'subsample': 0.9442202267644441, 'colsample_bytree': 0.542237414363943, 'min_child_weight': 8, 'gamma': 0.5984622313098521, 'n_estimators': 244}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:54.260+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  50%|#####     | 25/50 [00:15<00:16,  1.55it/s]
+[2025-11-17T22:16:54.260+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  50%|#####     | 25/50 [00:15<00:16,  1.55it/s]
+[2025-11-17T22:16:54.260+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  52%|#####2    | 26/50 [00:15<00:12,  1.88it/s]
+[2025-11-17T22:16:54.478+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:54.478+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:54.479+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:54,478] Trial 26 finished with value: 0.8038216560509555 and parameters: {'max_depth': 8, 'learning_rate': 0.06641911495783007, 'subsample': 0.8839869250575327, 'colsample_bytree': 0.5405632146491377, 'min_child_weight': 9, 'gamma': 0.96644750440953, 'n_estimators': 386}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:54.479+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  52%|#####2    | 26/50 [00:15<00:12,  1.88it/s]
+[2025-11-17T22:16:54.479+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  52%|#####2    | 26/50 [00:15<00:12,  1.88it/s]
+[2025-11-17T22:16:54.479+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  54%|#####4    | 27/50 [00:15<00:10,  2.28it/s]
+[2025-11-17T22:16:54.811+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:54.811+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:54.811+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:54,811] Trial 27 finished with value: 0.7989789406509253 and parameters: {'max_depth': 6, 'learning_rate': 0.1136332963446731, 'subsample': 0.8793125810669065, 'colsample_bytree': 0.6063265876537156, 'min_child_weight': 10, 'gamma': 1.106370658196623, 'n_estimators': 400}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:54.811+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  54%|#####4    | 27/50 [00:16<00:10,  2.28it/s]
+[2025-11-17T22:16:54.811+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  54%|#####4    | 27/50 [00:16<00:10,  2.28it/s]
+[2025-11-17T22:16:54.812+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  56%|#####6    | 28/50 [00:16<00:08,  2.46it/s]
+[2025-11-17T22:16:55.069+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:55.069+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:55.069+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:55,068] Trial 28 finished with value: 0.8017789072426939 and parameters: {'max_depth': 8, 'learning_rate': 0.0622026864941322, 'subsample': 0.8479600221200123, 'colsample_bytree': 0.5451856668789216, 'min_child_weight': 9, 'gamma': 1.590084338858835, 'n_estimators': 452}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:55.069+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  56%|#####6    | 28/50 [00:16<00:08,  2.46it/s]
+[2025-11-17T22:16:55.069+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  56%|#####6    | 28/50 [00:16<00:08,  2.46it/s]
+[2025-11-17T22:16:55.069+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  58%|#####8    | 29/50 [00:16<00:07,  2.76it/s]
+[2025-11-17T22:16:55.292+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:55.292+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:55.293+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:55,292] Trial 29 finished with value: 0.7938540332906531 and parameters: {'max_depth': 6, 'learning_rate': 0.11278320621021909, 'subsample': 0.8539190926713088, 'colsample_bytree': 0.6251406276829714, 'min_child_weight': 2, 'gamma': 0.8678364830754686, 'n_estimators': 312}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:55.293+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  58%|#####8    | 29/50 [00:16<00:07,  2.76it/s]
+[2025-11-17T22:16:55.293+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  58%|#####8    | 29/50 [00:16<00:07,  2.76it/s]
+[2025-11-17T22:16:55.293+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  60%|######    | 30/50 [00:16<00:06,  3.12it/s]
+[2025-11-17T22:16:55.360+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:55.360+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:55.360+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:55,360] Trial 30 finished with value: 0.7954545454545455 and parameters: {'max_depth': 11, 'learning_rate': 0.07197374060104013, 'subsample': 0.9106049299724355, 'colsample_bytree': 0.5404601292621971, 'min_child_weight': 6, 'gamma': 1.1200822264589698, 'n_estimators': 59}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:55.360+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  60%|######    | 30/50 [00:16<00:06,  3.12it/s]
+[2025-11-17T22:16:55.360+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  60%|######    | 30/50 [00:16<00:06,  3.12it/s]
+[2025-11-17T22:16:55.592+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:55.593+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:55.593+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:55,592] Trial 31 finished with value: 0.802555910543131 and parameters: {'max_depth': 9, 'learning_rate': 0.04470991201200388, 'subsample': 0.9611518756711329, 'colsample_bytree': 0.5330125477464511, 'min_child_weight': 8, 'gamma': 0.49950387226746695, 'n_estimators': 356}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:55.593+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  62%|######2   | 31/50 [00:17<00:06,  3.12it/s]
+[2025-11-17T22:16:55.593+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  62%|######2   | 31/50 [00:17<00:06,  3.12it/s]
+[2025-11-17T22:16:55.594+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  64%|######4   | 32/50 [00:17<00:04,  4.13it/s]
+[2025-11-17T22:16:56.598+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:56.598+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:56.598+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:56,598] Trial 32 finished with value: 0.8040842373962986 and parameters: {'max_depth': 10, 'learning_rate': 0.035080146031608174, 'subsample': 0.9078738412955842, 'colsample_bytree': 0.5295716509674251, 'min_child_weight': 10, 'gamma': 0.700320602086383, 'n_estimators': 390}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:56.598+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  64%|######4   | 32/50 [00:18<00:04,  4.13it/s]
+[2025-11-17T22:16:56.599+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  64%|######4   | 32/50 [00:18<00:04,  4.13it/s]
+[2025-11-17T22:16:56.599+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  66%|######6   | 33/50 [00:18<00:07,  2.32it/s]
+[2025-11-17T22:16:57.151+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:57.151+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:57.151+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:57,151] Trial 33 finished with value: 0.7949367088607594 and parameters: {'max_depth': 13, 'learning_rate': 0.03365584134447541, 'subsample': 0.8863815502354105, 'colsample_bytree': 0.5346384279790634, 'min_child_weight': 10, 'gamma': 0.7109318201925686, 'n_estimators': 110}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:57.151+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  66%|######6   | 33/50 [00:18<00:07,  2.32it/s]
+[2025-11-17T22:16:57.151+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  66%|######6   | 33/50 [00:18<00:07,  2.32it/s]
+[2025-11-17T22:16:57.152+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  68%|######8   | 34/50 [00:18<00:07,  2.16it/s]
+[2025-11-17T22:16:57.620+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:57.621+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:57.621+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:57,620] Trial 34 finished with value: 0.800763844684914 and parameters: {'max_depth': 10, 'learning_rate': 0.03123384006198769, 'subsample': 0.9077871074541212, 'colsample_bytree': 0.6072000604491916, 'min_child_weight': 10, 'gamma': 1.2765560681622468, 'n_estimators': 399}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:57.621+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  68%|######8   | 34/50 [00:19<00:07,  2.16it/s]
+[2025-11-17T22:16:57.621+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  68%|######8   | 34/50 [00:19<00:07,  2.16it/s]
+[2025-11-17T22:16:57.622+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  70%|#######   | 35/50 [00:19<00:06,  2.15it/s]
+[2025-11-17T22:16:59.078+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:59.078+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:59.078+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:59,078] Trial 35 finished with value: 0.8025396825396826 and parameters: {'max_depth': 8, 'learning_rate': 0.024375024069848896, 'subsample': 0.8618900172850131, 'colsample_bytree': 0.5262693571053811, 'min_child_weight': 9, 'gamma': 0.9077645066065027, 'n_estimators': 425}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:59.078+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  70%|#######   | 35/50 [00:20<00:06,  2.15it/s]
+[2025-11-17T22:16:59.079+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  70%|#######   | 35/50 [00:20<00:06,  2.15it/s]
+[2025-11-17T22:16:59.079+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  72%|#######2  | 36/50 [00:20<00:10,  1.35it/s]
+[2025-11-17T22:16:59.301+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:59.301+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:59.301+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:59,301] Trial 36 finished with value: 0.8030495552731892 and parameters: {'max_depth': 12, 'learning_rate': 0.05087654486381147, 'subsample': 0.9597977223447891, 'colsample_bytree': 0.5808054012550603, 'min_child_weight': 9, 'gamma': 1.5614294039307972, 'n_estimators': 345}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:59.302+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  72%|#######2  | 36/50 [00:20<00:10,  1.35it/s]
+[2025-11-17T22:16:59.302+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  72%|#######2  | 36/50 [00:20<00:10,  1.35it/s]
+[2025-11-17T22:16:59.302+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  74%|#######4  | 37/50 [00:20<00:07,  1.68it/s]
+[2025-11-17T22:16:59.610+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:59.611+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:59.611+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:59,610] Trial 37 finished with value: 0.7999999999999999 and parameters: {'max_depth': 6, 'learning_rate': 0.035641301817162074, 'subsample': 0.8667301202674141, 'colsample_bytree': 0.5208634342939849, 'min_child_weight': 10, 'gamma': 0.33467358795985264, 'n_estimators': 258}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:59.611+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  74%|#######4  | 37/50 [00:21<00:07,  1.68it/s]
+[2025-11-17T22:16:59.611+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  74%|#######4  | 37/50 [00:21<00:07,  1.68it/s]
+[2025-11-17T22:16:59.611+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  76%|#######6  | 38/50 [00:21<00:06,  1.95it/s]
+[2025-11-17T22:16:59.836+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:16:59.836+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:16:59.836+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:16:59,836] Trial 38 finished with value: 0.8017902813299232 and parameters: {'max_depth': 10, 'learning_rate': 0.06577035992004197, 'subsample': 0.9159129388868827, 'colsample_bytree': 0.5674178589293486, 'min_child_weight': 9, 'gamma': 1.0029814107530692, 'n_estimators': 305}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:16:59.836+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  76%|#######6  | 38/50 [00:21<00:06,  1.95it/s]
+[2025-11-17T22:16:59.837+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  76%|#######6  | 38/50 [00:21<00:06,  1.95it/s]
+[2025-11-17T22:16:59.837+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  78%|#######8  | 39/50 [00:21<00:04,  2.34it/s]
+[2025-11-17T22:17:00.770+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:00.770+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:00.770+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:00,770] Trial 39 finished with value: 0.7956298200514139 and parameters: {'max_depth': 13, 'learning_rate': 0.024149736099319453, 'subsample': 0.8896184945479426, 'colsample_bytree': 0.5009564238804844, 'min_child_weight': 4, 'gamma': 0.013282736215314839, 'n_estimators': 466}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:00.771+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  78%|#######8  | 39/50 [00:22<00:04,  2.34it/s]
+[2025-11-17T22:17:00.771+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  78%|#######8  | 39/50 [00:22<00:04,  2.34it/s]
+[2025-11-17T22:17:00.771+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  80%|########  | 40/50 [00:22<00:05,  1.73it/s]
+[2025-11-17T22:17:01.041+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:01.042+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:01.042+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:01,041] Trial 40 finished with value: 0.8012738853503185 and parameters: {'max_depth': 11, 'learning_rate': 0.08099598539151615, 'subsample': 0.9734910922844446, 'colsample_bytree': 0.6020512941564147, 'min_child_weight': 8, 'gamma': 0.6861613597540982, 'n_estimators': 391}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:01.042+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  80%|########  | 40/50 [00:22<00:05,  1.73it/s]
+[2025-11-17T22:17:01.042+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  80%|########  | 40/50 [00:22<00:05,  1.73it/s]
+[2025-11-17T22:17:01.042+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  82%|########2 | 41/50 [00:22<00:04,  2.06it/s]
+[2025-11-17T22:17:01.225+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:01.225+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:01.225+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:01,225] Trial 41 finished with value: 0.8040583386176284 and parameters: {'max_depth': 12, 'learning_rate': 0.048743238542306916, 'subsample': 0.9645148362039293, 'colsample_bytree': 0.5817595992958474, 'min_child_weight': 9, 'gamma': 1.4542812238641498, 'n_estimators': 345}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:01.225+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  82%|########2 | 41/50 [00:22<00:04,  2.06it/s]
+[2025-11-17T22:17:01.226+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  82%|########2 | 41/50 [00:22<00:04,  2.06it/s]
+[2025-11-17T22:17:01.226+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  84%|########4 | 42/50 [00:22<00:03,  2.52it/s]
+[2025-11-17T22:17:01.481+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:01.481+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:01.481+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:01,481] Trial 42 finished with value: 0.8005082592121983 and parameters: {'max_depth': 12, 'learning_rate': 0.04708579593629236, 'subsample': 0.9647637315753956, 'colsample_bytree': 0.5522012577943192, 'min_child_weight': 10, 'gamma': 1.3586581093234438, 'n_estimators': 317}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:01.482+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  84%|########4 | 42/50 [00:22<00:03,  2.52it/s]
+[2025-11-17T22:17:01.482+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  84%|########4 | 42/50 [00:22<00:03,  2.52it/s]
+[2025-11-17T22:17:01.482+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  86%|########6 | 43/50 [00:22<00:02,  2.82it/s]
+[2025-11-17T22:17:01.912+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:01.912+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:01.912+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:01,912] Trial 43 finished with value: 0.8017902813299232 and parameters: {'max_depth': 14, 'learning_rate': 0.05818845766266493, 'subsample': 0.9257265288933062, 'colsample_bytree': 0.5789600265995569, 'min_child_weight': 9, 'gamma': 1.0281641573269438, 'n_estimators': 413}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:01.913+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  86%|########6 | 43/50 [00:23<00:02,  2.82it/s]
+[2025-11-17T22:17:01.913+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  86%|########6 | 43/50 [00:23<00:02,  2.82it/s]
+[2025-11-17T22:17:01.913+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  88%|########8 | 44/50 [00:23<00:02,  2.65it/s]
+[2025-11-17T22:17:02.226+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:02.226+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:02.226+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:02,226] Trial 44 finished with value: 0.8045685279187816 and parameters: {'max_depth': 9, 'learning_rate': 0.028932707342245487, 'subsample': 0.974943570005506, 'colsample_bytree': 0.5194841038205044, 'min_child_weight': 8, 'gamma': 0.6462687015500123, 'n_estimators': 278}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:02.227+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  88%|########8 | 44/50 [00:23<00:02,  2.65it/s]
+[2025-11-17T22:17:02.227+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  88%|########8 | 44/50 [00:23<00:02,  2.65it/s]
+[2025-11-17T22:17:02.227+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  90%|######### | 45/50 [00:23<00:01,  2.79it/s]
+[2025-11-17T22:17:03.216+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:03.216+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:03.216+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:03,215] Trial 45 finished with value: 0.799240025332489 and parameters: {'max_depth': 9, 'learning_rate': 0.026863588714973543, 'subsample': 0.9860244033760543, 'colsample_bytree': 0.5233176666620485, 'min_child_weight': 7, 'gamma': 0.45571560039347925, 'n_estimators': 286}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:03.216+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  90%|######### | 45/50 [00:24<00:01,  2.79it/s]
+[2025-11-17T22:17:03.216+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  90%|######### | 45/50 [00:24<00:01,  2.79it/s]
+[2025-11-17T22:17:03.216+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  92%|#########2| 46/50 [00:24<00:02,  1.83it/s]
+[2025-11-17T22:17:03.729+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:03.730+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:03.730+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:03,729] Trial 46 finished with value: 0.8010204081632654 and parameters: {'max_depth': 10, 'learning_rate': 0.03754551115039342, 'subsample': 0.9973408618733371, 'colsample_bytree': 0.5797344860819836, 'min_child_weight': 8, 'gamma': 0.6742688217617143, 'n_estimators': 225}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:03.730+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  92%|#########2| 46/50 [00:25<00:02,  1.83it/s]
+[2025-11-17T22:17:03.730+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  92%|#########2| 46/50 [00:25<00:02,  1.83it/s]
+[2025-11-17T22:17:03.730+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  94%|#########3| 47/50 [00:25<00:01,  1.86it/s]
+[2025-11-17T22:17:04.122+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:04.122+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:04.122+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:04,122] Trial 47 finished with value: 0.8017789072426939 and parameters: {'max_depth': 13, 'learning_rate': 0.02976596457249386, 'subsample': 0.947257865606021, 'colsample_bytree': 0.5167665237972624, 'min_child_weight': 5, 'gamma': 0.26742623731616355, 'n_estimators': 265}. Best is trial 22 with value: 0.8048315321042594.
+[2025-11-17T22:17:04.122+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  94%|#########3| 47/50 [00:25<00:01,  1.86it/s]
+[2025-11-17T22:17:04.123+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  94%|#########3| 47/50 [00:25<00:01,  1.86it/s]
+[2025-11-17T22:17:04.123+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  96%|#########6| 48/50 [00:25<00:00,  2.02it/s]
+[2025-11-17T22:17:04.320+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:04.320+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:04.320+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:04,320] Trial 48 finished with value: 0.8055731475617479 and parameters: {'max_depth': 11, 'learning_rate': 0.020406225242038018, 'subsample': 0.9719203445724947, 'colsample_bytree': 0.6860304875117555, 'min_child_weight': 7, 'gamma': 0.23091753723281427, 'n_estimators': 162}. Best is trial 48 with value: 0.8055731475617479.
+[2025-11-17T22:17:04.320+0000] {logging_mixin.py:154} WARNING - Best trial: 22. Best value: 0.804832:  96%|#########6| 48/50 [00:25<00:00,  2.02it/s]
+[2025-11-17T22:17:04.321+0000] {logging_mixin.py:154} WARNING - Best trial: 48. Best value: 0.805573:  96%|#########6| 48/50 [00:25<00:00,  2.02it/s]
+[2025-11-17T22:17:04.321+0000] {logging_mixin.py:154} WARNING - Best trial: 48. Best value: 0.805573:  98%|#########8| 49/50 [00:25<00:00,  2.47it/s]
+[2025-11-17T22:17:04.569+0000] {logging_mixin.py:154} WARNING -                                                                                      
+[2025-11-17T22:17:04.569+0000] {logging_mixin.py:154} WARNING - 
+[2025-11-17T22:17:04.569+0000] {logging_mixin.py:154} INFO - [I 2025-11-17 22:17:04,569] Trial 49 finished with value: 0.8 and parameters: {'max_depth': 14, 'learning_rate': 0.020740606901180705, 'subsample': 0.9781744949907051, 'colsample_bytree': 0.7052857296673494, 'min_child_weight': 7, 'gamma': 0.19495114510447442, 'n_estimators': 198}. Best is trial 48 with value: 0.8055731475617479.
+[2025-11-17T22:17:04.569+0000] {logging_mixin.py:154} WARNING - Best trial: 48. Best value: 0.805573:  98%|#########8| 49/50 [00:26<00:00,  2.47it/s]
+[2025-11-17T22:17:04.570+0000] {logging_mixin.py:154} WARNING - Best trial: 48. Best value: 0.805573:  98%|#########8| 49/50 [00:26<00:00,  2.47it/s]
+[2025-11-17T22:17:04.570+0000] {logging_mixin.py:154} WARNING - Best trial: 48. Best value: 0.805573: 100%|##########| 50/50 [00:26<00:00,  2.79it/s]
+[2025-11-17T22:17:04.570+0000] {logging_mixin.py:154} WARNING - Best trial: 48. Best value: 0.805573: 100%|##########| 50/50 [00:26<00:00,  1.92it/s]
+[2025-11-17T22:17:04.570+0000] {model_training.py:111} INFO - ✅ Mejor F1-Score (validación): 0.8056
+[2025-11-17T22:17:04.570+0000] {model_training.py:112} INFO - 📊 Mejores hiperparámetros encontrados:
+[2025-11-17T22:17:04.570+0000] {model_training.py:114} INFO -    - max_depth: 11
+[2025-11-17T22:17:04.570+0000] {model_training.py:114} INFO -    - learning_rate: 0.020406225242038018
+[2025-11-17T22:17:04.571+0000] {model_training.py:114} INFO -    - subsample: 0.9719203445724947
+[2025-11-17T22:17:04.571+0000] {model_training.py:114} INFO -    - colsample_bytree: 0.6860304875117555
+[2025-11-17T22:17:04.571+0000] {model_training.py:114} INFO -    - min_child_weight: 7
+[2025-11-17T22:17:04.571+0000] {model_training.py:114} INFO -    - gamma: 0.23091753723281427
+[2025-11-17T22:17:04.571+0000] {model_training.py:114} INFO -    - n_estimators: 162
+[2025-11-17T22:17:04.571+0000] {model_training.py:281} INFO - 🎯 Entrenando modelo final con mejores hiperparámetros...
+[2025-11-17T22:17:04.592+0000] {logging_mixin.py:154} INFO - [0]	validation_0-logloss:0.68605	validation_1-logloss:0.68660	validation_2-logloss:0.68712
+[2025-11-17T22:17:04.600+0000] {logging_mixin.py:154} INFO - [1]	validation_0-logloss:0.67954	validation_1-logloss:0.68099	validation_2-logloss:0.68151
+[2025-11-17T22:17:04.608+0000] {logging_mixin.py:154} INFO - [2]	validation_0-logloss:0.67700	validation_1-logloss:0.67911	validation_2-logloss:0.67973
+[2025-11-17T22:17:04.619+0000] {logging_mixin.py:154} INFO - [3]	validation_0-logloss:0.67081	validation_1-logloss:0.67387	validation_2-logloss:0.67442
+[2025-11-17T22:17:04.627+0000] {logging_mixin.py:154} INFO - [4]	validation_0-logloss:0.66483	validation_1-logloss:0.66870	validation_2-logloss:0.66929
+[2025-11-17T22:17:04.633+0000] {logging_mixin.py:154} INFO - [5]	validation_0-logloss:0.65953	validation_1-logloss:0.66383	validation_2-logloss:0.66445
+[2025-11-17T22:17:04.640+0000] {logging_mixin.py:154} INFO - [6]	validation_0-logloss:0.65420	validation_1-logloss:0.65950	validation_2-logloss:0.66029
+[2025-11-17T22:17:04.641+0000] {logging_mixin.py:154} INFO - [7]	validation_0-logloss:0.64826	validation_1-logloss:0.65428	validation_2-logloss:0.65529
+[2025-11-17T22:17:04.643+0000] {logging_mixin.py:154} INFO - [8]	validation_0-logloss:0.64249	validation_1-logloss:0.64920	validation_2-logloss:0.65055
+[2025-11-17T22:17:04.644+0000] {logging_mixin.py:154} INFO - [9]	validation_0-logloss:0.63554	validation_1-logloss:0.64312	validation_2-logloss:0.64464
+[2025-11-17T22:17:04.646+0000] {logging_mixin.py:154} INFO - [10]	validation_0-logloss:0.62885	validation_1-logloss:0.63702	validation_2-logloss:0.63870
+[2025-11-17T22:17:04.647+0000] {logging_mixin.py:154} INFO - [11]	validation_0-logloss:0.62420	validation_1-logloss:0.63365	validation_2-logloss:0.63509
+[2025-11-17T22:17:04.649+0000] {logging_mixin.py:154} INFO - [12]	validation_0-logloss:0.61799	validation_1-logloss:0.62809	validation_2-logloss:0.62988
+[2025-11-17T22:17:04.654+0000] {logging_mixin.py:154} INFO - [13]	validation_0-logloss:0.61363	validation_1-logloss:0.62450	validation_2-logloss:0.62634
+[2025-11-17T22:17:04.657+0000] {logging_mixin.py:154} INFO - [14]	validation_0-logloss:0.61181	validation_1-logloss:0.62319	validation_2-logloss:0.62523
+[2025-11-17T22:17:04.659+0000] {logging_mixin.py:154} INFO - [15]	validation_0-logloss:0.60939	validation_1-logloss:0.62128	validation_2-logloss:0.62359
+[2025-11-17T22:17:04.661+0000] {logging_mixin.py:154} INFO - [16]	validation_0-logloss:0.60339	validation_1-logloss:0.61623	validation_2-logloss:0.61850
+[2025-11-17T22:17:04.663+0000] {logging_mixin.py:154} INFO - [17]	validation_0-logloss:0.59803	validation_1-logloss:0.61108	validation_2-logloss:0.61362
+[2025-11-17T22:17:04.665+0000] {logging_mixin.py:154} INFO - [18]	validation_0-logloss:0.59238	validation_1-logloss:0.60630	validation_2-logloss:0.60898
+[2025-11-17T22:17:04.673+0000] {logging_mixin.py:154} INFO - [19]	validation_0-logloss:0.59033	validation_1-logloss:0.60480	validation_2-logloss:0.60761
+[2025-11-17T22:17:04.676+0000] {logging_mixin.py:154} INFO - [20]	validation_0-logloss:0.58674	validation_1-logloss:0.60196	validation_2-logloss:0.60474
+[2025-11-17T22:17:04.680+0000] {logging_mixin.py:154} INFO - [21]	validation_0-logloss:0.58146	validation_1-logloss:0.59744	validation_2-logloss:0.60051
+[2025-11-17T22:17:04.684+0000] {logging_mixin.py:154} INFO - [22]	validation_0-logloss:0.57984	validation_1-logloss:0.59658	validation_2-logloss:0.59957
+[2025-11-17T22:17:04.685+0000] {logging_mixin.py:154} INFO - [23]	validation_0-logloss:0.57573	validation_1-logloss:0.59312	validation_2-logloss:0.59626
+[2025-11-17T22:17:04.691+0000] {logging_mixin.py:154} INFO - [24]	validation_0-logloss:0.57442	validation_1-logloss:0.59212	validation_2-logloss:0.59549
+[2025-11-17T22:17:04.696+0000] {logging_mixin.py:154} INFO - [25]	validation_0-logloss:0.57105	validation_1-logloss:0.58934	validation_2-logloss:0.59280
+[2025-11-17T22:17:04.697+0000] {logging_mixin.py:154} INFO - [26]	validation_0-logloss:0.56797	validation_1-logloss:0.58652	validation_2-logloss:0.59006
+[2025-11-17T22:17:04.699+0000] {logging_mixin.py:154} INFO - [27]	validation_0-logloss:0.56447	validation_1-logloss:0.58387	validation_2-logloss:0.58739
+[2025-11-17T22:17:04.702+0000] {logging_mixin.py:154} INFO - [28]	validation_0-logloss:0.56119	validation_1-logloss:0.58156	validation_2-logloss:0.58517
+[2025-11-17T22:17:04.704+0000] {logging_mixin.py:154} INFO - [29]	validation_0-logloss:0.55707	validation_1-logloss:0.57758	validation_2-logloss:0.58142
+[2025-11-17T22:17:04.706+0000] {logging_mixin.py:154} INFO - [30]	validation_0-logloss:0.55346	validation_1-logloss:0.57466	validation_2-logloss:0.57873
+[2025-11-17T22:17:04.708+0000] {logging_mixin.py:154} INFO - [31]	validation_0-logloss:0.55005	validation_1-logloss:0.57206	validation_2-logloss:0.57629
+[2025-11-17T22:17:04.710+0000] {logging_mixin.py:154} INFO - [32]	validation_0-logloss:0.54580	validation_1-logloss:0.56853	validation_2-logloss:0.57288
+[2025-11-17T22:17:04.711+0000] {logging_mixin.py:154} INFO - [33]	validation_0-logloss:0.54168	validation_1-logloss:0.56512	validation_2-logloss:0.56954
+[2025-11-17T22:17:04.713+0000] {logging_mixin.py:154} INFO - [34]	validation_0-logloss:0.53937	validation_1-logloss:0.56301	validation_2-logloss:0.56746
+[2025-11-17T22:17:04.715+0000] {logging_mixin.py:154} INFO - [35]	validation_0-logloss:0.53619	validation_1-logloss:0.56041	validation_2-logloss:0.56504
+[2025-11-17T22:17:04.717+0000] {logging_mixin.py:154} INFO - [36]	validation_0-logloss:0.53471	validation_1-logloss:0.55938	validation_2-logloss:0.56405
+[2025-11-17T22:17:04.718+0000] {logging_mixin.py:154} INFO - [37]	validation_0-logloss:0.53195	validation_1-logloss:0.55759	validation_2-logloss:0.56228
+[2025-11-17T22:17:04.720+0000] {logging_mixin.py:154} INFO - [38]	validation_0-logloss:0.52927	validation_1-logloss:0.55584	validation_2-logloss:0.56059
+[2025-11-17T22:17:04.723+0000] {logging_mixin.py:154} INFO - [39]	validation_0-logloss:0.52640	validation_1-logloss:0.55336	validation_2-logloss:0.55831
+[2025-11-17T22:17:04.724+0000] {logging_mixin.py:154} INFO - [40]	validation_0-logloss:0.52361	validation_1-logloss:0.55096	validation_2-logloss:0.55608
+[2025-11-17T22:17:04.726+0000] {logging_mixin.py:154} INFO - [41]	validation_0-logloss:0.52130	validation_1-logloss:0.54925	validation_2-logloss:0.55433
+[2025-11-17T22:17:04.728+0000] {logging_mixin.py:154} INFO - [42]	validation_0-logloss:0.51786	validation_1-logloss:0.54645	validation_2-logloss:0.55151
+[2025-11-17T22:17:04.729+0000] {logging_mixin.py:154} INFO - [43]	validation_0-logloss:0.51434	validation_1-logloss:0.54374	validation_2-logloss:0.54875
+[2025-11-17T22:17:04.731+0000] {logging_mixin.py:154} INFO - [44]	validation_0-logloss:0.51107	validation_1-logloss:0.54105	validation_2-logloss:0.54602
+[2025-11-17T22:17:04.733+0000] {logging_mixin.py:154} INFO - [45]	validation_0-logloss:0.50882	validation_1-logloss:0.53970	validation_2-logloss:0.54459
+[2025-11-17T22:17:04.735+0000] {logging_mixin.py:154} INFO - [46]	validation_0-logloss:0.50799	validation_1-logloss:0.53930	validation_2-logloss:0.54455
+[2025-11-17T22:17:04.736+0000] {logging_mixin.py:154} INFO - [47]	validation_0-logloss:0.50564	validation_1-logloss:0.53735	validation_2-logloss:0.54277
+[2025-11-17T22:17:04.737+0000] {logging_mixin.py:154} INFO - [48]	validation_0-logloss:0.50359	validation_1-logloss:0.53579	validation_2-logloss:0.54119
+[2025-11-17T22:17:04.739+0000] {logging_mixin.py:154} INFO - [49]	validation_0-logloss:0.50061	validation_1-logloss:0.53341	validation_2-logloss:0.53885
+[2025-11-17T22:17:04.741+0000] {logging_mixin.py:154} INFO - [50]	validation_0-logloss:0.49941	validation_1-logloss:0.53264	validation_2-logloss:0.53812
+[2025-11-17T22:17:04.742+0000] {logging_mixin.py:154} INFO - [51]	validation_0-logloss:0.49727	validation_1-logloss:0.53100	validation_2-logloss:0.53652
+[2025-11-17T22:17:04.747+0000] {logging_mixin.py:154} INFO - [52]	validation_0-logloss:0.49433	validation_1-logloss:0.52863	validation_2-logloss:0.53435
+[2025-11-17T22:17:04.752+0000] {logging_mixin.py:154} INFO - [53]	validation_0-logloss:0.49253	validation_1-logloss:0.52760	validation_2-logloss:0.53336
+[2025-11-17T22:17:04.754+0000] {logging_mixin.py:154} INFO - [54]	validation_0-logloss:0.49048	validation_1-logloss:0.52603	validation_2-logloss:0.53186
+[2025-11-17T22:17:04.755+0000] {logging_mixin.py:154} INFO - [55]	validation_0-logloss:0.48788	validation_1-logloss:0.52377	validation_2-logloss:0.52961
+[2025-11-17T22:17:04.756+0000] {logging_mixin.py:154} INFO - [56]	validation_0-logloss:0.48571	validation_1-logloss:0.52217	validation_2-logloss:0.52812
+[2025-11-17T22:17:04.758+0000] {logging_mixin.py:154} INFO - [57]	validation_0-logloss:0.48384	validation_1-logloss:0.52094	validation_2-logloss:0.52679
+[2025-11-17T22:17:04.759+0000] {logging_mixin.py:154} INFO - [58]	validation_0-logloss:0.48200	validation_1-logloss:0.51974	validation_2-logloss:0.52552
+[2025-11-17T22:17:04.762+0000] {logging_mixin.py:154} INFO - [59]	validation_0-logloss:0.48036	validation_1-logloss:0.51875	validation_2-logloss:0.52445
+[2025-11-17T22:17:04.774+0000] {logging_mixin.py:154} INFO - [60]	validation_0-logloss:0.47852	validation_1-logloss:0.51724	validation_2-logloss:0.52311
+[2025-11-17T22:17:04.782+0000] {logging_mixin.py:154} INFO - [61]	validation_0-logloss:0.47657	validation_1-logloss:0.51575	validation_2-logloss:0.52185
+[2025-11-17T22:17:04.788+0000] {logging_mixin.py:154} INFO - [62]	validation_0-logloss:0.47413	validation_1-logloss:0.51381	validation_2-logloss:0.52020
+[2025-11-17T22:17:04.796+0000] {logging_mixin.py:154} INFO - [63]	validation_0-logloss:0.47248	validation_1-logloss:0.51296	validation_2-logloss:0.51936
+[2025-11-17T22:17:04.801+0000] {logging_mixin.py:154} INFO - [64]	validation_0-logloss:0.47107	validation_1-logloss:0.51156	validation_2-logloss:0.51809
+[2025-11-17T22:17:04.806+0000] {logging_mixin.py:154} INFO - [65]	validation_0-logloss:0.46965	validation_1-logloss:0.51056	validation_2-logloss:0.51724
+[2025-11-17T22:17:04.807+0000] {logging_mixin.py:154} INFO - [66]	validation_0-logloss:0.46751	validation_1-logloss:0.50890	validation_2-logloss:0.51562
+[2025-11-17T22:17:04.809+0000] {logging_mixin.py:154} INFO - [67]	validation_0-logloss:0.46592	validation_1-logloss:0.50799	validation_2-logloss:0.51459
+[2025-11-17T22:17:04.810+0000] {logging_mixin.py:154} INFO - [68]	validation_0-logloss:0.46381	validation_1-logloss:0.50633	validation_2-logloss:0.51289
+[2025-11-17T22:17:04.811+0000] {logging_mixin.py:154} INFO - [69]	validation_0-logloss:0.46177	validation_1-logloss:0.50472	validation_2-logloss:0.51141
+[2025-11-17T22:17:04.813+0000] {logging_mixin.py:154} INFO - [70]	validation_0-logloss:0.45987	validation_1-logloss:0.50311	validation_2-logloss:0.50984
+[2025-11-17T22:17:04.814+0000] {logging_mixin.py:154} INFO - [71]	validation_0-logloss:0.45858	validation_1-logloss:0.50224	validation_2-logloss:0.50908
+[2025-11-17T22:17:04.816+0000] {logging_mixin.py:154} INFO - [72]	validation_0-logloss:0.45716	validation_1-logloss:0.50141	validation_2-logloss:0.50824
+[2025-11-17T22:17:04.817+0000] {logging_mixin.py:154} INFO - [73]	validation_0-logloss:0.45517	validation_1-logloss:0.49977	validation_2-logloss:0.50682
+[2025-11-17T22:17:04.818+0000] {logging_mixin.py:154} INFO - [74]	validation_0-logloss:0.45404	validation_1-logloss:0.49865	validation_2-logloss:0.50578
+[2025-11-17T22:17:04.819+0000] {logging_mixin.py:154} INFO - [75]	validation_0-logloss:0.45266	validation_1-logloss:0.49756	validation_2-logloss:0.50481
+[2025-11-17T22:17:04.820+0000] {logging_mixin.py:154} INFO - [76]	validation_0-logloss:0.45133	validation_1-logloss:0.49672	validation_2-logloss:0.50411
+[2025-11-17T22:17:04.821+0000] {logging_mixin.py:154} INFO - [77]	validation_0-logloss:0.45029	validation_1-logloss:0.49615	validation_2-logloss:0.50364
+[2025-11-17T22:17:04.823+0000] {logging_mixin.py:154} INFO - [78]	validation_0-logloss:0.44887	validation_1-logloss:0.49522	validation_2-logloss:0.50270
+[2025-11-17T22:17:04.824+0000] {logging_mixin.py:154} INFO - [79]	validation_0-logloss:0.44774	validation_1-logloss:0.49452	validation_2-logloss:0.50200
+[2025-11-17T22:17:04.825+0000] {logging_mixin.py:154} INFO - [80]	validation_0-logloss:0.44606	validation_1-logloss:0.49314	validation_2-logloss:0.50086
+[2025-11-17T22:17:04.827+0000] {logging_mixin.py:154} INFO - [81]	validation_0-logloss:0.44433	validation_1-logloss:0.49200	validation_2-logloss:0.49972
+[2025-11-17T22:17:04.828+0000] {logging_mixin.py:154} INFO - [82]	validation_0-logloss:0.44318	validation_1-logloss:0.49126	validation_2-logloss:0.49908
+[2025-11-17T22:17:04.830+0000] {logging_mixin.py:154} INFO - [83]	validation_0-logloss:0.44155	validation_1-logloss:0.48993	validation_2-logloss:0.49784
+[2025-11-17T22:17:04.832+0000] {logging_mixin.py:154} INFO - [84]	validation_0-logloss:0.44037	validation_1-logloss:0.48927	validation_2-logloss:0.49723
+[2025-11-17T22:17:04.833+0000] {logging_mixin.py:154} INFO - [85]	validation_0-logloss:0.43956	validation_1-logloss:0.48901	validation_2-logloss:0.49700
+[2025-11-17T22:17:04.834+0000] {logging_mixin.py:154} INFO - [86]	validation_0-logloss:0.43868	validation_1-logloss:0.48813	validation_2-logloss:0.49620
+[2025-11-17T22:17:04.836+0000] {logging_mixin.py:154} INFO - [87]	validation_0-logloss:0.43790	validation_1-logloss:0.48739	validation_2-logloss:0.49557
+[2025-11-17T22:17:04.837+0000] {logging_mixin.py:154} INFO - [88]	validation_0-logloss:0.43710	validation_1-logloss:0.48658	validation_2-logloss:0.49480
+[2025-11-17T22:17:04.839+0000] {logging_mixin.py:154} INFO - [89]	validation_0-logloss:0.43555	validation_1-logloss:0.48552	validation_2-logloss:0.49381
+[2025-11-17T22:17:04.840+0000] {logging_mixin.py:154} INFO - [90]	validation_0-logloss:0.43437	validation_1-logloss:0.48484	validation_2-logloss:0.49314
+[2025-11-17T22:17:04.841+0000] {logging_mixin.py:154} INFO - [91]	validation_0-logloss:0.43331	validation_1-logloss:0.48429	validation_2-logloss:0.49261
+[2025-11-17T22:17:04.842+0000] {logging_mixin.py:154} INFO - [92]	validation_0-logloss:0.43229	validation_1-logloss:0.48366	validation_2-logloss:0.49204
+[2025-11-17T22:17:04.844+0000] {logging_mixin.py:154} INFO - [93]	validation_0-logloss:0.43166	validation_1-logloss:0.48336	validation_2-logloss:0.49198
+[2025-11-17T22:17:04.846+0000] {logging_mixin.py:154} INFO - [94]	validation_0-logloss:0.43009	validation_1-logloss:0.48237	validation_2-logloss:0.49099
+[2025-11-17T22:17:04.847+0000] {logging_mixin.py:154} INFO - [95]	validation_0-logloss:0.42917	validation_1-logloss:0.48170	validation_2-logloss:0.49053
+[2025-11-17T22:17:04.849+0000] {logging_mixin.py:154} INFO - [96]	validation_0-logloss:0.42816	validation_1-logloss:0.48136	validation_2-logloss:0.49016
+[2025-11-17T22:17:04.851+0000] {logging_mixin.py:154} INFO - [97]	validation_0-logloss:0.42721	validation_1-logloss:0.48108	validation_2-logloss:0.48980
+[2025-11-17T22:17:04.852+0000] {logging_mixin.py:154} INFO - [98]	validation_0-logloss:0.42625	validation_1-logloss:0.48032	validation_2-logloss:0.48917
+[2025-11-17T22:17:04.853+0000] {logging_mixin.py:154} INFO - [99]	validation_0-logloss:0.42574	validation_1-logloss:0.48003	validation_2-logloss:0.48904
+[2025-11-17T22:17:04.855+0000] {logging_mixin.py:154} INFO - [100]	validation_0-logloss:0.42482	validation_1-logloss:0.47946	validation_2-logloss:0.48848
+[2025-11-17T22:17:04.856+0000] {logging_mixin.py:154} INFO - [101]	validation_0-logloss:0.42347	validation_1-logloss:0.47855	validation_2-logloss:0.48770
+[2025-11-17T22:17:04.857+0000] {logging_mixin.py:154} INFO - [102]	validation_0-logloss:0.42208	validation_1-logloss:0.47758	validation_2-logloss:0.48683
+[2025-11-17T22:17:04.859+0000] {logging_mixin.py:154} INFO - [103]	validation_0-logloss:0.42115	validation_1-logloss:0.47732	validation_2-logloss:0.48636
+[2025-11-17T22:17:04.861+0000] {logging_mixin.py:154} INFO - [104]	validation_0-logloss:0.42021	validation_1-logloss:0.47701	validation_2-logloss:0.48600
+[2025-11-17T22:17:04.871+0000] {logging_mixin.py:154} INFO - [105]	validation_0-logloss:0.41895	validation_1-logloss:0.47609	validation_2-logloss:0.48524
+[2025-11-17T22:17:04.873+0000] {logging_mixin.py:154} INFO - [106]	validation_0-logloss:0.41778	validation_1-logloss:0.47537	validation_2-logloss:0.48455
+[2025-11-17T22:17:04.876+0000] {logging_mixin.py:154} INFO - [107]	validation_0-logloss:0.41689	validation_1-logloss:0.47508	validation_2-logloss:0.48421
+[2025-11-17T22:17:04.877+0000] {logging_mixin.py:154} INFO - [108]	validation_0-logloss:0.41582	validation_1-logloss:0.47424	validation_2-logloss:0.48338
+[2025-11-17T22:17:04.878+0000] {logging_mixin.py:154} INFO - [109]	validation_0-logloss:0.41494	validation_1-logloss:0.47392	validation_2-logloss:0.48313
+[2025-11-17T22:17:04.921+0000] {logging_mixin.py:154} INFO - [110]	validation_0-logloss:0.41430	validation_1-logloss:0.47357	validation_2-logloss:0.48289
+[2025-11-17T22:17:04.926+0000] {logging_mixin.py:154} INFO - [111]	validation_0-logloss:0.41352	validation_1-logloss:0.47325	validation_2-logloss:0.48257
+[2025-11-17T22:17:04.927+0000] {logging_mixin.py:154} INFO - [112]	validation_0-logloss:0.41277	validation_1-logloss:0.47278	validation_2-logloss:0.48232
+[2025-11-17T22:17:04.929+0000] {logging_mixin.py:154} INFO - [113]	validation_0-logloss:0.41162	validation_1-logloss:0.47209	validation_2-logloss:0.48161
+[2025-11-17T22:17:04.930+0000] {logging_mixin.py:154} INFO - [114]	validation_0-logloss:0.41080	validation_1-logloss:0.47131	validation_2-logloss:0.48091
+[2025-11-17T22:17:04.932+0000] {logging_mixin.py:154} INFO - [115]	validation_0-logloss:0.40987	validation_1-logloss:0.47080	validation_2-logloss:0.48051
+[2025-11-17T22:17:04.933+0000] {logging_mixin.py:154} INFO - [116]	validation_0-logloss:0.40876	validation_1-logloss:0.47003	validation_2-logloss:0.47981
+[2025-11-17T22:17:04.934+0000] {logging_mixin.py:154} INFO - [117]	validation_0-logloss:0.40799	validation_1-logloss:0.46978	validation_2-logloss:0.47953
+[2025-11-17T22:17:04.935+0000] {logging_mixin.py:154} INFO - [118]	validation_0-logloss:0.40735	validation_1-logloss:0.46936	validation_2-logloss:0.47925
+[2025-11-17T22:17:04.936+0000] {logging_mixin.py:154} INFO - [119]	validation_0-logloss:0.40696	validation_1-logloss:0.46921	validation_2-logloss:0.47931
+[2025-11-17T22:17:04.938+0000] {logging_mixin.py:154} INFO - [120]	validation_0-logloss:0.40635	validation_1-logloss:0.46877	validation_2-logloss:0.47913
+[2025-11-17T22:17:04.939+0000] {logging_mixin.py:154} INFO - [121]	validation_0-logloss:0.40567	validation_1-logloss:0.46856	validation_2-logloss:0.47889
+[2025-11-17T22:17:04.941+0000] {logging_mixin.py:154} INFO - [122]	validation_0-logloss:0.40490	validation_1-logloss:0.46824	validation_2-logloss:0.47878
+[2025-11-17T22:17:04.945+0000] {logging_mixin.py:154} INFO - [123]	validation_0-logloss:0.40396	validation_1-logloss:0.46756	validation_2-logloss:0.47819
+[2025-11-17T22:17:04.954+0000] {logging_mixin.py:154} INFO - [124]	validation_0-logloss:0.40293	validation_1-logloss:0.46700	validation_2-logloss:0.47747
+[2025-11-17T22:17:04.961+0000] {logging_mixin.py:154} INFO - [125]	validation_0-logloss:0.40202	validation_1-logloss:0.46641	validation_2-logloss:0.47697
+[2025-11-17T22:17:04.965+0000] {logging_mixin.py:154} INFO - [126]	validation_0-logloss:0.40137	validation_1-logloss:0.46611	validation_2-logloss:0.47660
+[2025-11-17T22:17:04.966+0000] {logging_mixin.py:154} INFO - [127]	validation_0-logloss:0.40049	validation_1-logloss:0.46546	validation_2-logloss:0.47596
+[2025-11-17T22:17:04.967+0000] {logging_mixin.py:154} INFO - [128]	validation_0-logloss:0.40008	validation_1-logloss:0.46539	validation_2-logloss:0.47584
+[2025-11-17T22:17:04.969+0000] {logging_mixin.py:154} INFO - [129]	validation_0-logloss:0.39942	validation_1-logloss:0.46507	validation_2-logloss:0.47559
+[2025-11-17T22:17:04.970+0000] {logging_mixin.py:154} INFO - [130]	validation_0-logloss:0.39882	validation_1-logloss:0.46443	validation_2-logloss:0.47515
+[2025-11-17T22:17:04.971+0000] {logging_mixin.py:154} INFO - [131]	validation_0-logloss:0.39828	validation_1-logloss:0.46422	validation_2-logloss:0.47496
+[2025-11-17T22:17:04.973+0000] {logging_mixin.py:154} INFO - [132]	validation_0-logloss:0.39749	validation_1-logloss:0.46366	validation_2-logloss:0.47439
+[2025-11-17T22:17:04.974+0000] {logging_mixin.py:154} INFO - [133]	validation_0-logloss:0.39688	validation_1-logloss:0.46364	validation_2-logloss:0.47426
+[2025-11-17T22:17:04.976+0000] {logging_mixin.py:154} INFO - [134]	validation_0-logloss:0.39601	validation_1-logloss:0.46310	validation_2-logloss:0.47383
+[2025-11-17T22:17:04.977+0000] {logging_mixin.py:154} INFO - [135]	validation_0-logloss:0.39507	validation_1-logloss:0.46258	validation_2-logloss:0.47334
+[2025-11-17T22:17:04.978+0000] {logging_mixin.py:154} INFO - [136]	validation_0-logloss:0.39463	validation_1-logloss:0.46229	validation_2-logloss:0.47319
+[2025-11-17T22:17:04.979+0000] {logging_mixin.py:154} INFO - [137]	validation_0-logloss:0.39416	validation_1-logloss:0.46198	validation_2-logloss:0.47308
+[2025-11-17T22:17:04.981+0000] {logging_mixin.py:154} INFO - [138]	validation_0-logloss:0.39366	validation_1-logloss:0.46174	validation_2-logloss:0.47297
+[2025-11-17T22:17:04.982+0000] {logging_mixin.py:154} INFO - [139]	validation_0-logloss:0.39318	validation_1-logloss:0.46160	validation_2-logloss:0.47283
+[2025-11-17T22:17:04.987+0000] {logging_mixin.py:154} INFO - [140]	validation_0-logloss:0.39255	validation_1-logloss:0.46138	validation_2-logloss:0.47281
+[2025-11-17T22:17:04.989+0000] {logging_mixin.py:154} INFO - [141]	validation_0-logloss:0.39189	validation_1-logloss:0.46117	validation_2-logloss:0.47260
+[2025-11-17T22:17:04.990+0000] {logging_mixin.py:154} INFO - [142]	validation_0-logloss:0.39114	validation_1-logloss:0.46067	validation_2-logloss:0.47213
+[2025-11-17T22:17:04.995+0000] {logging_mixin.py:154} INFO - [143]	validation_0-logloss:0.39030	validation_1-logloss:0.46027	validation_2-logloss:0.47170
+[2025-11-17T22:17:05.001+0000] {logging_mixin.py:154} INFO - [144]	validation_0-logloss:0.38976	validation_1-logloss:0.46012	validation_2-logloss:0.47153
+[2025-11-17T22:17:05.002+0000] {logging_mixin.py:154} INFO - [145]	validation_0-logloss:0.38907	validation_1-logloss:0.45969	validation_2-logloss:0.47124
+[2025-11-17T22:17:05.003+0000] {logging_mixin.py:154} INFO - [146]	validation_0-logloss:0.38843	validation_1-logloss:0.45939	validation_2-logloss:0.47112
+[2025-11-17T22:17:05.004+0000] {logging_mixin.py:154} INFO - [147]	validation_0-logloss:0.38784	validation_1-logloss:0.45912	validation_2-logloss:0.47089
+[2025-11-17T22:17:05.005+0000] {logging_mixin.py:154} INFO - [148]	validation_0-logloss:0.38737	validation_1-logloss:0.45882	validation_2-logloss:0.47083
+[2025-11-17T22:17:05.006+0000] {logging_mixin.py:154} INFO - [149]	validation_0-logloss:0.38673	validation_1-logloss:0.45852	validation_2-logloss:0.47050
+[2025-11-17T22:17:05.008+0000] {logging_mixin.py:154} INFO - [150]	validation_0-logloss:0.38629	validation_1-logloss:0.45836	validation_2-logloss:0.47034
+[2025-11-17T22:17:05.009+0000] {logging_mixin.py:154} INFO - [151]	validation_0-logloss:0.38559	validation_1-logloss:0.45798	validation_2-logloss:0.47003
+[2025-11-17T22:17:05.010+0000] {logging_mixin.py:154} INFO - [152]	validation_0-logloss:0.38523	validation_1-logloss:0.45781	validation_2-logloss:0.46992
+[2025-11-17T22:17:05.011+0000] {logging_mixin.py:154} INFO - [153]	validation_0-logloss:0.38491	validation_1-logloss:0.45764	validation_2-logloss:0.46986
+[2025-11-17T22:17:05.013+0000] {logging_mixin.py:154} INFO - [154]	validation_0-logloss:0.38437	validation_1-logloss:0.45761	validation_2-logloss:0.46994
+[2025-11-17T22:17:05.014+0000] {logging_mixin.py:154} INFO - [155]	validation_0-logloss:0.38378	validation_1-logloss:0.45752	validation_2-logloss:0.46993
+[2025-11-17T22:17:05.016+0000] {logging_mixin.py:154} INFO - [156]	validation_0-logloss:0.38342	validation_1-logloss:0.45736	validation_2-logloss:0.46977
+[2025-11-17T22:17:05.017+0000] {logging_mixin.py:154} INFO - [157]	validation_0-logloss:0.38281	validation_1-logloss:0.45706	validation_2-logloss:0.46965
+[2025-11-17T22:17:05.018+0000] {logging_mixin.py:154} INFO - [158]	validation_0-logloss:0.38244	validation_1-logloss:0.45665	validation_2-logloss:0.46938
+[2025-11-17T22:17:05.019+0000] {logging_mixin.py:154} INFO - [159]	validation_0-logloss:0.38186	validation_1-logloss:0.45628	validation_2-logloss:0.46915
+[2025-11-17T22:17:05.021+0000] {logging_mixin.py:154} INFO - [160]	validation_0-logloss:0.38129	validation_1-logloss:0.45589	validation_2-logloss:0.46901
+[2025-11-17T22:17:05.022+0000] {logging_mixin.py:154} INFO - [161]	validation_0-logloss:0.38073	validation_1-logloss:0.45571	validation_2-logloss:0.46891
+[2025-11-17T22:17:05.025+0000] {model_training.py:291} INFO - 📊 Evaluando modelo en conjunto de TEST...
+[2025-11-17T22:17:05.038+0000] {model_training.py:304} INFO - 🎯 Métricas de TEST:
+[2025-11-17T22:17:05.038+0000] {model_training.py:305} INFO -    - Accuracy: 0.7735
+[2025-11-17T22:17:05.038+0000] {model_training.py:306} INFO -    - Precision: 0.7491
+[2025-11-17T22:17:05.038+0000] {model_training.py:307} INFO -    - Recall: 0.8226
+[2025-11-17T22:17:05.038+0000] {model_training.py:308} INFO -    - F1-Score: 0.7841
+[2025-11-17T22:17:05.038+0000] {model_training.py:309} INFO -    - ROC-AUC: 0.8572
+[2025-11-17T22:17:05.039+0000] {model_training.py:132} INFO - 📈 Generando gráficos de interpretabilidad con SHAP...
+[2025-11-17T22:17:05.043+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/xgboost/core.py:160 UserWarning: [22:17:05] WARNING: /workspace/src/c_api/c_api.cc:1240: Saving into deprecated binary model format, please consider using `json` or `ubj`. Model format will default to JSON in XGBoost 2.2 if not specified.
+[2025-11-17T22:17:05.581+0000] {model_training.py:157} INFO -    ✓ Summary plot guardado: /opt/***/diagrams/shap_summary.png
+[2025-11-17T22:17:05.773+0000] {model_training.py:168} INFO -    ✓ Feature importance plot guardado: /opt/***/diagrams/shap_feature_importance.png
+[2025-11-17T22:17:06.235+0000] {model_training.py:184} INFO -    ✓ Waterfall plot guardado: /opt/***/diagrams/shap_waterfall.png
+[2025-11-17T22:17:06.235+0000] {model_training.py:186} INFO - ✅ Gráficos SHAP generados exitosamente
+[2025-11-17T22:17:06.312+0000] {model_training.py:215} INFO -    ✓ Confusion matrix guardada: /opt/***/diagrams/confusion_matrix.png
+[2025-11-17T22:17:06.313+0000] {model_training.py:323} INFO - 📦 Registrando artifacts en MLflow...
+[2025-11-17T22:17:06.315+0000] {model_training.py:328} INFO -    ✅ shap_summary.png registrado
+[2025-11-17T22:17:06.315+0000] {model_training.py:328} INFO -    ✅ shap_feature_importance.png registrado
+[2025-11-17T22:17:06.315+0000] {model_training.py:328} INFO -    ✅ shap_waterfall.png registrado
+[2025-11-17T22:17:06.316+0000] {model_training.py:334} INFO -    ✅ Confusion matrix registrada
+[2025-11-17T22:17:06.326+0000] {model_training.py:361} INFO - 📤 Registrando resultados en MLflow...
+[2025-11-17T22:17:06.333+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/xgboost/core.py:160 UserWarning: [22:17:06] WARNING: /workspace/src/c_api/c_api.cc:1240: Saving into deprecated binary model format, please consider using `json` or `ubj`. Model format will default to JSON in XGBoost 2.2 if not specified.
+[2025-11-17T22:17:08.254+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/_distutils_hack/__init__.py:33 UserWarning: Setuptools is replacing distutils.
+[2025-11-17T22:17:08.266+0000] {model_training.py:391} INFO - ✅ Resultados registrados en MLflow exitosamente
+[2025-11-17T22:17:08.297+0000] {model_training.py:399} INFO - ✅ Entrenamiento completado exitosamente
+[2025-11-17T22:17:08.297+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'model_type': 'xgboost', 'test_metrics': {'test_accuracy': 0.7735215053763441, 'test_precision': 0.7490820073439413, 'test_recall': 0.8225806451612904, 'test_f1': 0.7841127482383088, 'test_roc_auc': 0.8572125390218525}, 'best_params': {'max_depth': 11, 'learning_rate': 0.020406225242038018, 'subsample': 0.9719203445724947, 'colsample_bytree': 0.6860304875117555, 'min_child_weight': 7, 'gamma': 0.23091753723281427, 'n_estimators': 162}}
+[2025-11-17T22:17:08.309+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=train_model, execution_date=20251117T221622, start_date=20251117T221638, end_date=20251117T221708
+[2025-11-17T22:17:08.376+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-11-17T22:17:08.390+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

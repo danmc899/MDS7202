@@ -1,24 +1,35 @@
 """
-Backend FastAPI para Chatbot Conversacional
-Responde preguntas sobre los datos usando procesamiento de lenguaje natural
+Backend FastAPI para Chatbot Conversacional con Google Gemini
+Responde preguntas sobre los datos de SodAI Drinks usando RAG (Retrieval Augmented Generation)
+Implementación basada en LangChain + Google Gemini API
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Dict, List
+from typing import Dict, List, Optional
 import pandas as pd
 import logging
 from pathlib import Path
-import re
+import os
+from datetime import datetime
+
+# LangChain imports
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Crear aplicación FastAPI
 app = FastAPI(
-    title="SodAI Drinks - Chatbot Conversacional",
-    description="API para responder preguntas sobre los datos",
-    version="1.0.0"
+    title="SodAI Drinks - Chatbot Conversacional con Google Gemini",
+    description="API para responder preguntas sobre los datos usando RAG con Google Gemini",
+    version="2.0.0"
 )
 
 # Configurar CORS
@@ -34,26 +45,39 @@ app.add_middleware(
 # Schemas
 class QuestionRequest(BaseModel):
     question: str
+    include_sources: bool = False
 
 
 class QuestionResponse(BaseModel):
     question: str
     answer: str
-    data: Dict = {}
+    sources: List[str] = []
+    metadata: Dict = {}
 
 
-# Sistema de Question Answering
-class DataQASystem:
+# Sistema de Question Answering con RAG y Google Gemini
+class GeminiRAGSystem:
     """
-    Sistema simple de Question Answering sobre los datos
+    Sistema de Question Answering usando Google Gemini con RAG
+    sobre los datos de SodAI Drinks (transacciones, clientes, productos)
     """
     
     def __init__(self):
-        self.data_path = Path("/app/data")
+        self.data_path = Path("/app/data/raw")
         self.df_transacciones = None
         self.df_clientes = None
         self.df_productos = None
+        self.vectorstore = None
+        self.rag_chain = None
+        self.llm = None
+        
+        # Verificar API key
+        self.api_key = os.getenv("GOOGLE_API_KEY")
+        if not self.api_key:
+            logger.warning("⚠️ GOOGLE_API_KEY no configurada. El sistema usará respuestas básicas.")
+        
         self.load_data()
+        self.setup_rag()
     
     def load_data(self):
         """
@@ -66,17 +90,18 @@ class DataQASystem:
             
             if transacciones_path.exists():
                 self.df_transacciones = pd.read_parquet(transacciones_path)
-                logger.info(f"Transacciones cargadas: {len(self.df_transacciones)} registros")
+                logger.info(f"✓ Transacciones cargadas: {len(self.df_transacciones):,} registros")
             
             if clientes_path.exists():
                 self.df_clientes = pd.read_parquet(clientes_path)
-                logger.info(f"Clientes cargados: {len(self.df_clientes)} registros")
+                logger.info(f"✓ Clientes cargados: {len(self.df_clientes):,} registros")
             
             if productos_path.exists():
                 self.df_productos = pd.read_parquet(productos_path)
-                logger.info(f"Productos cargados: {len(self.df_productos)} registros")
+                logger.info(f"✓ Productos cargados: {len(self.df_productos):,} registros")
             
             if self.df_transacciones is None:
+                logger.warning("No se encontraron datos. Creando datos de ejemplo...")
                 self._create_sample_data()
                 
         except Exception as e:
@@ -103,154 +128,339 @@ class DataQASystem:
         })
         
         self.df_clientes = pd.DataFrame({
-            'customer_id': [f"C{i:04d}" for i in range(n_customers)]
+            'customer_id': [f"C{i:04d}" for i in range(n_customers)],
+            'customer_name': [f"Cliente {i}" for i in range(n_customers)],
+            'segment': np.random.choice(['Premium', 'Regular', 'Básico'], n_customers)
         })
         
         self.df_productos = pd.DataFrame({
-            'product_id': [f"P{i:04d}" for i in range(n_products)]
+            'product_id': [f"P{i:04d}" for i in range(n_products)],
+            'product_name': [f"Producto {i}" for i in range(n_products)],
+            'category': np.random.choice(['Bebidas', 'Snacks', 'Dulces'], n_products)
         })
         
-        logger.info("Datos de ejemplo creados")
+        logger.info("✓ Datos de ejemplo creados")
     
-    def answer_question(self, question: str) -> Dict:
+    def create_documents_from_data(self) -> List[Document]:
         """
-        Responde preguntas sobre los datos usando pattern matching
+        Crea documentos para vectorización desde los DataFrames
+        Genera resúmenes estadísticos y metadatos útiles
+        """
+        documents = []
+        
+        # 1. Documento de resumen general
+        if self.df_transacciones is not None:
+            stats = {
+                "total_transacciones": len(self.df_transacciones),
+                "total_clientes": self.df_transacciones['customer_id'].nunique(),
+                "total_productos": self.df_transacciones['product_id'].nunique(),
+                "total_items": int(self.df_transacciones['items'].sum()),
+                "promedio_items": float(self.df_transacciones['items'].mean()),
+                "fecha_inicio": str(self.df_transacciones['purchase_date'].min()),
+                "fecha_fin": str(self.df_transacciones['purchase_date'].max())
+            }
+            
+            doc_general = Document(
+                page_content=f"""
+                RESUMEN GENERAL DE SODAI DRINKS
+                
+                El dataset contiene {stats['total_transacciones']:,} transacciones realizadas por {stats['total_clientes']:,} clientes únicos.
+                Se vendieron {stats['total_items']:,} items en total de {stats['total_productos']:,} productos diferentes.
+                El promedio de items por transacción es {stats['promedio_items']:.2f}.
+                Las transacciones abarcan desde {stats['fecha_inicio']} hasta {stats['fecha_fin']}.
+                """,
+                metadata={"type": "resumen_general", **stats}
+            )
+            documents.append(doc_general)
+            
+            # 2. Top 10 clientes por compras
+            top_clientes = (
+                self.df_transacciones
+                .groupby('customer_id')['items']
+                .agg(['sum', 'count'])
+                .sort_values('sum', ascending=False)
+                .head(10)
+            )
+            
+            doc_top_clientes = Document(
+                page_content=f"""
+                TOP 10 CLIENTES CON MÁS COMPRAS
+                
+                Los 10 clientes que más han comprado son:
+                {chr(10).join([f"- {idx}: {row['sum']:.0f} items en {row['count']} transacciones" for idx, row in top_clientes.iterrows()])}
+                
+                El cliente más activo es {top_clientes.index[0]} con {top_clientes.iloc[0]['sum']:.0f} items comprados.
+                """,
+                metadata={"type": "top_clientes", "top_customer": top_clientes.index[0]}
+            )
+            documents.append(doc_top_clientes)
+            
+            # Bottom 10 clientes con menos compras
+            bottom_clientes = (
+                self.df_transacciones
+                .groupby('customer_id')['items']
+                .agg(['sum', 'count'])
+                .sort_values('sum', ascending=True)
+                .head(10)
+            )
+            
+            doc_bottom_clientes = Document(
+                page_content=f"""
+                BOTTOM 10 CLIENTES CON MENOS COMPRAS
+                
+                Los 10 clientes que menos han comprado son:
+                {chr(10).join([f"- {idx}: {row['sum']:.0f} items en {row['count']} transacciones" for idx, row in bottom_clientes.iterrows()])}
+                
+                El cliente con menos compras es {bottom_clientes.index[0]} con {bottom_clientes.iloc[0]['sum']:.0f} items comprados.
+                """,
+                metadata={"type": "bottom_clientes", "bottom_customer": bottom_clientes.index[0]}
+            )
+            documents.append(doc_bottom_clientes)
+            
+            # 3. Top 10 productos más vendidos
+            top_productos = (
+                self.df_transacciones
+                .groupby('product_id')['items']
+                .sum()
+                .sort_values(ascending=False)
+                .head(10)
+            )
+            
+            doc_top_productos = Document(
+                page_content=f"""
+                TOP 10 PRODUCTOS MÁS VENDIDOS
+                
+                Los 10 productos más vendidos son:
+                {chr(10).join([f"- {prod}: {items:.0f} items vendidos" for prod, items in top_productos.items()])}
+                
+                El producto más popular es {top_productos.index[0]} con {top_productos.iloc[0]:.0f} items vendidos.
+                """,
+                metadata={"type": "top_productos", "top_product": top_productos.index[0]}
+            )
+            documents.append(doc_top_productos)
+            
+            # Bottom 10 productos menos vendidos
+            bottom_productos = (
+                self.df_transacciones
+                .groupby('product_id')['items']
+                .sum()
+                .sort_values(ascending=True)
+                .head(10)
+            )
+            
+            doc_bottom_productos = Document(
+                page_content=f"""
+                BOTTOM 10 PRODUCTOS MENOS VENDIDOS
+                
+                Los 10 productos menos vendidos son:
+                {chr(10).join([f"- {prod}: {items:.0f} items vendidos" for prod, items in bottom_productos.items()])}
+                
+                El producto menos popular es {bottom_productos.index[0]} con {bottom_productos.iloc[0]:.0f} items vendidos.
+                """,
+                metadata={"type": "bottom_productos", "bottom_product": bottom_productos.index[0]}
+            )
+            documents.append(doc_bottom_productos)
+            
+            # 4. Información detallada de cada cliente (top 50)
+            for customer_id in self.df_transacciones['customer_id'].value_counts().head(50).index:
+                customer_trans = self.df_transacciones[self.df_transacciones['customer_id'] == customer_id]
+                
+                doc_cliente = Document(
+                    page_content=f"""
+                    INFORMACIÓN DEL CLIENTE {customer_id}
+                    
+                    - Total de transacciones: {len(customer_trans)}
+                    - Total de items comprados: {customer_trans['items'].sum():.0f}
+                    - Promedio de items por transacción: {customer_trans['items'].mean():.2f}
+                    - Productos únicos comprados: {customer_trans['product_id'].nunique()}
+                    - Producto favorito: {customer_trans.groupby('product_id')['items'].sum().idxmax()}
+                    - Primera compra: {customer_trans['purchase_date'].min()}
+                    - Última compra: {customer_trans['purchase_date'].max()}
+                    """,
+                    metadata={
+                        "type": "detalle_cliente",
+                        "customer_id": customer_id,
+                        "num_transactions": len(customer_trans),
+                        "total_items": int(customer_trans['items'].sum())
+                    }
+                )
+                documents.append(doc_cliente)
+        
+        logger.info(f"✓ Creados {len(documents)} documentos para vectorización")
+        return documents
+    
+    def setup_rag(self):
+        """
+        Configura el sistema RAG con Google Gemini
+        """
+        try:
+            if not self.api_key:
+                logger.warning("Sistema RAG no disponible sin GOOGLE_API_KEY")
+                return
+            
+            # Inicializar LLM de Google Gemini
+            self.llm = ChatGoogleGenerativeAI(
+                model="gemini-2.0-flash-exp",
+                temperature=0.3,
+                google_api_key=self.api_key
+            )
+            
+            # Crear documentos desde los datos
+            documents = self.create_documents_from_data()
+            
+            if not documents:
+                logger.warning("No hay documentos para vectorizar")
+                return
+            
+            # Split documentos en chunks
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=500,
+                chunk_overlap=50
+            )
+            splits = text_splitter.split_documents(documents)
+            
+            logger.info(f"✓ Creados {len(splits)} chunks de documentos")
+            
+            # Crear embeddings y vectorstore
+            embedding = GoogleGenerativeAIEmbeddings(
+                model="models/text-embedding-004",
+                google_api_key=self.api_key
+            )
+            
+            self.vectorstore = FAISS.from_documents(
+                documents=splits,
+                embedding=embedding
+            )
+            
+            logger.info("✓ Vectorstore FAISS creado exitosamente")
+            
+            # Crear retriever
+            retriever = self.vectorstore.as_retriever(
+                search_type="similarity",
+                search_kwargs={"k": 3}
+            )
+            
+            # Función para formatear documentos
+            def format_docs(docs):
+                return "\n\n".join(doc.page_content for doc in docs)
+            
+            # Template RAG para SodAI Drinks
+            rag_template = '''Eres un asistente experto en análisis de datos de SodAI Drinks.
+Tu rol es responder preguntas del usuario usando ÚNICAMENTE la información relevante que se te proporciona.
+
+REGLAS IMPORTANTES:
+1. Responde SOLO con información de la fuente proporcionada
+2. Si no tienes suficiente información, di "No tengo suficiente información para responder eso"
+3. Usa números exactos cuando estén disponibles
+4. Sé conciso pero completo
+5. Usa formato markdown para mejor legibilidad
+
+Información relevante: {context}
+
+Pregunta del usuario: {question}
+
+Respuesta útil y precisa:'''
+            
+            rag_prompt = PromptTemplate.from_template(rag_template)
+            
+            # Chain RAG
+            self.rag_chain = (
+                {
+                    "context": retriever | format_docs,
+                    "question": RunnablePassthrough(),
+                }
+                | rag_prompt
+                | self.llm
+                | StrOutputParser()
+            )
+            
+            logger.info("✓ Sistema RAG con Google Gemini configurado exitosamente")
+            
+        except Exception as e:
+            logger.error(f"Error al configurar RAG: {str(e)}")
+            self.rag_chain = None
+    
+    def answer_question(self, question: str, include_sources: bool = False) -> Dict:
+        """
+        Responde preguntas usando RAG con Google Gemini
         
         Args:
             question: Pregunta del usuario
+            include_sources: Si incluir documentos fuente
             
         Returns:
-            Diccionario con respuesta y datos adicionales
+            Diccionario con respuesta y metadatos
+        """
+        if self.rag_chain is None:
+            return self._fallback_answer(question)
+        
+        try:
+            # Invocar chain RAG
+            answer = self.rag_chain.invoke(question)
+            
+            # Obtener documentos fuente si se solicita
+            sources = []
+            if include_sources and self.vectorstore is not None:
+                docs = self.vectorstore.similarity_search(question, k=3)
+                sources = [doc.page_content[:200] + "..." for doc in docs]
+            
+            return {
+                "answer": answer,
+                "sources": sources,
+                "metadata": {
+                    "model": "gemini-2.0-flash-exp",
+                    "method": "RAG",
+                    "timestamp": datetime.now().isoformat()
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error en RAG: {str(e)}")
+            return self._fallback_answer(question)
+    
+    def _fallback_answer(self, question: str) -> Dict:
+        """
+        Respuestas básicas cuando RAG no está disponible
         """
         question_lower = question.lower()
         
-        # Patrones de preguntas
-        
-        # 1. ¿Cuántos clientes únicos?
-        if re.search(r'(cuántos|cuantos|cantidad|número|numero).*clientes', question_lower):
-            n_clientes = self.df_transacciones['customer_id'].nunique() if self.df_transacciones is not None else len(self.df_clientes) if self.df_clientes is not None else 0
+        # Estadísticas básicas
+        if "cuántos clientes" in question_lower or "cantidad de clientes" in question_lower:
+            n_clientes = self.df_transacciones['customer_id'].nunique() if self.df_transacciones is not None else 0
             return {
-                "answer": f"Hay **{n_clientes:,}** clientes únicos en el dataset.",
-                "data": {"num_clientes": n_clientes}
+                "answer": f"Hay **{n_clientes:,}** clientes únicos en el dataset de SodAI Drinks.",
+                "sources": [],
+                "metadata": {"method": "fallback"}
             }
         
-        # 2. ¿Cuántas transacciones de un cliente?
-        customer_match = re.search(r'cliente\s+([A-Za-z0-9]+)', question_lower)
-        if customer_match and re.search(r'transacci(ones|ón)', question_lower):
-            customer_id = customer_match.group(1).upper()
-            if self.df_transacciones is not None:
-                # Buscar el customer_id (case insensitive)
-                mask = self.df_transacciones['customer_id'].str.upper() == customer_id
-                n_trans = mask.sum()
-                
-                if n_trans > 0:
-                    total_items = self.df_transacciones[mask]['items'].sum()
-                    return {
-                        "answer": f"El cliente **{customer_id}** ha realizado **{n_trans:,}** transacciones, comprando un total de **{total_items:,}** items.",
-                        "data": {
-                            "customer_id": customer_id,
-                            "num_transacciones": int(n_trans),
-                            "total_items": int(total_items)
-                        }
-                    }
-                else:
-                    return {
-                        "answer": f"No se encontraron transacciones para el cliente **{customer_id}**.",
-                        "data": {"customer_id": customer_id, "num_transacciones": 0}
-                    }
-        
-        # 3. ¿Cuántos productos únicos?
-        if re.search(r'(cuántos|cuantos|cantidad|número|numero).*productos', question_lower):
-            n_productos = self.df_transacciones['product_id'].nunique() if self.df_transacciones is not None else len(self.df_productos) if self.df_productos is not None else 0
+        if "cuántos productos" in question_lower or "cantidad de productos" in question_lower:
+            n_productos = self.df_transacciones['product_id'].nunique() if self.df_transacciones is not None else 0
             return {
                 "answer": f"Hay **{n_productos:,}** productos únicos en el dataset.",
-                "data": {"num_productos": n_productos}
+                "sources": [],
+                "metadata": {"method": "fallback"}
             }
         
-        # 4. ¿Cuántas transacciones totales?
-        if re.search(r'(cuántas|cuantas|total).*transacci(ones|ón)', question_lower):
-            n_trans = len(self.df_transacciones) if self.df_transacciones is not None else 0
-            return {
-                "answer": f"Se han registrado **{n_trans:,}** transacciones en total.",
-                "data": {"num_transacciones": n_trans}
-            }
-        
-        # 5. Producto más vendido
-        if re.search(r'producto.*más.*vend(ido|idos)|más.*popular', question_lower):
-            if self.df_transacciones is not None:
-                top_product = self.df_transacciones.groupby('product_id')['items'].sum().idxmax()
-                total_sales = self.df_transacciones.groupby('product_id')['items'].sum().max()
-                return {
-                    "answer": f"El producto más vendido es **{top_product}** con **{int(total_sales):,}** items vendidos.",
-                    "data": {
-                        "product_id": top_product,
-                        "total_sales": int(total_sales)
-                    }
-                }
-        
-        # 6. Cliente con más compras
-        if re.search(r'cliente.*más.*compr(as|a)|mejor.*cliente', question_lower):
-            if self.df_transacciones is not None:
-                top_customer = self.df_transacciones.groupby('customer_id')['items'].sum().idxmax()
-                total_items = self.df_transacciones.groupby('customer_id')['items'].sum().max()
-                n_trans = (self.df_transacciones['customer_id'] == top_customer).sum()
-                return {
-                    "answer": f"El cliente con más compras es **{top_customer}** con **{int(total_items):,}** items en **{n_trans}** transacciones.",
-                    "data": {
-                        "customer_id": top_customer,
-                        "total_items": int(total_items),
-                        "num_transacciones": int(n_trans)
-                    }
-                }
-        
-        # 7. Estadísticas generales
-        if re.search(r'estadísticas|resumen|general|overview', question_lower):
-            if self.df_transacciones is not None:
-                stats = {
-                    "num_clientes": self.df_transacciones['customer_id'].nunique(),
-                    "num_productos": self.df_transacciones['product_id'].nunique(),
-                    "num_transacciones": len(self.df_transacciones),
-                    "total_items": int(self.df_transacciones['items'].sum()),
-                    "avg_items_per_transaction": float(self.df_transacciones['items'].mean())
-                }
-                return {
-                    "answer": f"""**Estadísticas Generales:**
-                    
-- **Clientes únicos**: {stats['num_clientes']:,}
-- **Productos únicos**: {stats['num_productos']:,}
-- **Transacciones totales**: {stats['num_transacciones']:,}
-- **Items vendidos**: {stats['total_items']:,}
-- **Promedio items/transacción**: {stats['avg_items_per_transaction']:.2f}
-                    """,
-                    "data": stats
-                }
-        
-        # Pregunta no reconocida
         return {
-            "answer": """No pude entender tu pregunta. Puedo ayudarte con preguntas como:
-
-- ¿Cuántos clientes únicos hay en el dataset?
-- ¿Cuántas transacciones ha realizado el cliente [ID]?
-- ¿Cuántos productos únicos se encuentran en los datos?
-- ¿Cuál es el producto más vendido?
-- ¿Cuál es el cliente con más compras?
-- Dame las estadísticas generales
-
-Por favor, intenta reformular tu pregunta.""",
-            "data": {}
+            "answer": "⚠️ El sistema RAG no está disponible. Por favor configura GOOGLE_API_KEY para respuestas inteligentes.",
+            "sources": [],
+            "metadata": {"method": "fallback", "error": "RAG_not_configured"}
         }
 
 
-# Instancia global del sistema QA
-qa_system = DataQASystem()
+# Instancia global del sistema RAG
+qa_system = GeminiRAGSystem()
 
 
 @app.get("/")
 async def root():
     return {
-        "message": "Chatbot Conversacional - SodAI Drinks",
+        "message": "Chatbot Conversacional con Google Gemini - SodAI Drinks",
         "status": "online",
-        "version": "1.0.0"
+        "version": "2.0.0",
+        "model": "gemini-2.0-flash-exp",
+        "rag_enabled": qa_system.rag_chain is not None,
+        "data_loaded": qa_system.df_transacciones is not None
     }
 
 
@@ -258,24 +468,30 @@ async def root():
 async def health_check():
     return {
         "status": "healthy",
-        "data_loaded": qa_system.df_transacciones is not None
+        "rag_enabled": qa_system.rag_chain is not None,
+        "data_loaded": qa_system.df_transacciones is not None,
+        "num_transactions": len(qa_system.df_transacciones) if qa_system.df_transacciones is not None else 0
     }
 
 
 @app.post("/api/v1/ask", response_model=QuestionResponse)
 async def ask_question(request: QuestionRequest):
     """
-    Responde preguntas sobre los datos
+    Responde preguntas sobre los datos usando RAG con Google Gemini
     """
     try:
         logger.info(f"Pregunta recibida: {request.question}")
         
-        result = qa_system.answer_question(request.question)
+        result = qa_system.answer_question(
+            question=request.question,
+            include_sources=request.include_sources
+        )
         
         return QuestionResponse(
             question=request.question,
             answer=result["answer"],
-            data=result.get("data", {})
+            sources=result.get("sources", []),
+            metadata=result.get("metadata", {})
         )
         
     except Exception as e:

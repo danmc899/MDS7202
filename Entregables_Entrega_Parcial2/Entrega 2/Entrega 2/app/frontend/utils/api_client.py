@@ -169,3 +169,12 @@ class APIClient:
             Estado de salud del backend
         """
         return self._make_request("GET", "/health")
+    
+    def get_data_ranges(self) -> Dict:
+        """
+        Obtiene los rangos de IDs de clientes y productos
+        
+        Returns:
+            Diccionario con rangos de customer_id y product_id
+        """
+        return self._make_request("GET", "/api/v1/data/ranges")

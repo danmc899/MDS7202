@@ -1,0 +1,31 @@
+[2025-11-17T16:12:42.703+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data manual__2025-11-17T16:12:37.903412+00:00 [queued]>
+[2025-11-17T16:12:42.710+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data manual__2025-11-17T16:12:37.903412+00:00 [queued]>
+[2025-11-17T16:12:42.710+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-11-17T16:12:42.721+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-11-17 16:12:37.903412+00:00
+[2025-11-17T16:12:42.740+0000] {standard_task_runner.py:57} INFO - Started process 14097 to run task
+[2025-11-17T16:12:42.744+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'manual__2025-11-17T16:12:37.903412+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmph4r6w_2p']
+[2025-11-17T16:12:42.749+0000] {standard_task_runner.py:85} INFO - Job 9: Subtask process_data
+[2025-11-17T16:12:42.787+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data manual__2025-11-17T16:12:37.903412+00:00 [running]> on host d1f907c36040
+[2025-11-17T16:12:42.845+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-17T16:12:37.903412+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-17T16:12:37.903412+00:00'
+[2025-11-17T16:12:42.846+0000] {data_processing.py:103} INFO - Iniciando procesamiento de datos
+[2025-11-17T16:12:42.906+0000] {data_processing.py:115} INFO - Datos cargados - Transacciones: 4565, Clientes: 1569, Productos: 971
+[2025-11-17T16:12:42.912+0000] {data_processing.py:122} INFO - Predicción para semana: 2024-02
+[2025-11-17T16:12:43.181+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tasks/data_processing.py", line 125, in process_data
+    df_target = create_target_variable(df_transacciones, balance_method="undersample", random_state=42)
+  File "/opt/airflow/dags/tasks/data_processing.py", line 85, in create_target_variable
+    df_neg_bal = resample(df_neg, replace=False, n_samples=len(df_pos), random_state=random_state)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sklearn/utils/_param_validation.py", line 214, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sklearn/utils/__init__.py", line 572, in resample
+    raise ValueError(
+ValueError: Cannot sample 3719 out of arrays with dim 0 when replace is False
+[2025-11-17T16:12:43.190+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251117T161237, start_date=20251117T161242, end_date=20251117T161243
+[2025-11-17T16:12:43.198+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 9 for task process_data (Cannot sample 3719 out of arrays with dim 0 when replace is False; 14097)
+[2025-11-17T16:12:43.243+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-11-17T16:12:43.263+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

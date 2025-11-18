@@ -15,31 +15,41 @@ api_client = APIClient()
 
 def create_single_prediction_tab():
     """
-    Crea el tab para predicciones individuales
+    Crea el tab para predicciones individuales con sliders
     """
+    # Usar valores por defecto (no llamar al backend durante inicialización)
+    customer_min, customer_max = 25734, 2061063
+    product_min, product_max = 8, 297994
+    
     with gr.Tab("🔮 Predicción Individual"):
         gr.Markdown("""
         ### Predicción Individual
         Predice si un cliente específico comprará un producto específico la próxima semana.
         
         **Instrucciones:**
-        1. Ingresa el ID del cliente
-        2. Ingresa el ID del producto
+        1. Selecciona el ID del cliente con el slider
+        2. Selecciona el ID del producto con el slider
         3. Opcionalmente, proporciona estadísticas conocidas
         4. Click en "Predecir"
         """)
         
         with gr.Row():
             with gr.Column():
-                customer_id = gr.Textbox(
+                customer_id = gr.Slider(
+                    minimum=customer_min,
+                    maximum=customer_max,
+                    step=1,
+                    value=customer_min,
                     label="ID del Cliente",
-                    placeholder="Ej: C12345",
-                    info="Identificador único del cliente"
+                    info=f"Selecciona un cliente (rango: {customer_min:,} - {customer_max:,})"
                 )
-                product_id = gr.Textbox(
+                product_id = gr.Slider(
+                    minimum=product_min,
+                    maximum=product_max,
+                    step=1,
+                    value=product_min,
                     label="ID del Producto",
-                    placeholder="Ej: P6789",
-                    info="Identificador único del producto"
+                    info=f"Selecciona un producto (rango: {product_min:,} - {product_max:,})"
                 )
                 
                 gr.Markdown("#### Features Opcionales (dejar en 0 si no se conocen)")
@@ -89,8 +99,8 @@ def create_single_prediction_tab():
         def predict_single(cust_id, prod_id, cp_total, cp_avg, total, avg):
             try:
                 result = api_client.predict_single(
-                    customer_id=cust_id,
-                    product_id=prod_id,
+                    customer_id=str(int(cust_id)),
+                    product_id=str(int(prod_id)),
                     cp_total_items=cp_total if cp_total > 0 else None,
                     cp_avg_items=cp_avg if cp_avg > 0 else None,
                     total_items=total if total > 0 else None,
@@ -212,11 +222,12 @@ def create_batch_prediction_tab():
         )
 
 
-def create_recommendations_tab():
-    """
-    Crea el tab para recomendaciones de productos
-    """
-    with gr.Tab("⭐ Recomendaciones"):
+# ELIMINADO: Sistema de recomendaciones existe como bonus separado
+# def create_recommendations_tab():
+#     """
+#     Crea el tab para recomendaciones de productos
+#     """
+#     with gr.Tab("⭐ Recomendaciones"):
         gr.Markdown("""
         ### Recomendaciones de Productos
         Obtén los productos más recomendados para un cliente específico.
@@ -351,7 +362,6 @@ def create_interface():
         # Crear tabs
         create_single_prediction_tab()
         create_batch_prediction_tab()
-        create_recommendations_tab()
         create_model_info_tab()
         
         gr.Markdown("""

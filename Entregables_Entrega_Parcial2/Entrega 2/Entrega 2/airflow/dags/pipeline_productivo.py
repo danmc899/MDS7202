@@ -16,10 +16,11 @@ import logging
 
 # Importar tasks
 from tasks.data_extraction import extract_data
-from tasks.data_preprocessing import preprocess_data
+from tasks.data_processing import process_data
 from tasks.drift_detection import detect_drift
 from tasks.model_training import train_model
 from tasks.prediction_generation import generate_predictions
+from tasks.recsys_data_sync import sync_recsys_data
 
 logger = logging.getLogger(__name__)
 
@@ -91,10 +92,10 @@ extract_data_task = PythonOperator(
     dag=dag,
 )
 
-# 2. Preprocessing
-preprocess_data_task = PythonOperator(
-    task_id='preprocess_data',
-    python_callable=preprocess_data,
+# 2. Data Processing
+process_data_task = PythonOperator(
+    task_id='process_data',
+    python_callable=process_data,
     dag=dag,
 )
 
@@ -139,14 +140,21 @@ generate_predictions_task = PythonOperator(
     dag=dag,
 )
 
-# 9. Tarea final
+# 9. Sincronización con RecSys (BONUS)
+sync_recsys_task = PythonOperator(
+    task_id='sync_recsys_data',
+    python_callable=sync_recsys_data,
+    dag=dag,
+)
+
+# 10. Tarea final
 end_task = EmptyOperator(
     task_id='pipeline_completed',
     dag=dag,
 )
 
 # Definir dependencias del DAG
-extract_data_task >> preprocess_data_task >> detect_drift_task >> decide_retraining_task
+extract_data_task >> process_data_task >> detect_drift_task >> decide_retraining_task
 
 # Branching para reentrenamiento
 decide_retraining_task >> [train_model_task, skip_training_task]
@@ -154,5 +162,5 @@ decide_retraining_task >> [train_model_task, skip_training_task]
 # Join después del branching
 [train_model_task, skip_training_task] >> join_task
 
-# Continuar con predicciones
-join_task >> generate_predictions_task >> end_task
+# Continuar con predicciones y sync con RecSys
+join_task >> generate_predictions_task >> sync_recsys_task >> end_task

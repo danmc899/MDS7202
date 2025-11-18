@@ -14,6 +14,20 @@ logger = logging.getLogger(__name__)
 BACKEND_URL = os.getenv("BACKEND_URL", "http://backend:8001")
 
 
+def get_available_customers():
+    """
+    Obtiene lista de clientes disponibles desde el backend
+    """
+    try:
+        response = requests.get(f"{BACKEND_URL}/api/v1/customers", timeout=5)
+        response.raise_for_status()
+        data = response.json()
+        return data.get("customers", [])
+    except Exception as e:
+        logger.error(f"Error obteniendo clientes: {e}")
+        return []
+
+
 def get_recommendations(customer_id: str, n_recommendations: int):
     """
     Obtiene recomendaciones desde el backend
@@ -50,24 +64,36 @@ def get_recommendations(customer_id: str, n_recommendations: int):
 
 
 # Crear interfaz
-with gr.Blocks(theme=gr.themes.Soft(), title="Sistema de Recomendación - SodAI Drinks") as interface:
+with gr.Blocks(theme=gr.themes.Soft(), title="Sistema de Recomendación SVD - SodAI Drinks") as interface:
     gr.Markdown("""
-    # 🎯 Sistema de Recomendación de Productos
+    # 🎯 Sistema de Recomendación de Productos (SVD)
     ## SodAI Drinks
     
-    Este sistema utiliza **Collaborative Filtering** para recomendar productos basándose en:
+    Este sistema utiliza **SVD (Singular Value Decomposition)** con Matrix Factorization para recomendar productos basándose en:
     - Historial de compras del cliente
-    - Similaridad entre productos
-    - Patrones de compra de clientes similares
+    - Factorización de la matriz de ratings implícitos
+    - Patrones latentes descubiertos por SVD
     """)
     
     with gr.Row():
         with gr.Column():
-            customer_id = gr.Textbox(
-                label="ID del Cliente",
-                placeholder="Ej: C0001",
-                info="Ingresa el identificador único del cliente"
-            )
+            # Obtener lista de clientes disponibles
+            available_customers = get_available_customers()
+            
+            if available_customers:
+                customer_id = gr.Dropdown(
+                    choices=available_customers,
+                    label="ID del Cliente",
+                    info="Selecciona un cliente de la lista",
+                    allow_custom_value=True,
+                    filterable=True
+                )
+            else:
+                customer_id = gr.Textbox(
+                    label="ID del Cliente",
+                    placeholder="Ej: 181101",
+                    info="Ingresa el identificador único del cliente"
+                )
             
             n_recommendations = gr.Slider(
                 minimum=1,
@@ -121,7 +147,7 @@ with gr.Blocks(theme=gr.themes.Soft(), title="Sistema de Recomendación - SodAI 
     ---
     ### 📞 Información
     
-    **Sistema**: Collaborative Filtering con Cosine Similarity  
+    **Sistema**: SVD (Singular Value Decomposition) con Matrix Factorization  
     **Autores**: Javier Pinochet & Daniel Muñoz  
     **Curso**: MDS7202 - Universidad de Chile
     """)

@@ -26,9 +26,9 @@ def generate_predictions(**context):
     logger.info("Iniciando generación de predicciones...")
     
     ti = context['ti']
-    processed_data_path = ti.xcom_pull(key='processed_data_path', task_ids='preprocess_data')
+    processed_data_path = ti.xcom_pull(key='processed_data_path', task_ids='process_data')
     model_path_xcom = ti.xcom_pull(key='model_path', task_ids='train_model')
-    prediction_week = ti.xcom_pull(key='prediction_week', task_ids='preprocess_data')
+    prediction_week = ti.xcom_pull(key='prediction_week', task_ids='process_data')
     
     # Si no hay model_path del XCom (porque se saltó el entrenamiento),
     # usar el modelo existente en disco

@@ -80,7 +80,7 @@ def detect_drift(**context):
     logger.info("Iniciando detección de drift...")
     
     ti = context['ti']
-    processed_data_path = ti.xcom_pull(key='processed_data_path', task_ids='preprocess_data')
+    processed_data_path = ti.xcom_pull(key='processed_data_path', task_ids='process_data')
     
     # Cargar datos procesados actuales
     df_current = pd.read_parquet(processed_data_path)
@@ -162,10 +162,10 @@ def detect_drift(**context):
     ti.xcom_push(key='drift_results', value=drift_results)
     
     if drift_detected:
-        logger.warning("⚠️ DRIFT DETECTADO - Se recomienda reentrenamiento del modelo")
+        logger.warning("DRIFT DETECTADO - Se recomienda reentrenamiento del modelo")
         ti.xcom_push(key='drift_reason', value='statistical_drift')
     else:
-        logger.info("✅ No se detectó drift significativo en los datos")
+        logger.info("No se detectó drift significativo en los datos")
         ti.xcom_push(key='drift_reason', value='no_drift')
     
     return {

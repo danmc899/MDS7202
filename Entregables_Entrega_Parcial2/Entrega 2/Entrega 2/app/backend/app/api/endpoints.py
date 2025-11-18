@@ -195,3 +195,54 @@ async def reload_model():
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error al recargar modelo: {str(e)}"
         )
+
+
+@router.get("/data/ranges")
+async def get_data_ranges():
+    """
+    Obtiene los rangos de IDs de clientes y productos
+    
+    Returns:
+        Rangos de customer_id y product_id
+    """
+    try:
+        from pathlib import Path
+        
+        # Leer datos de clientes y productos
+        data_dir = Path("/opt/airflow/data")
+        clientes_path = data_dir / "clientes.parquet"
+        productos_path = data_dir / "productos.parquet"
+        
+        if not clientes_path.exists() or not productos_path.exists():
+            raise FileNotFoundError("Archivos de datos no encontrados")
+        
+        clientes_df = pd.read_parquet(clientes_path)
+        productos_df = pd.read_parquet(productos_path)
+        
+        return {
+            "customer_id": {
+                "min": int(clientes_df['customer_id'].min()),
+                "max": int(clientes_df['customer_id'].max()),
+                "count": len(clientes_df)
+            },
+            "product_id": {
+                "min": int(productos_df['product_id'].min()),
+                "max": int(productos_df['product_id'].max()),
+                "count": len(productos_df)
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error al obtener rangos de datos: {str(e)}")
+        # Retornar valores por defecto si falla
+        return {
+            "customer_id": {
+                "min": 25734,
+                "max": 2061063,
+                "count": 1569
+            },
+            "product_id": {
+                "min": 8,
+                "max": 297994,
+                "count": 971
+            }
+        }
