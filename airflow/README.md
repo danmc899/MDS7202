@@ -1,5 +1,38 @@
 # Pipeline Airflow - MLOps
 
+## 🚀 Setup Inicial (IMPORTANTE)
+
+### Compatibilidad Linux/macOS
+
+Este proyecto está configurado para funcionar tanto en **Linux** como en **macOS** sin modificaciones manuales.
+
+**⚠️ ANTES de ejecutar `docker-compose up`:**
+
+```bash
+# 1. Ejecutar script de inicialización (detecta automáticamente el OS)
+./init_airflow.sh
+
+# 2. Levantar servicios
+docker-compose up -d
+```
+
+El script `init_airflow.sh`:
+
+- Detecta automáticamente si estás en Linux o macOS
+- Configura `AIRFLOW_UID` apropiadamente:
+  - **Linux**: `1000` (usuario estándar)
+  - **macOS**: UID del usuario actual (`501`, `502`, etc. obtenido con `id -u`)
+- Crea directorios necesarios
+- Ajusta permisos
+
+**🔒 Importante sobre `.env`:**
+
+- El archivo `.env` **NO está en Git** (es específico de cada máquina)
+- Se genera automáticamente al ejecutar `init_airflow.sh`
+- Contiene `AIRFLOW_UID` dinámico según tu sistema operativo
+
+---
+
 ## Descripción
 
 Pipeline de MLOps que orquesta el flujo completo desde ingesta de datos hasta entrenamiento de modelos XGBoost, incluyendo detección de drift, evaluación con SHAP, y registro en MLflow.

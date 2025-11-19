@@ -1,0 +1,39 @@
+# Environment variables (específico de cada máquina)
+.env
+
+# Logs de Airflow
+logs/
+*.log
+
+# MLflow artifacts
+mlruns/
+
+# Modelos entrenados
+models/*.pkl
+models/*.json
+
+# Datos procesados
+data/processed/
+data/raw/
+
+# Diagramas generados
+diagrams/*.png
+diagrams/*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+.dockerignore

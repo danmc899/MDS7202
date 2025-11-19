@@ -1,37 +1,37 @@
 {
   "Y": {
-    "ks_statistic": 0.12540605121250284,
-    "ks_p_value": 0.0,
+    "ks_statistic": 0.1339069642376983,
+    "ks_p_value": 2.141317669243686e-115,
     "ks_drift": true,
-    "psi": 0.00962266063879653,
+    "psi": 0.42279600443854365,
     "psi_drift": false
   },
   "X": {
     "ks_statistic": 0.13852077884335945,
-    "ks_p_value": 0.0,
+    "ks_p_value": 1.7296895961061186e-123,
     "ks_drift": true,
-    "psi": 0.002752275994984549,
+    "psi": 0.08072994045974347,
     "psi_drift": false
   },
   "size": {
-    "ks_statistic": 0.3831218315089283,
+    "ks_statistic": 0.368104883761191,
     "ks_p_value": 0.0,
     "ks_drift": true,
-    "psi": 6.697522136727059,
-    "psi_drift": true
+    "psi": 5.840896089293691,
+    "psi_drift": false
   },
   "num_deliver_per_week": {
-    "ks_statistic": 0.0015321773386289522,
-    "ks_p_value": 0.6053799277163772,
-    "ks_drift": false,
-    "psi": 0.0002027322949461055,
+    "ks_statistic": 0.8252090922033415,
+    "ks_p_value": 0.0,
+    "ks_drift": true,
+    "psi": 0.014583560075673456,
     "psi_drift": false
   },
   "segment": {
-    "ks_statistic": 0.018152830249604457,
-    "ks_p_value": 2.3909618729486848e-71,
-    "ks_drift": true,
-    "psi": 2.4651903288156616e-32,
+    "ks_statistic": 0.0004977641989846182,
+    "ks_p_value": 1.0,
+    "ks_drift": false,
+    "psi": 1.7454780123179408e-28,
     "psi_drift": false
   }
 }

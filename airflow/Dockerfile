@@ -20,6 +20,11 @@ RUN pip install --no-cache-dir -r /requirements.txt
 # Copy umask wrapper script (must have +x permissions on host)
 COPY entrypoint-wrapper.sh /entrypoint-wrapper.sh
 
+# Set execute permissions for the entrypoint wrapper
+USER root
+RUN chmod +x /entrypoint-wrapper.sh
+USER airflow
+
 # Crear directorios necesarios
 RUN mkdir -p /opt/airflow/dags \
     /opt/airflow/logs \

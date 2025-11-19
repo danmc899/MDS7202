@@ -238,10 +238,10 @@ def train_model(**context):
     # IMPORTANTE: Excluir columnas que podrían causar data leakage
     exclude_cols = [
         'customer_id', 'product_id', 'compra_semanal',
-        'items',  # LEAKAGE: items solo existe para compras (compra_semanal=1)
-        'purchase_week',  # LEAKAGE: semana de compra solo existe si hubo compra
-        'order_id',  # LEAKAGE: ID de orden solo existe si hubo compra
-        'purchase_date'  # LEAKAGE: fecha de compra solo existe si hubo compra
+        'items',
+        'purchase_week',
+        'order_id',
+        'purchase_date'
     ]
     feature_cols = [col for col in df.columns if col not in exclude_cols]
     
@@ -390,68 +390,119 @@ def train_model(**context):
                 mlflow.log_artifact(str(cm_path_obj), artifact_path="plots")
                 logger.info(f"   ✅ Confusion matrix registrada")
         
-        # Guardar modelo
+        # Guardar modelo con lógica de comparación
         models_dir = Path("/opt/airflow/models")
         models_dir.mkdir(parents=True, exist_ok=True)
         
         model_path = models_dir / "best_model.pkl"
-        with open(model_path, 'wb') as f:
-            pickle.dump(model, f)
+        metadata_path = models_dir / "model_metadata.json"
         
-        # Guardar metadata
-        metadata = {
-            'model_type': 'xgboost',
-            'best_params': best_params,
-            'test_metrics': test_metrics,
-            'feature_names': feature_cols,
-            'training_date': datetime.now().isoformat(),
-            'n_features': len(feature_cols),
-            'train_size': len(X_train),
-            'val_size': len(X_val),
-            'test_size': len(X_test)
-        }
+        # Verificar si existe modelo previo
+        existing_model_exists = model_path.exists() and metadata_path.exists()
+        should_save_model = True
+        comparison_result = "first_model"
         
-        with open(models_dir / "model_metadata.json", 'w') as f:
-            json.dump(metadata, f, indent=2)
+        if existing_model_exists:
+            logger.info("🔍 Modelo existente detectado. Comparando rendimiento...")
+            
+            # Cargar metadata del modelo anterior
+            with open(metadata_path, 'r') as f:
+                existing_metadata = json.load(f)
+            
+            existing_f1 = existing_metadata['test_metrics']['f1']
+            new_f1 = test_metrics['f1']
+            
+            logger.info(f"   📊 F1 Score Existente: {existing_f1:.4f}")
+            logger.info(f"   📊 F1 Score Nuevo: {new_f1:.4f}")
+            
+            # Umbral de mejora mínima (1%)
+            improvement_threshold = 0.01
+            
+            if new_f1 > existing_f1 + improvement_threshold:
+                logger.info(f"   ✅ Nuevo modelo ES MEJOR (mejora > {improvement_threshold:.2%})")
+                should_save_model = True
+                comparison_result = "new_model_better"
+            elif new_f1 >= existing_f1 - improvement_threshold:
+                logger.info(f"   ⚖️  Nuevo modelo SIMILAR (diferencia < {improvement_threshold:.2%})")
+                should_save_model = True
+                comparison_result = "new_model_similar"
+            else:
+                logger.warning(f"   ❌ Nuevo modelo PEOR (degradación > {improvement_threshold:.2%})")
+                logger.warning("   ⏭️  Manteniendo modelo existente.")
+                should_save_model = False
+                comparison_result = "keep_existing"
         
-        # Logging en MLflow
-        logger.info("📤 Registrando resultados en MLflow...")
+        if should_save_model:
+            logger.info("💾 Guardando modelo y metadata...")
+            
+            with open(model_path, 'wb') as f:
+                pickle.dump(model, f)
+            
+            # Guardar metadata
+            metadata = {
+                'model_type': 'xgboost',
+                'best_params': best_params,
+                'test_metrics': test_metrics,
+                'feature_names': feature_cols,
+                'training_date': datetime.now().isoformat(),
+                'n_features': len(feature_cols),
+                'train_size': len(X_train),
+                'val_size': len(X_val),
+                'test_size': len(X_test),
+                'comparison_result': comparison_result
+            }
+            
+            with open(metadata_path, 'w') as f:
+                json.dump(metadata, f, indent=2)
+            
+            logger.info("   ✅ Modelo y metadata guardados exitosamente")
+        else:
+            logger.info("   ⏭️  Saltando guardado de modelo (modelo existente es superior)")
         
-        # Log de hiperparámetros optimizados
-        mlflow.log_params(best_params)
-        mlflow.log_param("model_type", "xgboost")
-        mlflow.log_param("n_features", len(feature_cols))
-        mlflow.log_param("optimization_trials", 50)
+        # Logging en MLflow (solo si se guardó el modelo)
+        if should_save_model:
+            logger.info("📤 Registrando resultados en MLflow...")
+            
+            # Log de hiperparámetros optimizados
+            mlflow.log_params(best_params)
+            mlflow.log_param("model_type", "xgboost")
+            mlflow.log_param("n_features", len(feature_cols))
+            mlflow.log_param("optimization_trials", 50)
+            mlflow.log_param("comparison_result", comparison_result)
+            
+            # Log de métricas de TEST únicamente
+            mlflow.log_metrics(test_metrics)
+            
+            # Log del modelo
+            mlflow.xgboost.log_model(model, "model")
+            
+            # Log de artifacts (gráficos SHAP y confusion matrix)
+            for plot_path in shap_plots:
+                mlflow.log_artifact(plot_path, artifact_path="shap_plots")
+            mlflow.log_artifact(cm_path, artifact_path="evaluation")
+            mlflow.log_artifact(str(metadata_path), artifact_path="metadata")
+            
+            # Log de importancia de features
+            feature_importance = pd.DataFrame({
+                'feature': feature_cols,
+                'importance': model.feature_importances_
+            }).sort_values('importance', ascending=False)
+            
+            importance_path = diagrams_dir / "feature_importance.csv"
+            feature_importance.to_csv(importance_path, index=False)
+            mlflow.log_artifact(str(importance_path), artifact_path="metadata")
+            
+            logger.info("✅ Resultados registrados en MLflow exitosamente")
+        else:
+            logger.info("⏭️  Saltando registro en MLflow (modelo existente conservado)")
         
-        # Log de métricas de TEST únicamente
-        mlflow.log_metrics(test_metrics)
-        
-        # Log del modelo
-        mlflow.xgboost.log_model(model, "model")
-        
-        # Log de artifacts (gráficos SHAP y confusion matrix)
-        for plot_path in shap_plots:
-            mlflow.log_artifact(plot_path, artifact_path="shap_plots")
-        mlflow.log_artifact(cm_path, artifact_path="evaluation")
-        mlflow.log_artifact(str(models_dir / "model_metadata.json"), artifact_path="metadata")
-        
-        # Log de importancia de features
-        feature_importance = pd.DataFrame({
-            'feature': feature_cols,
-            'importance': model.feature_importances_
-        }).sort_values('importance', ascending=False)
-        
-        importance_path = diagrams_dir / "feature_importance.csv"
-        feature_importance.to_csv(importance_path, index=False)
-        mlflow.log_artifact(str(importance_path), artifact_path="metadata")
-        
-        logger.info("✅ Resultados registrados en MLflow exitosamente")
-        
-        # Pushear información
+        # Pushear información (siempre, para tracking)
         ti.xcom_push(key='model_path', value=str(model_path))
         ti.xcom_push(key='model_metrics', value=test_metrics)
         ti.xcom_push(key='model_type', value='xgboost')
         ti.xcom_push(key='best_params', value=best_params)
+        ti.xcom_push(key='model_saved', value=should_save_model)
+        ti.xcom_push(key='comparison_result', value=comparison_result)
     
     logger.info("✅ Entrenamiento completado exitosamente")
     
