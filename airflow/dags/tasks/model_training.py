@@ -38,7 +38,7 @@ import seaborn as sns
 logger = logging.getLogger(__name__)
 
 
-def optimize_xgboost_hyperparameters(X_train, y_train, X_val, y_val, n_trials=50):
+def optimize_xgboost_hyperparameters(X_train, y_train, X_val, y_val, n_trials=12):
     """
     Optimiza hiperparámetros de XGBoost usando Optuna
     
@@ -331,7 +331,7 @@ def train_model(**context):
         
         # Optimizar hiperparámetros
         best_params, study = optimize_xgboost_hyperparameters(
-            X_train, y_train, X_val, y_val, n_trials=50
+            X_train, y_train, X_val, y_val, n_trials=12
         )
         
         # Entrenar modelo final con mejores hiperparámetros
@@ -397,12 +397,20 @@ def train_model(**context):
         model_path = models_dir / "best_model.pkl"
         metadata_path = models_dir / "model_metadata.json"
         
+        # Verificar si el entrenamiento fue disparado por drift
+        has_drift = ti.xcom_pull(key='has_drift', task_ids='detect_drift')
+        
         # Verificar si existe modelo previo
         existing_model_exists = model_path.exists() and metadata_path.exists()
         should_save_model = True
         comparison_result = "first_model"
         
-        if existing_model_exists:
+        # Si se detectó drift, guardar modelo sin comparación (será el nuevo baseline)
+        if has_drift:
+            logger.info("🔄 Drift detectado - guardando modelo como nuevo baseline sin comparación")
+            should_save_model = True
+            comparison_result = "drift_update"
+        elif existing_model_exists:
             logger.info("🔍 Modelo existente detectado. Comparando rendimiento...")
             
             # Cargar metadata del modelo anterior
@@ -456,6 +464,19 @@ def train_model(**context):
                 json.dump(metadata, f, indent=2)
             
             logger.info("   ✅ Modelo y metadata guardados exitosamente")
+            
+            # Si fue entrenamiento por drift, actualizar datos de referencia
+            if has_drift:
+                logger.info("🔄 Actualizando datos de referencia para futuras comparaciones de drift...")
+                reference_dir = Path("/opt/airflow/data/processed")
+                reference_path = reference_dir / "reference_data.parquet"
+                
+                # Guardar el dataset procesado completo como nueva referencia
+                df = pd.read_parquet(processed_data_path)
+                df.to_parquet(reference_path, index=False)
+                
+                logger.info(f"   ✅ Nuevos datos de referencia guardados: {len(df)} registros")
+                logger.info("   📊 Futuras ejecuciones compararán contra estos datos")
         else:
             logger.info("   ⏭️  Saltando guardado de modelo (modelo existente es superior)")
         
@@ -467,7 +488,7 @@ def train_model(**context):
             mlflow.log_params(best_params)
             mlflow.log_param("model_type", "xgboost")
             mlflow.log_param("n_features", len(feature_cols))
-            mlflow.log_param("optimization_trials", 50)
+            mlflow.log_param("optimization_trials", 12)
             mlflow.log_param("comparison_result", comparison_result)
             
             # Log de métricas de TEST únicamente

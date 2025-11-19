@@ -1,16 +1,16 @@
 feature,importance
-package_KEG,0.4006033
-sub_category_GASEOSAS,0.3507413
-customer_type_MINIMARKET,0.035120215
-package_LATA,0.030400647
-brand_num,0.029845461
-size,0.029404324
-customer_type_MAYORISTA,0.02560767
-segment,0.025384342
-customer_type_CANAL FRIO,0.015520283
-customer_type_TIENDA DE CONVENIENCIA,0.014270049
-customer_type_RESTAURANT,0.010649769
-X,0.0088591855
-num_deliver_per_week,0.0083774105
-Y,0.007952597
-customer_type_SUPERMERCADO,0.0072634476
+sub_category_GASEOSAS,0.31024235
+package_KEG,0.23069087
+size,0.1264394
+brand_num,0.073826656
+segment,0.061627332
+customer_type_MAYORISTA,0.05601953
+package_LATA,0.044749245
+customer_type_CANAL FRIO,0.024642779
+customer_type_RESTAURANT,0.018754294
+X,0.01852502
+Y,0.018365702
+num_deliver_per_week,0.016116785
+customer_type_MINIMARKET,0.0
+customer_type_SUPERMERCADO,0.0
+customer_type_TIENDA DE CONVENIENCIA,0.0

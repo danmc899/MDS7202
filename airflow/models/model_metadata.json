@@ -1,20 +1,20 @@
 {
   "model_type": "xgboost",
   "best_params": {
-    "max_depth": 13,
-    "learning_rate": 0.2176335838016791,
-    "subsample": 0.7473540064360764,
-    "colsample_bytree": 0.8538136098696347,
-    "min_child_weight": 2,
-    "gamma": 0.6321800452596251,
-    "n_estimators": 275
+    "max_depth": 7,
+    "learning_rate": 0.026000059117302653,
+    "subsample": 0.7713480415791243,
+    "colsample_bytree": 0.5704621124873813,
+    "min_child_weight": 9,
+    "gamma": 0.3727532183988541,
+    "n_estimators": 495
   },
   "test_metrics": {
-    "test_accuracy": 0.8547297297297297,
-    "test_precision": 0.8295201457784976,
-    "test_recall": 0.8929816913687881,
-    "test_f1": 0.8600818725726882,
-    "test_roc_auc": 0.9238784478716138
+    "test_accuracy": 0.7728494623655914,
+    "test_precision": 0.7524875621890548,
+    "test_recall": 0.8131720430107527,
+    "test_f1": 0.781653746770026,
+    "test_roc_auc": 0.853938135911666
   },
   "feature_names": [
     "Y",
@@ -33,9 +33,10 @@
     "package_LATA",
     "brand_num"
   ],
-  "training_date": "2025-11-18T02:31:12.989850",
+  "training_date": "2025-11-19T20:54:44.636984",
   "n_features": 15,
-  "train_size": 247752,
-  "val_size": 82584,
-  "test_size": 82584
+  "train_size": 4462,
+  "val_size": 1488,
+  "test_size": 1488,
+  "comparison_result": "drift_update"
 }
