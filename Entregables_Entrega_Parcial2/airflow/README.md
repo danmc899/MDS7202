@@ -1,48 +1,34 @@
 # Pipeline Airflow - MLOps
 
-## 🚀 Setup Inicial (IMPORTANTE)
+## 🚀 Quick Start
 
-### Compatibilidad Windows/Linux/macOS
+```bash
+# Solo necesitas Docker. Funciona en Windows, Linux y macOS sin configuración.
+cd Entregables_Entrega_Parcial2/airflow
+docker compose up -d
+```
 
-Este proyecto está configurado para funcionar en **Windows (WSL)**, **Linux** y **macOS** sin modificaciones manuales.
+**Accesos:**
+- **Airflow UI**: http://localhost:8080 (usuario: `airflow`, contraseña: `airflow`)
+- **MLflow UI**: http://localhost:5001
 
-#### 📁 Logs Cross-Platform
+---
 
-Los logs de Airflow están configurados con nombres de archivo compatibles con todos los sistemas operativos. Por defecto, Airflow usa caracteres como `:` y `+` en los nombres de archivos de log (ej: `run_id=scheduled__2025-11-09T00:00:00+00:00`), que son **inválidos en Windows**.
+## 🌐 Compatibilidad Cross-Platform (Windows/Linux/macOS)
 
-La configuración actual reemplaza automáticamente:
+Este proyecto funciona **sin configuración previa** en cualquier sistema operativo:
+
+### ✅ No necesitas archivo `.env`
+El `docker-compose.yml` usa UID fijo `50000` que funciona en todos los sistemas.
+
+### ✅ Logs compatibles con Windows
+Los logs de Airflow usan nombres de archivo sin caracteres especiales (`:`, `+`) que son inválidos en Windows.
+
+La configuración reemplaza automáticamente:
 - `:` → `_`
 - `+` → `_`
 
-Esto se hace mediante la variable de entorno:
-```yaml
-AIRFLOW__LOGGING__LOG_FILENAME_TEMPLATE: 'dag_id={{ ti.dag_id }}/run_id={{ ti.run_id | replace(":", "_") | replace("+", "_") }}/task_id={{ ti.task_id }}/attempt={{ try_number }}.log'
-```
-
-**⚠️ ANTES de ejecutar `docker-compose up`:**
-
-```bash
-# 1. Ejecutar script de inicialización (detecta automáticamente el OS)
-./init_airflow.sh
-
-# 2. Levantar servicios
-docker-compose up -d
-```
-
-El script `init_airflow.sh`:
-
-- Detecta automáticamente si estás en Linux o macOS
-- Configura `AIRFLOW_UID` apropiadamente:
-  - **Linux**: `1000` (usuario estándar)
-  - **macOS**: UID del usuario actual (`501`, `502`, etc. obtenido con `id -u`)
-- Crea directorios necesarios
-- Ajusta permisos
-
-**🔒 Importante sobre `.env`:**
-
-- El archivo `.env` **NO está en Git** (es específico de cada máquina)
-- Se genera automáticamente al ejecutar `init_airflow.sh`
-- Contiene `AIRFLOW_UID` dinámico según tu sistema operativo
+Ejemplo: `run_id=scheduled__2025-11-09T00_00_00_00_00` en lugar de `run_id=scheduled__2025-11-09T00:00:00+00:00`
 
 ---
 
