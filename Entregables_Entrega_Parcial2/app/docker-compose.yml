@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sodai-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Montar modelos desde airflow (rutas absolutas para evitar problemas)
+      - ../airflow/models:/app/models:ro
+      - ../airflow/mlruns:/app/mlruns:ro
+      - ../airflow/data:/app/data:ro
+    environment:
+      - MODEL_PATH=/app/models/best_model.pkl
+      - MODEL_METADATA_PATH=/app/models/model_metadata.json
+      - MLFLOW_TRACKING_URI=file:///app/mlruns
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - sodai-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sodai-frontend
+    ports:
+      - "7860:7860"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - sodai-network
+
+networks:
+  sodai-network:
+    driver: bridge
