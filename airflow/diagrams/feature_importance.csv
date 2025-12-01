@@ -1,0 +1,16 @@
+feature,importance
+sub_category_GASEOSAS,0.33655027
+package_KEG,0.22947127
+package_LATA,0.08384295
+size,0.06371714
+brand_num,0.050048213
+segment,0.049433935
+customer_type_MAYORISTA,0.043324757
+customer_type_MINIMARKET,0.03518799
+customer_type_CANAL FRIO,0.024957404
+customer_type_TIENDA DE CONVENIENCIA,0.01738432
+customer_type_RESTAURANT,0.016730946
+customer_type_SUPERMERCADO,0.0140357185
+X,0.013212149
+Y,0.011769906
+num_deliver_per_week,0.010333086
