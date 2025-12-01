@@ -1,0 +1,9 @@
+{
+  "total_predictions": 25640,
+  "positive_predictions": 14450,
+  "positive_rate": 0.5635725429017161,
+  "avg_probability": 0.4997534155845642,
+  "prediction_week": "2025-01-07T00:00:00",
+  "week_id": "2025-W01_2sem_predict",
+  "timestamp": "20251201_215005"
+}
