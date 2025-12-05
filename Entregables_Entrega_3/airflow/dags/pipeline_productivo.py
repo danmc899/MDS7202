@@ -40,8 +40,8 @@ dag = DAG(
     'sodai_drinks_production_pipeline',
     default_args=default_args,
     description='Pipeline productivo completo para predicción de compras',
-    schedule_interval='@weekly',  # Ejecutar semanalmente
-    start_date=datetime(2024, 1, 1),
+    schedule_interval=None,  # Ejecutar semanalmente
+    start_date=datetime(2024, 11, 23),
     catchup=False,
     tags=['production', 'ml', 'sodai_drinks'],
 )
