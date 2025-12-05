@@ -1,9 +1,0 @@
-{
-  "total_predictions": 24792,
-  "positive_predictions": 13853,
-  "positive_rate": 0.5587689577282995,
-  "avg_probability": 0.5011388063430786,
-  "prediction_week": "2024-12-31T00:00:00",
-  "week_id": "2024-W52_2sem_train",
-  "timestamp": "20251201_214846"
-}
