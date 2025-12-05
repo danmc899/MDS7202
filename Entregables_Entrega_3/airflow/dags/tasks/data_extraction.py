@@ -1,38 +1,94 @@
 """
 Data Extraction Task
-Extrae los datos de las fuentes (parquet files) y los prepara para procesamiento.
+Lee los archivos de batch semanales pre-generados de data/raw/.
 
-Lógica de semanas (2 semanas):
-- Si NO hay best_model.pkl → usa penúltimas 2 semanas para entrenar modelo base
-- Si YA hay best_model.pkl → usa últimas 2 semanas para evaluar drift y predecir
+Archivos esperados en data/raw/:
+- batch_YYYY-WXX.parquet  (batches semanales de Condabench)
+- clientes.parquet
+- productos.parquet
+
+Lógica:
+- Detecta todos los archivos batch_YYYY-WXX.parquet disponibles
+- Ordena por semana ISO (cronológicamente)
+- Busca un archivo "processed_weeks.txt" para saber cuáles ya se procesaron
+- Procesa el siguiente batch no procesado (del más antiguo al más nuevo)
+- El primer batch genera best_model.pkl
+- Los siguientes evalúan drift y predicen
 """
 import pandas as pd
 import os
+import re
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)
 
-# Configuración de ventanas de tiempo
-SEMANAS_ENTRENAMIENTO = 2  # Usar 2 semanas para entrenar
+
+def get_available_batches(raw_dir: Path) -> list:
+    """
+    Detecta todos los archivos batch disponibles y extrae sus semanas ISO.
+    
+    Returns:
+        Lista de tuplas (week_id, filepath) ordenadas cronológicamente (más antiguo primero)
+    """
+    pattern = re.compile(r'batch_(\d{4}-W\d{2})\.parquet')
+    batches = []
+    
+    for f in raw_dir.glob("batch_*.parquet"):
+        match = pattern.match(f.name)
+        if match:
+            week_id = match.group(1)  # Ej: "2024-W51"
+            batches.append((week_id, f))
+    
+    # Ordenar cronológicamente (año, semana)
+    def sort_key(x):
+        year, week = x[0].split('-W')
+        return (int(year), int(week))
+    
+    batches.sort(key=sort_key)
+    return batches
+
+
+def get_processed_weeks(data_dir: Path) -> set:
+    """
+    Lee el archivo de semanas ya procesadas.
+    """
+    processed_file = data_dir / "processed_weeks.txt"
+    if processed_file.exists():
+        with open(processed_file, 'r') as f:
+            return set(line.strip() for line in f if line.strip())
+    return set()
+
+
+def mark_week_processed(data_dir: Path, week_id: str):
+    """
+    Marca una semana como procesada.
+    """
+    processed_file = data_dir / "processed_weeks.txt"
+    with open(processed_file, 'a') as f:
+        f.write(f"{week_id}\n")
 
 
 def extract_data(**context):
     """
-    Extrae los datos de los archivos parquet.
+    Lee el siguiente batch semanal no procesado.
     
-    - Si NO hay best_model.pkl → usa 2 semanas anteriores a la última para entrenar
-    - Si YA hay best_model.pkl → usa últimas 2 semanas para evaluar drift y predecir
+    Lógica:
+    - Itera cronológicamente por los batches disponibles
+    - Encuentra el primero que no ha sido procesado
+    - Si NO hay best_model.pkl → es entrenamiento inicial
+    - Si YA hay best_model.pkl → evalúa drift y predice
     
     Args:
-        **context: Contexto de Airflow con información del DAG
+        **context: Contexto de Airflow
         
     Returns:
         dict: Información sobre los datos extraídos
     """
-    logger.info("Iniciando extracción de datos...")
-    logger.info(f"📅 Configuración: {SEMANAS_ENTRENAMIENTO} semanas para entrenamiento")
+    logger.info("=" * 60)
+    logger.info("📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar")
+    logger.info("=" * 60)
     
     # Directorios
     base_dir = Path("/opt/airflow/data")
@@ -40,30 +96,41 @@ def extract_data(**context):
     models_dir = Path("/opt/airflow/models")
     raw_dir.mkdir(parents=True, exist_ok=True)
     
-    # Rutas de archivos
-    transacciones_full_path = raw_dir / "transacciones.parquet"
+    # Rutas de archivos auxiliares
     clientes_path = raw_dir / "clientes.parquet"
     productos_path = raw_dir / "productos.parquet"
     
-    # Verificar que existen los archivos base
-    if not transacciones_full_path.exists():
-        logger.error(f"No se encontró el archivo de transacciones en {transacciones_full_path}")
-        raise FileNotFoundError(f"Archivo no encontrado: {transacciones_full_path}")
+    # Detectar batches disponibles (ordenados cronológicamente)
+    available_batches = get_available_batches(raw_dir)
     
-    # Cargar datos completos para obtener fechas
-    df_full = pd.read_parquet(transacciones_full_path)
-    df_full['purchase_date'] = pd.to_datetime(df_full['purchase_date'])
+    if not available_batches:
+        raise FileNotFoundError(
+            f"No se encontraron archivos batch_YYYY-WXX.parquet en {raw_dir}"
+        )
     
-    # Calcular límites de semanas
-    fecha_maxima = df_full['purchase_date'].max()
-    fecha_inicio_ultima_semana = fecha_maxima - timedelta(days=7)
-    fecha_inicio_ventana_train = fecha_maxima - timedelta(days=7 * (SEMANAS_ENTRENAMIENTO + 1))  # +1 para excluir última
-    fecha_inicio_ventana_predict = fecha_maxima - timedelta(days=7 * SEMANAS_ENTRENAMIENTO)
+    logger.info(f"📅 Batches disponibles: {[b[0] for b in available_batches]}")
     
-    logger.info(f"📅 Fechas en dataset completo:")
-    logger.info(f"   Fecha máxima: {fecha_maxima.date()}")
-    logger.info(f"   Ventana entrenamiento ({SEMANAS_ENTRENAMIENTO} sem): {fecha_inicio_ventana_train.date()} → {fecha_inicio_ultima_semana.date()}")
-    logger.info(f"   Ventana predicción ({SEMANAS_ENTRENAMIENTO} sem): {fecha_inicio_ventana_predict.date()} → {fecha_maxima.date()}")
+    # Ver cuáles ya se procesaron
+    processed_weeks = get_processed_weeks(base_dir)
+    logger.info(f"✅ Ya procesados: {sorted(processed_weeks) if processed_weeks else 'ninguno'}")
+    
+    # Encontrar el siguiente batch a procesar
+    batch_to_process = None
+    for week_id, filepath in available_batches:
+        if week_id not in processed_weeks:
+            batch_to_process = (week_id, filepath)
+            break
+    
+    if batch_to_process is None:
+        logger.info("🎉 Todos los batches ya fueron procesados!")
+        # Retornar el último procesado para no romper el pipeline
+        batch_to_process = available_batches[-1]
+        context['ti'].xcom_push(key='all_processed', value=True)
+    else:
+        context['ti'].xcom_push(key='all_processed', value=False)
+    
+    week_id, filepath = batch_to_process
+    logger.info(f"📦 Procesando batch: {week_id} ({filepath.name})")
     
     # Verificar si existe un modelo entrenado
     model_path = models_dir / "best_model.pkl"
@@ -71,90 +138,85 @@ def extract_data(**context):
     
     if not model_exists:
         # ═══════════════════════════════════════════════════════════════════
-        # PRIMERA EJECUCIÓN: Usar 2 semanas anteriores a la última para entrenar
+        # PRIMERA EJECUCIÓN: Entrenar modelo base con este batch
         # ═══════════════════════════════════════════════════════════════════
-        logger.info("🔵 PRIMERA EJECUCIÓN: No hay best_model.pkl")
-        logger.info(f"   → Usando {SEMANAS_ENTRENAMIENTO} semanas (excluyendo última) para entrenar modelo base")
-        
-        df_transacciones = df_full[
-            (df_full['purchase_date'] > fecha_inicio_ventana_train) &
-            (df_full['purchase_date'] <= fecha_inicio_ultima_semana)
-        ].copy()
-        
-        semana_inicio = fecha_inicio_ventana_train + timedelta(days=1)
-        semana_fin = fecha_inicio_ultima_semana
+        logger.info("🔵 MODO: Entrenamiento inicial (no hay best_model.pkl)")
         is_first_training = True
-        periodo_desc = f"{SEMANAS_ENTRENAMIENTO}sem_train"
-        
+        periodo_desc = "train"
     else:
         # ═══════════════════════════════════════════════════════════════════
-        # SEGUNDA EJECUCIÓN: Usar últimas 2 semanas para evaluar drift y predecir
+        # EJECUCIÓN CON MODELO: Evaluar drift y predecir
         # ═══════════════════════════════════════════════════════════════════
-        logger.info("�� EJECUCIÓN CON MODELO: best_model.pkl detectado")
-        logger.info(f"   → Usando últimas {SEMANAS_ENTRENAMIENTO} semanas para evaluar drift y predecir")
-        
-        df_transacciones = df_full[
-            df_full['purchase_date'] > fecha_inicio_ventana_predict
-        ].copy()
-        
-        semana_inicio = fecha_inicio_ventana_predict + timedelta(days=1)
-        semana_fin = fecha_maxima
+        logger.info("🟢 MODO: Evaluación de drift + Predicción (best_model.pkl existe)")
         is_first_training = False
-        periodo_desc = f"{SEMANAS_ENTRENAMIENTO}sem_predict"
+        periodo_desc = "predict"
     
-    # Calcular identificador de semana (año-semana ISO de la fecha final)
-    semana_iso = semana_fin.isocalendar()
-    week_id = f"{semana_iso.year}-W{semana_iso.week:02d}_{periodo_desc}"
+    # Leer el batch
+    logger.info(f"   📖 Leyendo: {filepath.name}")
+    df_transacciones = pd.read_parquet(filepath)
     
-    # Guardar subsample con timestamp (único archivo de subsample)
-    subsample_path = raw_dir / f"transacciones_subsample_{week_id}.parquet"
-    df_transacciones.to_parquet(subsample_path, index=False)
+    # Asegurar tipos de datos correctos
+    df_transacciones['purchase_date'] = pd.to_datetime(df_transacciones['purchase_date'])
     
-    # Leer clientes y productos
-    df_clientes = pd.read_parquet(clientes_path)
-    df_productos = pd.read_parquet(productos_path)
-    
-    # Estadísticas del subsample
+    # Estadísticas
+    fecha_min = df_transacciones['purchase_date'].min()
+    fecha_max = df_transacciones['purchase_date'].max()
     num_transacciones = len(df_transacciones)
     num_clientes = df_transacciones['customer_id'].nunique()
     num_productos = df_transacciones['product_id'].nunique()
     pares_unicos = df_transacciones.groupby(['customer_id', 'product_id']).size().reset_index()
     num_pares = len(pares_unicos)
     
-    logger.info(f"📊 Datos del subsample ({week_id}):")
-    logger.info(f"   Rango: {semana_inicio.date()} → {semana_fin.date()}")
-    logger.info(f"   Días incluidos: {(semana_fin - semana_inicio).days}")
+    logger.info(f"📊 Datos del batch {week_id}:")
+    logger.info(f"   Rango fechas: {fecha_min.date()} → {fecha_max.date()}")
     logger.info(f"   Transacciones: {num_transacciones:,}")
     logger.info(f"   Clientes únicos: {num_clientes:,}")
     logger.info(f"   Productos únicos: {num_productos:,}")
     logger.info(f"   Pares cliente-producto: {num_pares:,}")
     
+    # Construir week_id completo
+    full_week_id = f"{week_id}_{periodo_desc}"
+    
+    # Guardar archivo para procesamiento posterior
+    output_path = raw_dir / f"current_batch_{full_week_id}.parquet"
+    df_transacciones.to_parquet(output_path, index=False)
+    logger.info(f"   💾 Guardado: {output_path.name}")
+    
     # Validar estructura de datos
     required_cols = ['customer_id', 'product_id', 'order_id', 'purchase_date', 'items']
-    if not all(col in df_transacciones.columns for col in required_cols):
-        raise ValueError(f"Columnas requeridas: {required_cols}")
+    missing_cols = [col for col in required_cols if col not in df_transacciones.columns]
+    if missing_cols:
+        logger.warning(f"⚠️ Columnas faltantes: {missing_cols}")
+    
+    # Marcar como procesado
+    mark_week_processed(base_dir, week_id)
+    logger.info(f"   ✅ Marcado como procesado: {week_id}")
     
     # Pushear información al XCom
-    context['ti'].xcom_push(key='transacciones_path', value=str(subsample_path))
+    context['ti'].xcom_push(key='transacciones_path', value=str(output_path))
     context['ti'].xcom_push(key='clientes_path', value=str(clientes_path))
     context['ti'].xcom_push(key='productos_path', value=str(productos_path))
     context['ti'].xcom_push(key='num_transacciones', value=num_transacciones)
     context['ti'].xcom_push(key='num_pares', value=num_pares)
     context['ti'].xcom_push(key='is_first_training', value=is_first_training)
-    context['ti'].xcom_push(key='week_id', value=week_id)
-    context['ti'].xcom_push(key='max_date', value=semana_fin.isoformat())
+    context['ti'].xcom_push(key='week_id', value=full_week_id)
+    context['ti'].xcom_push(key='batch_week', value=week_id)
+    context['ti'].xcom_push(key='max_date', value=fecha_max.isoformat())
     
-    logger.info(f"✅ Extracción completada - Periodo: {week_id}")
+    logger.info(f"✅ Extracción completada - Week ID: {full_week_id}")
+    logger.info("=" * 60)
     
     return {
         'status': 'success',
-        'week_id': week_id,
+        'week_id': full_week_id,
+        'batch_week': week_id,
         'transacciones_count': num_transacciones,
         'pares_count': num_pares,
         'clientes_count': num_clientes,
         'productos_count': num_productos,
         'is_first_training': is_first_training,
-        'fecha_inicio': semana_inicio.isoformat(),
-        'fecha_fin': semana_fin.isoformat(),
-        'semanas_usadas': SEMANAS_ENTRENAMIENTO
+        'fecha_inicio': fecha_min.isoformat(),
+        'fecha_fin': fecha_max.isoformat(),
+        'batches_disponibles': [b[0] for b in available_batches],
+        'batches_procesados': list(processed_weeks | {week_id})
     }
