@@ -1,0 +1,42 @@
+[2025-12-07T03:10:46.212+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data manual__2025-12-07T03:10:41+00:00 [queued]>
+[2025-12-07T03:10:46.219+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data manual__2025-12-07T03:10:41+00:00 [queued]>
+[2025-12-07T03:10:46.220+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-07T03:10:46.236+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-12-07 03:10:41+00:00
+[2025-12-07T03:10:46.251+0000] {standard_task_runner.py:57} INFO - Started process 1250 to run task
+[2025-12-07T03:10:46.253+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'manual__2025-12-07T03:10:41+00:00', '--job-id', '45', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpyea17aa3']
+[2025-12-07T03:10:46.256+0000] {standard_task_runner.py:85} INFO - Job 45: Subtask process_data
+[2025-12-07T03:10:46.293+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data manual__2025-12-07T03:10:41+00:00 [running]> on host d63631a18ada
+[2025-12-07T03:10:46.348+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-12-07T03:10:41+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-07T03:10:41+00:00'
+[2025-12-07T03:10:46.350+0000] {data_processing.py:169} INFO - Iniciando procesamiento de datos...
+[2025-12-07T03:10:46.412+0000] {data_processing.py:181} INFO - Datos cargados - Transacciones: 6190, Clientes: 1569, Productos: 971
+[2025-12-07T03:10:46.418+0000] {data_processing.py:188} INFO - Predicción para semana: 2025-04
+[2025-12-07T03:10:46.418+0000] {data_processing.py:73} INFO - Creando variable target...
+[2025-12-07T03:10:46.667+0000] {data_processing.py:90} INFO - ✅ Ejemplos positivos (compraron): 4,866
+[2025-12-07T03:10:46.668+0000] {data_processing.py:105} INFO - 🎲 Generando 48,660 ejemplos negativos (ratio 10.0:1)...
+[2025-12-07T03:10:49.083+0000] {data_processing.py:133} INFO - ⚖️ Aplicando undersampling con RandomUnderSampler...
+[2025-12-07T03:10:49.084+0000] {data_processing.py:134} INFO -    Antes: 48,660 negativos
+[2025-12-07T03:10:49.095+0000] {data_processing.py:151} INFO -    Después: 4,866 negativos
+[2025-12-07T03:10:49.096+0000] {data_processing.py:155} INFO - 📊 Dataset balanceado:
+[2025-12-07T03:10:49.096+0000] {data_processing.py:156} INFO -    - Positivos: 4,866
+[2025-12-07T03:10:49.096+0000] {data_processing.py:157} INFO -    - Negativos: 4,866
+[2025-12-07T03:10:49.096+0000] {data_processing.py:158} INFO -    - Total: 9,732
+[2025-12-07T03:10:49.111+0000] {data_processing.py:197} INFO - Dataset merged: (9732, 17)
+[2025-12-07T03:10:49.113+0000] {data_processing.py:208} INFO - Features: ['customer_type', 'Y', 'X', 'num_deliver_per_week', 'brand', 'category', 'sub_category', 'segment', 'package', 'size']
+[2025-12-07T03:10:49.113+0000] {data_processing.py:209} INFO - Distribución de clases - 0: 4866, 1: 4866
+[2025-12-07T03:10:49.120+0000] {data_processing.py:217} INFO - Columna 'brand' convertida a 'brand_num' (numérica)
+[2025-12-07T03:10:49.125+0000] {data_processing.py:263} INFO - Ajustando preprocessor...
+[2025-12-07T03:10:49.143+0000] {data_processing.py:295} INFO - Datos transformados: (9732, 18)
+[2025-12-07T03:10:49.144+0000] {data_processing.py:296} INFO - Verificación de clases - 0: 4866, 1: 4866
+[2025-12-07T03:10:49.155+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tasks/data_processing.py", line 311, in process_data
+    with open(models_dir / "preprocessor.pkl", 'wb') as f:
+PermissionError: [Errno 13] Permission denied: '/opt/airflow/models/preprocessor.pkl'
+[2025-12-07T03:10:49.162+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251207T031041, start_date=20251207T031046, end_date=20251207T031049
+[2025-12-07T03:10:49.170+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 45 for task process_data ([Errno 13] Permission denied: '/opt/airflow/models/preprocessor.pkl'; 1250)
+[2025-12-07T03:10:49.211+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-12-07T03:10:49.230+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

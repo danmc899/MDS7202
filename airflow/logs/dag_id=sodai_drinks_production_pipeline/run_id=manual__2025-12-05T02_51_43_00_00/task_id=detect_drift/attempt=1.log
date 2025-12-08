@@ -1,0 +1,28 @@
+[2025-12-05T02:52:40.627+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift manual__2025-12-05T02:51:43+00:00 [queued]>
+[2025-12-05T02:52:40.633+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.detect_drift manual__2025-12-05T02:51:43+00:00 [queued]>
+[2025-12-05T02:52:40.634+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:52:40.641+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): detect_drift> on 2025-12-05 02:51:43+00:00
+[2025-12-05T02:52:40.651+0000] {standard_task_runner.py:57} INFO - Started process 593 to run task
+[2025-12-05T02:52:40.655+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'detect_drift', 'manual__2025-12-05T02:51:43+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpapcnypd3']
+[2025-12-05T02:52:40.659+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask detect_drift
+[2025-12-05T02:52:40.696+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.detect_drift manual__2025-12-05T02:51:43+00:00 [running]> on host 77cc39016fd2
+[2025-12-05T02:52:40.759+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='detect_drift' AIRFLOW_CTX_EXECUTION_DATE='2025-12-05T02:51:43+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-05T02:51:43+00:00'
+[2025-12-05T02:52:40.760+0000] {drift_detection.py:80} INFO - Iniciando detección de drift...
+[2025-12-05T02:52:41.026+0000] {drift_detection.py:110} INFO - Datos de referencia: 13920 registros
+[2025-12-05T02:52:41.026+0000] {drift_detection.py:111} INFO - Datos actuales: 13920 registros
+[2025-12-05T02:52:41.029+0000] {drift_detection.py:119} INFO - Analizando drift en 15 features numéricas
+[2025-12-05T02:52:41.031+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-12-05T02:52:41.033+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-12-05T02:52:41.035+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-12-05T02:52:41.037+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-12-05T02:52:41.038+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-12-05T02:52:41.040+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-12-05T02:52:41.041+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-12-05T02:52:41.042+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-12-05T02:52:41.043+0000] {drift_detection.py:30} INFO - KS Test - Statistic: 0.0000, P-value: 1.0000
+[2025-12-05T02:52:41.044+0000] {drift_detection.py:65} INFO - PSI: 0.0000
+[2025-12-05T02:52:41.066+0000] {drift_detection.py:168} INFO - No se detectó drift significativo en los datos
+[2025-12-05T02:52:41.073+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'has_drift': False, 'features_analyzed': 15, 'drift_results': {'Y': {'ks_statistic': 0.0, 'ks_p_value': 1.0, 'ks_drift': False, 'psi': 0.0, 'psi_drift': False}, 'X': {'ks_statistic': 0.0, 'ks_p_value': 1.0, 'ks_drift': False, 'psi': 0.0, 'psi_drift': False}, 'size': {'ks_statistic': 0.0, 'ks_p_value': 1.0, 'ks_drift': False, 'psi': 0.0, 'psi_drift': False}, 'num_deliver_per_week': {'ks_statistic': 0.0, 'ks_p_value': 1.0, 'ks_drift': False, 'psi': 0.0, 'psi_drift': False}, 'segment': {'ks_statistic': 0.0, 'ks_p_value': 1.0, 'ks_drift': False, 'psi': 0.0, 'psi_drift': False}}}
+[2025-12-05T02:52:41.089+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=detect_drift, execution_date=20251205T025143, start_date=20251205T025240, end_date=20251205T025241
+[2025-12-05T02:52:41.150+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T02:52:41.172+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

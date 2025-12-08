@@ -129,6 +129,158 @@ def optimize_xgboost_hyperparameters(X_train, y_train, X_val, y_val, timeout=OPT
 
 def generate_hyperparameter_importance_plot(study, output_dir):
     """
+    Genera gráfico de importancia de hiperparámetros en la optimización del F1-Score
+    usando Optuna's param_importances
+    
+    Args:
+        study: Estudio de Optuna completado
+        output_dir: Directorio para guardar el gráfico
+        
+    Returns:
+        dict: Diccionario con rutas de los gráficos generados
+    """
+    logger.info("📊 Generando gráficos de optimización de Optuna...")
+    
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    plot_paths = {}
+    
+    try:
+        # ═══════════════════════════════════════════════════════════════════
+        # 1. Gráfico de Importancia de Hiperparámetros
+        # ═══════════════════════════════════════════════════════════════════
+        from optuna.importance import get_param_importances
+        
+        importances = get_param_importances(study)
+        
+        # Ordenar por importancia
+        params = list(importances.keys())
+        values = list(importances.values())
+        
+        # Crear gráfico de barras horizontal
+        plt.figure(figsize=(10, 6))
+        colors = plt.cm.viridis([v / max(values) if max(values) > 0 else 0 for v in values])
+        
+        bars = plt.barh(params, values, color=colors)
+        
+        # Añadir valores en las barras
+        for bar, val in zip(bars, values):
+            plt.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2, 
+                    f'{val:.3f}', va='center', fontsize=10)
+        
+        plt.xlabel('Importancia relativa', fontsize=12)
+        plt.ylabel('Hiperparámetro', fontsize=12)
+        plt.title('Importancia de Hiperparámetros en la Optimización del F1-Score\n(Optuna - fANOVA)', 
+                  fontsize=14, fontweight='bold')
+        plt.xlim(0, max(values) * 1.15 if max(values) > 0 else 1)
+        plt.gca().invert_yaxis()  # Mayor importancia arriba
+        plt.tight_layout()
+        
+        importance_path = output_dir / "hyperparameter_importance.png"
+        plt.savefig(importance_path, dpi=150, bbox_inches='tight')
+        plt.close()
+        plot_paths['importance'] = str(importance_path)
+        
+        logger.info(f"   ✓ Gráfico de importancia de hiperparámetros guardado: {importance_path}")
+        
+        # Guardar datos como JSON
+        importance_data = {
+            'hyperparameters': params,
+            'importances': values,
+            'best_f1_score': study.best_value,
+            'n_trials': len(study.trials)
+        }
+        json_path = output_dir / "hyperparameter_importance.json"
+        with open(json_path, 'w') as f:
+            json.dump(importance_data, f, indent=2)
+        plot_paths['importance_json'] = str(json_path)
+        logger.info(f"   ✓ Datos de importancia guardados: {json_path}")
+        
+        # ═══════════════════════════════════════════════════════════════════
+        # 2. Gráfico de Optimization History
+        # ═══════════════════════════════════════════════════════════════════
+        trials_data = []
+        best_values = []
+        current_best = float('-inf')
+        
+        for trial in study.trials:
+            if trial.state.name == 'COMPLETE':
+                trials_data.append({
+                    'trial': trial.number,
+                    'value': trial.value
+                })
+                if trial.value > current_best:
+                    current_best = trial.value
+                best_values.append(current_best)
+        
+        if trials_data:
+            trial_numbers = [t['trial'] for t in trials_data]
+            trial_values = [t['value'] for t in trials_data]
+            
+            fig, ax = plt.subplots(figsize=(12, 6))
+            
+            # Plot de todos los trials
+            ax.scatter(trial_numbers, trial_values, c='steelblue', alpha=0.6, 
+                      label='F1-Score por trial', s=50)
+            
+            # Línea del mejor valor acumulado
+            ax.plot(trial_numbers, best_values, color='crimson', linewidth=2, 
+                   label='Mejor F1-Score acumulado', marker='', linestyle='-')
+            
+            # Marcar el mejor trial
+            best_trial_idx = trial_values.index(max(trial_values))
+            ax.scatter([trial_numbers[best_trial_idx]], [trial_values[best_trial_idx]], 
+                      c='gold', s=200, marker='*', edgecolors='black', linewidths=1.5,
+                      label=f'Mejor trial (#{trial_numbers[best_trial_idx]})', zorder=5)
+            
+            ax.set_xlabel('Número de Trial', fontsize=12)
+            ax.set_ylabel('F1-Score', fontsize=12)
+            ax.set_title('Optimization History - Evolución del F1-Score durante la búsqueda\n(Optuna TPE Sampler)', 
+                        fontsize=14, fontweight='bold')
+            ax.legend(loc='lower right')
+            ax.grid(True, alpha=0.3)
+            
+            # Añadir anotación del mejor valor
+            ax.annotate(f'Best: {max(trial_values):.4f}', 
+                       xy=(trial_numbers[best_trial_idx], trial_values[best_trial_idx]),
+                       xytext=(10, 10), textcoords='offset points',
+                       fontsize=10, fontweight='bold',
+                       bbox=dict(boxstyle='round,pad=0.3', facecolor='yellow', alpha=0.7))
+            
+            plt.tight_layout()
+            
+            history_path = output_dir / "optimization_history.png"
+            plt.savefig(history_path, dpi=150, bbox_inches='tight')
+            plt.close()
+            plot_paths['history'] = str(history_path)
+            
+            logger.info(f"   ✓ Gráfico de optimization history guardado: {history_path}")
+            
+            # Guardar datos de historia como JSON
+            history_data = {
+                'trials': trials_data,
+                'best_values_cumulative': best_values,
+                'best_trial': trial_numbers[best_trial_idx],
+                'best_f1_score': max(trial_values),
+                'total_trials': len(trials_data)
+            }
+            history_json_path = output_dir / "optimization_history.json"
+            with open(history_json_path, 'w') as f:
+                json.dump(history_data, f, indent=2)
+            plot_paths['history_json'] = str(history_json_path)
+            logger.info(f"   ✓ Datos de optimization history guardados: {history_json_path}")
+        
+        logger.info("✅ Gráficos de optimización de Optuna generados exitosamente")
+        return plot_paths
+        
+    except Exception as e:
+        logger.warning(f"⚠️ No se pudo generar gráficos de optimización: {e}")
+    return study.best_params, study
+
+
+def generate_hyperparameter_importance_plot(study, output_dir):
+    """
     Genera gráfico de importancia de hiperparámetros y optimization history
     usando Optuna's param_importances
     
@@ -147,19 +299,24 @@ def generate_hyperparameter_importance_plot(study, output_dir):
     plot_paths = {}
     
     try:
+        # ═══════════════════════════════════════════════════════════════════
         # 1. Gráfico de Importancia de Hiperparámetros
+        # ═══════════════════════════════════════════════════════════════════
         from optuna.importance import get_param_importances
         
         importances = get_param_importances(study)
+        
+        # Ordenar por importancia
         params = list(importances.keys())
         values = list(importances.values())
         
+        # Crear gráfico de barras horizontal
         plt.figure(figsize=(10, 6))
-        max_val = max(values) if values and max(values) > 0 else 1
-        colors = plt.cm.get_cmap('viridis')([v / max_val for v in values])
+        colors = plt.cm.viridis([v / max(values) if max(values) > 0 else 0 for v in values])
         
         bars = plt.barh(params, values, color=colors)
         
+        # Añadir valores en las barras
         for bar, val in zip(bars, values):
             plt.text(bar.get_width() + 0.01, bar.get_y() + bar.get_height()/2, 
                     f'{val:.3f}', va='center', fontsize=10)
@@ -168,7 +325,7 @@ def generate_hyperparameter_importance_plot(study, output_dir):
         plt.ylabel('Hiperparámetro', fontsize=12)
         plt.title('Importancia de Hiperparámetros en la Optimización del F1-Score\n(Optuna - fANOVA)', 
                   fontsize=14, fontweight='bold')
-        plt.xlim(0, max_val * 1.15)
+        plt.xlim(0, max(values) * 1.15 if max(values) > 0 else 1)
         plt.gca().invert_yaxis()
         plt.tight_layout()
         
@@ -176,7 +333,8 @@ def generate_hyperparameter_importance_plot(study, output_dir):
         plt.savefig(importance_path, dpi=150, bbox_inches='tight')
         plt.close()
         plot_paths['importance'] = str(importance_path)
-        logger.info(f"   ✓ Gráfico de importancia guardado: {importance_path}")
+        
+        logger.info(f"   ✓ Gráfico de importancia de hiperparámetros guardado: {importance_path}")
         
         # Guardar datos como JSON
         importance_data = {
@@ -189,15 +347,21 @@ def generate_hyperparameter_importance_plot(study, output_dir):
         with open(json_path, 'w') as f:
             json.dump(importance_data, f, indent=2)
         plot_paths['importance_json'] = str(json_path)
+        logger.info(f"   ✓ Datos de importancia guardados: {json_path}")
         
+        # ═══════════════════════════════════════════════════════════════════
         # 2. Gráfico de Optimization History
+        # ═══════════════════════════════════════════════════════════════════
         trials_data = []
         best_values = []
         current_best = float('-inf')
         
         for trial in study.trials:
             if trial.state.name == 'COMPLETE':
-                trials_data.append({'trial': trial.number, 'value': trial.value})
+                trials_data.append({
+                    'trial': trial.number,
+                    'value': trial.value
+                })
                 if trial.value > current_best:
                     current_best = trial.value
                 best_values.append(current_best)
@@ -207,11 +371,16 @@ def generate_hyperparameter_importance_plot(study, output_dir):
             trial_values = [t['value'] for t in trials_data]
             
             fig, ax = plt.subplots(figsize=(12, 6))
+            
+            # Plot de todos los trials
             ax.scatter(trial_numbers, trial_values, c='steelblue', alpha=0.6, 
                       label='F1-Score por trial', s=50)
-            ax.plot(trial_numbers, best_values, color='crimson', linewidth=2, 
-                   label='Mejor F1-Score acumulado')
             
+            # Línea del mejor valor acumulado
+            ax.plot(trial_numbers, best_values, color='crimson', linewidth=2, 
+                   label='Mejor F1-Score acumulado', marker='', linestyle='-')
+            
+            # Marcar el mejor trial
             best_trial_idx = trial_values.index(max(trial_values))
             ax.scatter([trial_numbers[best_trial_idx]], [trial_values[best_trial_idx]], 
                       c='gold', s=200, marker='*', edgecolors='black', linewidths=1.5,
@@ -219,11 +388,12 @@ def generate_hyperparameter_importance_plot(study, output_dir):
             
             ax.set_xlabel('Número de Trial', fontsize=12)
             ax.set_ylabel('F1-Score', fontsize=12)
-            ax.set_title('Optimization History - Evolución del F1-Score\n(Optuna TPE Sampler)', 
+            ax.set_title('Optimization History - Evolución del F1-Score durante la búsqueda\n(Optuna TPE Sampler)', 
                         fontsize=14, fontweight='bold')
             ax.legend(loc='lower right')
             ax.grid(True, alpha=0.3)
             
+            # Añadir anotación del mejor valor
             ax.annotate(f'Best: {max(trial_values):.4f}', 
                        xy=(trial_numbers[best_trial_idx], trial_values[best_trial_idx]),
                        xytext=(10, 10), textcoords='offset points',
@@ -236,8 +406,10 @@ def generate_hyperparameter_importance_plot(study, output_dir):
             plt.savefig(history_path, dpi=150, bbox_inches='tight')
             plt.close()
             plot_paths['history'] = str(history_path)
+            
             logger.info(f"   ✓ Gráfico de optimization history guardado: {history_path}")
             
+            # Guardar datos de historia como JSON
             history_data = {
                 'trials': trials_data,
                 'best_values_cumulative': best_values,
@@ -249,8 +421,9 @@ def generate_hyperparameter_importance_plot(study, output_dir):
             with open(history_json_path, 'w') as f:
                 json.dump(history_data, f, indent=2)
             plot_paths['history_json'] = str(history_json_path)
+            logger.info(f"   ✓ Datos de optimization history guardados: {history_json_path}")
         
-        logger.info("✅ Gráficos de Optuna generados exitosamente")
+        logger.info("✅ Gráficos de optimización de Optuna generados exitosamente")
         return plot_paths
         
     except Exception as e:
@@ -327,10 +500,10 @@ def generate_shap_plots(model, X_sample, feature_names, output_dir):
         plot_paths.append(str(waterfall_path))
         logger.info(f"   ✓ Waterfall plot guardado: {waterfall_path}")
         
-        logger.info("✅ Gráficos SHAP generados exitosamente")
+        logger.info("Gráficos SHAP generados exitosamente")
         
     except Exception as e:
-        logger.error(f"❌ Error al generar gráficos SHAP: {e}")
+        logger.error(f"Error al generar gráficos SHAP: {e}")
         raise
     
     return plot_paths
@@ -370,7 +543,7 @@ def train_model(**context):
     Returns:
         dict: Métricas del modelo entrenado
     """
-    logger.info("🚀 Iniciando entrenamiento del modelo XGBoost...")
+    logger.info("Iniciando entrenamiento del modelo XGBoost...")
     
     ti = context['ti']
     processed_data_path = ti.xcom_pull(key='processed_data_path', task_ids='process_data')
@@ -392,7 +565,7 @@ def train_model(**context):
     X = df[feature_cols]
     y = df['compra_semanal']
     
-    logger.info(f"📊 Dataset cargado:")
+    logger.info(f"Dataset cargado:")
     logger.info(f"   - Features: {X.shape[1]}")
     logger.info(f"   - Registros: {X.shape[0]}")
     logger.info(f"   - Distribución de clases - Clase 0: {(y==0).sum()}, Clase 1: {(y==1).sum()}")
@@ -405,7 +578,7 @@ def train_model(**context):
         X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp
     )
     
-    logger.info(f"📂 Splits creados:")
+    logger.info(f"Splits creados:")
     logger.info(f"   - Train: {X_train.shape[0]} muestras")
     logger.info(f"   - Validation: {X_val.shape[0]} muestras")
     logger.info(f"   - Test: {X_test.shape[0]} muestras")
@@ -423,7 +596,7 @@ def train_model(**context):
     run_type = "initial_training" if is_first_training else "drift_evaluation"
     
     run_name = f"{run_type}_{week_id}_{run_timestamp}"
-    logger.info(f"📊 MLflow Run: {run_name}")
+    logger.info(f"MLflow Run: {run_name}")
     
     with mlflow.start_run(run_name=run_name):
         # Tags para identificar fácilmente en MLflow UI
@@ -432,7 +605,7 @@ def train_model(**context):
         mlflow.set_tag("timestamp", run_timestamp)
         
         # Registrar datasets en MLflow
-        logger.info("📊 Registrando datasets en MLflow...")
+        logger.info("Registrando datasets en MLflow...")
         
         # Crear datasets temporales para logging
         datasets_dir = Path("/opt/airflow/datasets")
@@ -488,14 +661,16 @@ def train_model(**context):
         
         logger.info("✅ Datasets registrados en MLflow")
         
-        # Optimizar hiperparámetros (1 minuto de timeout)
+        # Crear directorio para gráficos
+        diagrams_dir = Path("/opt/airflow/diagrams")
+        diagrams_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Optimizar hiperparámetros (5 minutos de timeout)
         best_params, study = optimize_xgboost_hyperparameters(
             X_train, y_train, X_val, y_val, timeout=OPTUNA_TIMEOUT_SECONDS
         )
         
         # Generar gráficos de Optuna (importancia de hiperparámetros + optimization history)
-        diagrams_dir = Path("/opt/airflow/diagrams")
-        diagrams_dir.mkdir(parents=True, exist_ok=True)
         optuna_plots = generate_hyperparameter_importance_plot(study, diagrams_dir)
         
         # Log trials completados
@@ -533,10 +708,6 @@ def train_model(**context):
         logger.info(f"   - F1-Score: {test_metrics['test_f1']:.4f}")
         logger.info(f"   - ROC-AUC: {test_metrics['test_roc_auc']:.4f}")
         
-        # Generar gráficos de interpretabilidad
-        diagrams_dir = Path("/opt/airflow/diagrams")
-        diagrams_dir.mkdir(parents=True, exist_ok=True)
-        
         # Sample para SHAP (100 muestras aleatorias del test)
         X_sample = X_test.sample(min(100, len(X_test)), random_state=42)
         shap_plots = generate_shap_plots(model, X_sample, feature_cols, diagrams_dir)
@@ -550,13 +721,13 @@ def train_model(**context):
             plot_path = Path(plot_path_str)
             if plot_path.exists():
                 mlflow.log_artifact(str(plot_path), artifact_path="shap_plots")
-                logger.info(f"   ✅ {plot_path.name} registrado")
+                logger.info(f"{plot_path.name} registrado")
         
         if cm_path:
             cm_path_obj = Path(cm_path)
             if cm_path_obj.exists():
                 mlflow.log_artifact(str(cm_path_obj), artifact_path="plots")
-                logger.info(f"   ✅ Confusion matrix registrada")
+                logger.info(f"Confusion matrix registrada")
         
         # Registrar gráficos de optimización de Optuna
         if optuna_plots:
@@ -564,7 +735,7 @@ def train_model(**context):
                 plot_path_obj = Path(plot_path)
                 if plot_path_obj.exists():
                     mlflow.log_artifact(str(plot_path_obj), artifact_path="optuna_plots")
-                    logger.info(f"   ✅ {plot_path_obj.name} registrado")
+                    logger.info(f"{plot_path_obj.name} registrado")
         
         # Guardar modelo con lógica de comparación
         models_dir = Path("/opt/airflow/models")
@@ -583,41 +754,41 @@ def train_model(**context):
         
         # Si se detectó drift, guardar modelo sin comparación (será el nuevo baseline)
         if has_drift:
-            logger.info("🔄 Drift detectado - guardando modelo como nuevo baseline sin comparación")
+            logger.info("Drift detectado - guardando modelo como nuevo baseline sin comparación")
             should_save_model = True
             comparison_result = "drift_update"
         elif existing_model_exists:
-            logger.info("🔍 Modelo existente detectado. Comparando rendimiento...")
+            logger.info("Modelo existente detectado. Comparando rendimiento...")
             
             # Cargar metadata del modelo anterior
             with open(metadata_path, 'r') as f:
                 existing_metadata = json.load(f)
             
-            existing_f1 = existing_metadata['test_metrics']['test_f1']
-            new_f1 = test_metrics['test_f1']
+            existing_f1 = existing_metadata['test_metrics']['f1']
+            new_f1 = test_metrics['f1']
             
-            logger.info(f"   📊 F1 Score Existente: {existing_f1:.4f}")
-            logger.info(f"   📊 F1 Score Nuevo: {new_f1:.4f}")
+            logger.info(f"F1 Score Existente: {existing_f1:.4f}")
+            logger.info(f"F1 Score Nuevo: {new_f1:.4f}")
             
             # Umbral de mejora mínima (1%)
             improvement_threshold = 0.01
             
             if new_f1 > existing_f1 + improvement_threshold:
-                logger.info(f"   ✅ Nuevo modelo ES MEJOR (mejora > {improvement_threshold:.2%})")
+                logger.info(f"Nuevo modelo ES MEJOR (mejora > {improvement_threshold:.2%})")
                 should_save_model = True
                 comparison_result = "new_model_better"
             elif new_f1 >= existing_f1 - improvement_threshold:
-                logger.info(f"   ⚖️  Nuevo modelo SIMILAR (diferencia < {improvement_threshold:.2%})")
+                logger.info(f"Nuevo modelo SIMILAR (diferencia < {improvement_threshold:.2%})")
                 should_save_model = True
                 comparison_result = "new_model_similar"
             else:
-                logger.warning(f"   ❌ Nuevo modelo PEOR (degradación > {improvement_threshold:.2%})")
-                logger.warning("   ⏭️  Manteniendo modelo existente.")
+                logger.warning(f"Nuevo modelo PEOR (degradación > {improvement_threshold:.2%})")
+                logger.warning("Manteniendo modelo existente.")
                 should_save_model = False
                 comparison_result = "keep_existing"
         
         if should_save_model:
-            logger.info("💾 Guardando modelo y metadata...")
+            logger.info("Guardando modelo y metadata...")
             
             with open(model_path, 'wb') as f:
                 pickle.dump(model, f)
@@ -639,11 +810,11 @@ def train_model(**context):
             with open(metadata_path, 'w') as f:
                 json.dump(metadata, f, indent=2)
             
-            logger.info("   ✅ Modelo y metadata guardados exitosamente")
+            logger.info("Modelo y metadata guardados exitosamente")
             
             # Si fue entrenamiento por drift, actualizar datos de referencia
             if has_drift:
-                logger.info("🔄 Actualizando datos de referencia para futuras comparaciones de drift...")
+                logger.info("Actualizando datos de referencia para futuras comparaciones de drift...")
                 reference_dir = Path("/opt/airflow/data/processed")
                 reference_path = reference_dir / "reference_data.parquet"
                 
@@ -651,10 +822,10 @@ def train_model(**context):
                 df = pd.read_parquet(processed_data_path)
                 df.to_parquet(reference_path, index=False)
                 
-                logger.info(f"   ✅ Nuevos datos de referencia guardados: {len(df)} registros")
-                logger.info("   📊 Futuras ejecuciones compararán contra estos datos")
+                logger.info(f"Nuevos datos de referencia guardados: {len(df)} registros")
+                logger.info("Futuras ejecuciones compararán contra estos datos")
         else:
-            logger.info("   ⏭️  Saltando guardado de modelo (modelo existente es superior)")
+            logger.info("Saltando guardado de modelo (modelo existente es superior)")
         
         # Logging en MLflow (solo si se guardó el modelo)
         if should_save_model:
@@ -691,9 +862,9 @@ def train_model(**context):
             feature_importance.to_csv(importance_path, index=False)
             mlflow.log_artifact(str(importance_path), artifact_path="metadata")
             
-            logger.info("✅ Resultados registrados en MLflow exitosamente")
+            logger.info("Resultados registrados en MLflow exitosamente")
         else:
-            logger.info("⏭️  Saltando registro en MLflow (modelo existente conservado)")
+            logger.info("Saltando registro en MLflow (modelo existente conservado)")
         
         # Pushear información (siempre, para tracking)
         ti.xcom_push(key='model_path', value=str(model_path))
@@ -703,7 +874,7 @@ def train_model(**context):
         ti.xcom_push(key='model_saved', value=should_save_model)
         ti.xcom_push(key='comparison_result', value=comparison_result)
     
-    logger.info("✅ Entrenamiento completado exitosamente")
+    logger.info("Entrenamiento completado exitosamente")
     
     return {
         'status': 'success',

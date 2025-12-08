@@ -1,0 +1,14 @@
+digest: e75bdf14
+name: validation_data
+profile: '{"num_rows": 1969, "num_elements": 31504}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "Y"}, {"type": "double", "name":
+  "X"}, {"type": "double", "name": "size"}, {"type": "double", "name": "num_deliver_per_week"},
+  {"type": "double", "name": "segment"}, {"type": "double", "name": "customer_type_CANAL
+  FRIO"}, {"type": "double", "name": "customer_type_MAYORISTA"}, {"type": "double",
+  "name": "customer_type_MINIMARKET"}, {"type": "double", "name": "customer_type_RESTAURANT"},
+  {"type": "double", "name": "customer_type_SUPERMERCADO"}, {"type": "double", "name":
+  "customer_type_TIENDA DE CONVENIENCIA"}, {"type": "double", "name": "sub_category_GASEOSAS"},
+  {"type": "double", "name": "package_KEG"}, {"type": "double", "name": "package_LATA"},
+  {"type": "double", "name": "brand_num"}, {"type": "long", "name": "compra_semanal"}]}'
+source: '{"uri": "/opt/airflow/datasets/X_val.parquet"}'
+source_type: local

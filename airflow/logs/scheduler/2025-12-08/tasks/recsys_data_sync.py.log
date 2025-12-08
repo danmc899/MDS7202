@@ -1,0 +1,120 @@
+[2025-12-08T15:25:02.665+0000] {processor.py:157} INFO - Started process (PID=166) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:25:02.666+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:25:02.666+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:02.666+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:25:03.162+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:25:03.175+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.513 seconds
+[2025-12-08T15:25:34.123+0000] {processor.py:157} INFO - Started process (PID=226) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:25:34.124+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:25:34.125+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:34.125+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:25:34.289+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:25:34.300+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.179 seconds
+[2025-12-08T15:26:04.389+0000] {processor.py:157} INFO - Started process (PID=300) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:26:04.390+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:26:04.391+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:04.391+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:26:04.605+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:26:04.619+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.233 seconds
+[2025-12-08T15:26:35.497+0000] {processor.py:157} INFO - Started process (PID=359) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:26:35.498+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:26:35.498+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:35.498+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:26:35.665+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:26:35.676+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.182 seconds
+[2025-12-08T15:27:06.594+0000] {processor.py:157} INFO - Started process (PID=418) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:27:06.601+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:27:06.601+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:06.601+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:27:06.774+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:27:06.784+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.194 seconds
+[2025-12-08T15:27:37.675+0000] {processor.py:157} INFO - Started process (PID=477) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:27:37.676+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:27:37.677+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:37.677+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:27:37.858+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:27:37.870+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.197 seconds
+[2025-12-08T15:28:08.468+0000] {processor.py:157} INFO - Started process (PID=536) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:28:08.469+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:28:08.469+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:08.469+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:28:08.690+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:28:08.701+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.236 seconds
+[2025-12-08T15:28:39.610+0000] {processor.py:157} INFO - Started process (PID=596) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:28:39.612+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:28:39.612+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:39.612+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:28:39.803+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:28:39.814+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.206 seconds
+[2025-12-08T15:29:09.988+0000] {processor.py:157} INFO - Started process (PID=655) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:29:09.989+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:29:09.989+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:09.989+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:29:10.177+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:29:10.187+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.203 seconds
+[2025-12-08T15:29:41.099+0000] {processor.py:157} INFO - Started process (PID=714) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:29:41.100+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:29:41.101+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:41.100+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:29:41.295+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:29:41.308+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.213 seconds
+[2025-12-08T15:30:12.199+0000] {processor.py:157} INFO - Started process (PID=773) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:30:12.200+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:30:12.201+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:12.200+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:30:12.364+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:30:12.374+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.178 seconds
+[2025-12-08T15:30:43.279+0000] {processor.py:157} INFO - Started process (PID=832) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:30:43.280+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:30:43.281+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:43.281+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:30:43.453+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:30:43.463+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.188 seconds
+[2025-12-08T15:31:14.355+0000] {processor.py:157} INFO - Started process (PID=891) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:31:14.356+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:31:14.357+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:14.357+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:31:14.542+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:31:14.553+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.201 seconds
+[2025-12-08T15:31:45.467+0000] {processor.py:157} INFO - Started process (PID=950) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:31:45.469+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:31:45.469+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:45.469+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:31:45.655+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:31:45.666+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.201 seconds
+[2025-12-08T15:32:16.562+0000] {processor.py:157} INFO - Started process (PID=1002) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:32:16.563+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:32:16.564+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:32:16.563+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:32:16.830+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:32:16.841+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.206 seconds
+[2025-12-08T15:32:47.346+0000] {processor.py:157} INFO - Started process (PID=1068) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:32:47.347+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:32:47.349+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:32:47.348+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:32:47.546+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:32:47.557+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.214 seconds
+[2025-12-08T15:33:18.454+0000] {processor.py:157} INFO - Started process (PID=1127) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:33:18.455+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:33:18.456+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:18.456+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:33:18.638+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:33:18.649+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.198 seconds
+[2025-12-08T15:33:49.564+0000] {processor.py:157} INFO - Started process (PID=1179) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:33:49.565+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:33:49.565+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:49.565+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:33:49.754+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:33:49.768+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.207 seconds
+[2025-12-08T15:34:19.874+0000] {processor.py:157} INFO - Started process (PID=1238) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:34:19.875+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:34:19.875+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:19.875+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:34:20.085+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:34:20.097+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.228 seconds
+[2025-12-08T15:34:50.278+0000] {processor.py:157} INFO - Started process (PID=1297) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:34:50.280+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:34:50.280+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:50.280+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:34:50.476+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:34:50.488+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.213 seconds
+[2025-12-08T15:35:21.171+0000] {processor.py:157} INFO - Started process (PID=1356) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:35:21.188+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:35:21.188+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:21.188+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:35:21.348+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:35:21.358+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.190 seconds
+[2025-12-08T15:35:51.531+0000] {processor.py:157} INFO - Started process (PID=1415) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:35:51.532+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:35:51.532+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:51.532+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:35:51.717+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:35:51.730+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.201 seconds
+[2025-12-08T15:36:22.434+0000] {processor.py:157} INFO - Started process (PID=1474) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:36:22.435+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:36:22.435+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:22.435+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:36:22.607+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:36:22.618+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.187 seconds
+[2025-12-08T15:36:53.109+0000] {processor.py:157} INFO - Started process (PID=1533) to work on /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:36:53.110+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/tasks/recsys_data_sync.py for tasks to queue
+[2025-12-08T15:36:53.110+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:53.110+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:36:53.285+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/tasks/recsys_data_sync.py
+[2025-12-08T15:36:53.297+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/tasks/recsys_data_sync.py took 0.192 seconds

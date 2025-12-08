@@ -1,0 +1,22 @@
+{
+  "hyperparameters": [
+    "colsample_bytree",
+    "n_estimators",
+    "max_depth",
+    "subsample",
+    "min_child_weight",
+    "gamma",
+    "learning_rate"
+  ],
+  "importances": [
+    0.34960209092412015,
+    0.27675223874712773,
+    0.08975280387414249,
+    0.08856329861858747,
+    0.08247008992812145,
+    0.06980964516363279,
+    0.043049832744267935
+  ],
+  "best_f1_score": 0.7899388171312032,
+  "n_trials": 46
+}

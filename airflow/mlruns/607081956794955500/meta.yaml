@@ -1,0 +1,6 @@
+artifact_location: file:///opt/airflow/mlruns/607081956794955500
+creation_time: 1764904765950
+experiment_id: '607081956794955500'
+last_update_time: 1764904765950
+lifecycle_stage: active
+name: sodai_drinks_xgboost

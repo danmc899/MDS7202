@@ -1,0 +1,39 @@
+[2025-12-07T03:04:24.240+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data manual__2025-12-07T03:04:22+00:00 [queued]>
+[2025-12-07T03:04:24.245+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data manual__2025-12-07T03:04:22+00:00 [queued]>
+[2025-12-07T03:04:24.245+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-07T03:04:24.253+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_data> on 2025-12-07 03:04:22+00:00
+[2025-12-07T03:04:24.263+0000] {standard_task_runner.py:57} INFO - Started process 301 to run task
+[2025-12-07T03:04:24.267+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'extract_data', 'manual__2025-12-07T03:04:22+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpj0k_ynx_']
+[2025-12-07T03:04:24.270+0000] {standard_task_runner.py:85} INFO - Job 39: Subtask extract_data
+[2025-12-07T03:04:24.306+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.extract_data manual__2025-12-07T03:04:22+00:00 [running]> on host d63631a18ada
+[2025-12-07T03:04:24.364+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2025-12-07T03:04:22+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-07T03:04:22+00:00'
+[2025-12-07T03:04:24.365+0000] {data_extraction.py:89} INFO - ============================================================
+[2025-12-07T03:04:24.365+0000] {data_extraction.py:90} INFO - 📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar
+[2025-12-07T03:04:24.365+0000] {data_extraction.py:91} INFO - ============================================================
+[2025-12-07T03:04:24.366+0000] {data_extraction.py:111} INFO - 📅 Batches disponibles: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03', '2025-W04']
+[2025-12-07T03:04:24.366+0000] {data_extraction.py:115} INFO - ✅ Ya procesados: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03']
+[2025-12-07T03:04:24.387+0000] {data_extraction.py:133} INFO - 📦 Procesando batch: 2025-W04 (batch_2025-W04.parquet)
+[2025-12-07T03:04:24.387+0000] {data_extraction.py:150} INFO - 🟢 MODO: Evaluación de drift + Predicción (best_model.pkl existe)
+[2025-12-07T03:04:24.387+0000] {data_extraction.py:155} INFO -    📖 Leyendo: batch_2025-W04.parquet
+[2025-12-07T03:04:24.488+0000] {data_extraction.py:170} INFO - 📊 Datos del batch 2025-W04:
+[2025-12-07T03:04:24.489+0000] {data_extraction.py:171} INFO -    Rango fechas: 2025-01-20 → 2025-01-26
+[2025-12-07T03:04:24.489+0000] {data_extraction.py:172} INFO -    Transacciones: 6,190
+[2025-12-07T03:04:24.489+0000] {data_extraction.py:173} INFO -    Clientes únicos: 1,032
+[2025-12-07T03:04:24.489+0000] {data_extraction.py:174} INFO -    Productos únicos: 58
+[2025-12-07T03:04:24.489+0000] {data_extraction.py:175} INFO -    Pares cliente-producto: 4,866
+[2025-12-07T03:04:24.493+0000] {data_extraction.py:183} INFO -    💾 Guardado: current_batch_2025-W04_predict.parquet
+[2025-12-07T03:04:24.493+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tasks/data_extraction.py", line 192, in extract_data
+    mark_week_processed(base_dir, week_id)
+  File "/opt/airflow/dags/tasks/data_extraction.py", line 69, in mark_week_processed
+    with open(processed_file, 'a') as f:
+PermissionError: [Errno 13] Permission denied: '/opt/airflow/data/processed_weeks.txt'
+[2025-12-07T03:04:24.501+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=sodai_drinks_production_pipeline, task_id=extract_data, execution_date=20251207T030422, start_date=20251207T030424, end_date=20251207T030424
+[2025-12-07T03:04:24.509+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 39 for task extract_data ([Errno 13] Permission denied: '/opt/airflow/data/processed_weeks.txt'; 301)
+[2025-12-07T03:04:24.562+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-12-07T03:04:24.580+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

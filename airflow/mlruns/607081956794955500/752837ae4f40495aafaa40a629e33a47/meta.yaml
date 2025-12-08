@@ -1,0 +1,15 @@
+artifact_uri: file:///opt/airflow/mlruns/607081956794955500/752837ae4f40495aafaa40a629e33a47/artifacts
+end_time: 1764905446510
+entry_point_name: ''
+experiment_id: '607081956794955500'
+lifecycle_stage: active
+run_id: 752837ae4f40495aafaa40a629e33a47
+run_name: drift_evaluation_2025-W03_predict_20251205_033017
+run_uuid: 752837ae4f40495aafaa40a629e33a47
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764905417244
+status: 3
+tags: []
+user_id: airflow
