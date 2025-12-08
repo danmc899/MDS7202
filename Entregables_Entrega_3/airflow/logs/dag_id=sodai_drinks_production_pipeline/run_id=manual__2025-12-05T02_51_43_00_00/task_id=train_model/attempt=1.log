@@ -1,0 +1,188 @@
+[2025-12-05T02:52:45.679+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-12-05T02:51:43+00:00 [queued]>
+[2025-12-05T02:52:45.685+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-12-05T02:51:43+00:00 [queued]>
+[2025-12-05T02:52:45.686+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:52:45.695+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_model> on 2025-12-05 02:51:43+00:00
+[2025-12-05T02:52:45.705+0000] {standard_task_runner.py:57} INFO - Started process 694 to run task
+[2025-12-05T02:52:45.709+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'train_model', 'manual__2025-12-05T02:51:43+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpbp3vowi4']
+[2025-12-05T02:52:45.712+0000] {standard_task_runner.py:85} INFO - Job 11: Subtask train_model
+[2025-12-05T02:52:45.750+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-12-05T02:51:43+00:00 [running]> on host 77cc39016fd2
+[2025-12-05T02:52:45.811+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-12-05T02:51:43+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-05T02:51:43+00:00'
+[2025-12-05T02:52:45.813+0000] {model_training.py:373} INFO - 🚀 Iniciando entrenamiento del modelo XGBoost...
+[2025-12-05T02:52:46.149+0000] {model_training.py:395} INFO - 📊 Dataset cargado:
+[2025-12-05T02:52:46.150+0000] {model_training.py:396} INFO -    - Features: 15
+[2025-12-05T02:52:46.150+0000] {model_training.py:397} INFO -    - Registros: 13920
+[2025-12-05T02:52:46.150+0000] {model_training.py:398} INFO -    - Distribución de clases - Clase 0: 6960, Clase 1: 6960
+[2025-12-05T02:52:46.160+0000] {model_training.py:408} INFO - 📂 Splits creados:
+[2025-12-05T02:52:46.161+0000] {model_training.py:409} INFO -    - Train: 8352 muestras
+[2025-12-05T02:52:46.161+0000] {model_training.py:410} INFO -    - Validation: 2784 muestras
+[2025-12-05T02:52:46.161+0000] {model_training.py:411} INFO -    - Test: 2784 muestras
+[2025-12-05T02:52:46.183+0000] {model_training.py:426} INFO - 📊 MLflow Run: initial_training_2024-W51_train_20251205_025246
+[2025-12-05T02:52:46.214+0000] {logging_mixin.py:154} WARNING - 2025/12/05 02:52:46 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-12-05T02:52:46.226+0000] {model_training.py:435} INFO - 📊 Registrando datasets en MLflow...
+[2025-12-05T02:52:46.264+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/mlflow/data/dataset_source_registry.py:143 UserWarning: The specified dataset source can be interpreted in multiple ways: LocalArtifactDatasetSource, LocalArtifactDatasetSource. MLflow will assume that this is a LocalArtifactDatasetSource source.
+[2025-12-05T02:52:46.281+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/mlflow/data/pandas_dataset.py:134 UserWarning: Hint: Inferred schema contains integer column(s). Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset) that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values. See `Handling Integers With Missing Values <https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values>`_ for more details.
+[2025-12-05T02:52:46.284+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/mlflow/data/dataset_source_registry.py:143 UserWarning: The specified dataset source can be interpreted in multiple ways: LocalArtifactDatasetSource, LocalArtifactDatasetSource. MLflow will assume that this is a LocalArtifactDatasetSource source.
+[2025-12-05T02:52:46.292+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/mlflow/data/pandas_dataset.py:134 UserWarning: Hint: Inferred schema contains integer column(s). Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset) that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values. See `Handling Integers With Missing Values <https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values>`_ for more details.
+[2025-12-05T02:52:46.295+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/mlflow/data/dataset_source_registry.py:143 UserWarning: The specified dataset source can be interpreted in multiple ways: LocalArtifactDatasetSource, LocalArtifactDatasetSource. MLflow will assume that this is a LocalArtifactDatasetSource source.
+[2025-12-05T02:52:46.305+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/mlflow/data/pandas_dataset.py:134 UserWarning: Hint: Inferred schema contains integer column(s). Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset) that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values. See `Handling Integers With Missing Values <https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values>`_ for more details.
+[2025-12-05T02:52:46.307+0000] {model_training.py:489} INFO - ✅ Datasets registrados en MLflow
+[2025-12-05T02:52:46.307+0000] {model_training.py:69} INFO - 🔍 Iniciando optimización de hiperparámetros (timeout: 60s = 1 min)...
+[2025-12-05T02:52:46.309+0000] {logging_mixin.py:154} WARNING -   0%|          | 0/50 [00:00<?, ?it/s]
+[2025-12-05T02:53:17.715+0000] {logging_mixin.py:154} WARNING -                                       
+[2025-12-05T02:53:17.715+0000] {logging_mixin.py:154} WARNING - 
+[2025-12-05T02:53:17.715+0000] {logging_mixin.py:154} INFO - [I 2025-12-05 02:53:17,715] Trial 0 finished with value: 0.7809589513625388 and parameters: {'max_depth': 7, 'learning_rate': 0.2536999076681772, 'subsample': 0.8659969709057025, 'colsample_bytree': 0.7993292420985183, 'min_child_weight': 2, 'gamma': 0.7799726016810132, 'n_estimators': 76}. Best is trial 0 with value: 0.7809589513625388.
+[2025-12-05T02:53:17.715+0000] {logging_mixin.py:154} WARNING -   0%|          | 0/50 [00:31<?, ?it/s]
+[2025-12-05T02:53:17.716+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   0%|          | 0/50 [00:31<?, ?it/s]
+[2025-12-05T02:53:17.716+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   2%|2         | 1/50 [00:31<25:38, 31.41s/it]
+[2025-12-05T02:53:17.716+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   2%|2         | 1/50 [00:31<25:38, 31.41s/it, 31.41/60 seconds]
+[2025-12-05T02:53:52.626+0000] {logging_mixin.py:154} WARNING -                                                                                                      
+[2025-12-05T02:53:52.626+0000] {logging_mixin.py:154} WARNING - 
+[2025-12-05T02:53:52.626+0000] {logging_mixin.py:154} INFO - [I 2025-12-05 02:53:52,626] Trial 1 finished with value: 0.7793008910212474 and parameters: {'max_depth': 14, 'learning_rate': 0.07725378389307355, 'subsample': 0.8540362888980227, 'colsample_bytree': 0.5102922471479012, 'min_child_weight': 10, 'gamma': 4.162213204002109, 'n_estimators': 145}. Best is trial 0 with value: 0.7809589513625388.
+[2025-12-05T02:53:52.626+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   2%|2         | 1/50 [01:06<25:38, 31.41s/it, 31.41/60 seconds]
+[2025-12-05T02:53:52.627+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   2%|2         | 1/50 [01:06<25:38, 31.41s/it, 31.41/60 seconds]
+[2025-12-05T02:53:52.627+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   4%|4         | 2/50 [01:06<26:46, 33.47s/it, 31.41/60 seconds]
+[2025-12-05T02:53:52.627+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   4%|4         | 2/50 [01:06<26:46, 33.47s/it, 66.32/60 seconds]
+[2025-12-05T02:53:52.627+0000] {logging_mixin.py:154} WARNING - Best trial: 0. Best value: 0.780959:   4%|4         | 2/50 [01:06<26:31, 33.16s/it, 66.32/60 seconds]
+[2025-12-05T02:53:52.627+0000] {model_training.py:121} INFO - ✅ Optimización completada: 2 trials en 60s
+[2025-12-05T02:53:52.628+0000] {model_training.py:122} INFO - ✅ Mejor F1-Score (validación): 0.7810
+[2025-12-05T02:53:52.628+0000] {model_training.py:123} INFO - 📊 Mejores hiperparámetros encontrados:
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - max_depth: 7
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - learning_rate: 0.2536999076681772
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - subsample: 0.8659969709057025
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - colsample_bytree: 0.7993292420985183
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - min_child_weight: 2
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - gamma: 0.7799726016810132
+[2025-12-05T02:53:52.628+0000] {model_training.py:125} INFO -    - n_estimators: 76
+[2025-12-05T02:53:52.628+0000] {model_training.py:142} INFO - 📊 Generando gráficos de optimización de Optuna...
+[2025-12-05T02:53:52.949+0000] {model_training.py:179} INFO -    ✓ Gráfico de importancia guardado: /opt/***/diagrams/hyperparameter_importance.png
+[2025-12-05T02:53:53.237+0000] {model_training.py:239} INFO -    ✓ Gráfico de optimization history guardado: /opt/***/diagrams/optimization_history.png
+[2025-12-05T02:53:53.237+0000] {model_training.py:253} INFO - ✅ Gráficos de Optuna generados exitosamente
+[2025-12-05T02:53:53.240+0000] {model_training.py:506} INFO - 🎯 Entrenando modelo final con mejores hiperparámetros...
+[2025-12-05T02:53:54.453+0000] {logging_mixin.py:154} INFO - [0]	validation_0-logloss:0.64392	validation_1-logloss:0.64425	validation_2-logloss:0.64062
+[2025-12-05T02:53:54.954+0000] {logging_mixin.py:154} INFO - [1]	validation_0-logloss:0.59041	validation_1-logloss:0.59430	validation_2-logloss:0.58728
+[2025-12-05T02:53:55.352+0000] {logging_mixin.py:154} INFO - [2]	validation_0-logloss:0.57690	validation_1-logloss:0.58389	validation_2-logloss:0.57483
+[2025-12-05T02:53:55.811+0000] {logging_mixin.py:154} INFO - [3]	validation_0-logloss:0.55490	validation_1-logloss:0.56656	validation_2-logloss:0.55540
+[2025-12-05T02:53:56.411+0000] {logging_mixin.py:154} INFO - [4]	validation_0-logloss:0.54047	validation_1-logloss:0.55666	validation_2-logloss:0.54270
+[2025-12-05T02:53:57.116+0000] {logging_mixin.py:154} INFO - [5]	validation_0-logloss:0.53172	validation_1-logloss:0.54934	validation_2-logloss:0.53412
+[2025-12-05T02:53:57.645+0000] {logging_mixin.py:154} INFO - [6]	validation_0-logloss:0.51463	validation_1-logloss:0.53459	validation_2-logloss:0.52206
+[2025-12-05T02:53:58.126+0000] {logging_mixin.py:154} INFO - [7]	validation_0-logloss:0.50025	validation_1-logloss:0.52191	validation_2-logloss:0.50792
+[2025-12-05T02:53:58.837+0000] {logging_mixin.py:154} INFO - [8]	validation_0-logloss:0.49129	validation_1-logloss:0.51461	validation_2-logloss:0.49968
+[2025-12-05T02:53:59.644+0000] {logging_mixin.py:154} INFO - [9]	validation_0-logloss:0.47731	validation_1-logloss:0.50513	validation_2-logloss:0.48845
+[2025-12-05T02:54:00.184+0000] {logging_mixin.py:154} INFO - [10]	validation_0-logloss:0.47274	validation_1-logloss:0.50204	validation_2-logloss:0.48481
+[2025-12-05T02:54:00.912+0000] {logging_mixin.py:154} INFO - [11]	validation_0-logloss:0.46805	validation_1-logloss:0.50003	validation_2-logloss:0.48185
+[2025-12-05T02:54:01.608+0000] {logging_mixin.py:154} INFO - [12]	validation_0-logloss:0.46288	validation_1-logloss:0.49621	validation_2-logloss:0.47753
+[2025-12-05T02:54:02.081+0000] {logging_mixin.py:154} INFO - [13]	validation_0-logloss:0.46044	validation_1-logloss:0.49427	validation_2-logloss:0.47577
+[2025-12-05T02:54:02.660+0000] {logging_mixin.py:154} INFO - [14]	validation_0-logloss:0.45313	validation_1-logloss:0.49241	validation_2-logloss:0.47431
+[2025-12-05T02:54:03.279+0000] {logging_mixin.py:154} INFO - [15]	validation_0-logloss:0.44825	validation_1-logloss:0.48930	validation_2-logloss:0.47215
+[2025-12-05T02:54:03.766+0000] {logging_mixin.py:154} INFO - [16]	validation_0-logloss:0.44266	validation_1-logloss:0.48854	validation_2-logloss:0.47205
+[2025-12-05T02:54:04.271+0000] {logging_mixin.py:154} INFO - [17]	validation_0-logloss:0.43933	validation_1-logloss:0.48707	validation_2-logloss:0.46942
+[2025-12-05T02:54:04.758+0000] {logging_mixin.py:154} INFO - [18]	validation_0-logloss:0.43576	validation_1-logloss:0.48553	validation_2-logloss:0.46812
+[2025-12-05T02:54:05.501+0000] {logging_mixin.py:154} INFO - [19]	validation_0-logloss:0.43307	validation_1-logloss:0.48409	validation_2-logloss:0.46691
+[2025-12-05T02:54:06.077+0000] {logging_mixin.py:154} INFO - [20]	validation_0-logloss:0.43009	validation_1-logloss:0.48193	validation_2-logloss:0.46686
+[2025-12-05T02:54:06.740+0000] {logging_mixin.py:154} INFO - [21]	validation_0-logloss:0.42602	validation_1-logloss:0.48033	validation_2-logloss:0.46596
+[2025-12-05T02:54:07.248+0000] {logging_mixin.py:154} INFO - [22]	validation_0-logloss:0.42477	validation_1-logloss:0.47961	validation_2-logloss:0.46558
+[2025-12-05T02:54:07.769+0000] {logging_mixin.py:154} INFO - [23]	validation_0-logloss:0.42200	validation_1-logloss:0.47872	validation_2-logloss:0.46395
+[2025-12-05T02:54:08.217+0000] {logging_mixin.py:154} INFO - [24]	validation_0-logloss:0.41959	validation_1-logloss:0.47898	validation_2-logloss:0.46343
+[2025-12-05T02:54:08.717+0000] {logging_mixin.py:154} INFO - [25]	validation_0-logloss:0.41825	validation_1-logloss:0.47857	validation_2-logloss:0.46297
+[2025-12-05T02:54:08.972+0000] {logging_mixin.py:154} INFO - [26]	validation_0-logloss:0.41820	validation_1-logloss:0.47858	validation_2-logloss:0.46288
+[2025-12-05T02:54:09.435+0000] {logging_mixin.py:154} INFO - [27]	validation_0-logloss:0.41444	validation_1-logloss:0.47697	validation_2-logloss:0.46316
+[2025-12-05T02:54:09.955+0000] {logging_mixin.py:154} INFO - [28]	validation_0-logloss:0.41267	validation_1-logloss:0.47627	validation_2-logloss:0.46258
+[2025-12-05T02:54:10.419+0000] {logging_mixin.py:154} INFO - [29]	validation_0-logloss:0.41236	validation_1-logloss:0.47648	validation_2-logloss:0.46273
+[2025-12-05T02:54:11.016+0000] {logging_mixin.py:154} INFO - [30]	validation_0-logloss:0.40967	validation_1-logloss:0.47571	validation_2-logloss:0.46275
+[2025-12-05T02:54:11.558+0000] {logging_mixin.py:154} INFO - [31]	validation_0-logloss:0.40729	validation_1-logloss:0.47540	validation_2-logloss:0.46250
+[2025-12-05T02:54:12.044+0000] {logging_mixin.py:154} INFO - [32]	validation_0-logloss:0.40272	validation_1-logloss:0.47416	validation_2-logloss:0.46213
+[2025-12-05T02:54:12.963+0000] {logging_mixin.py:154} INFO - [33]	validation_0-logloss:0.39962	validation_1-logloss:0.47396	validation_2-logloss:0.46199
+[2025-12-05T02:54:13.195+0000] {logging_mixin.py:154} INFO - [34]	validation_0-logloss:0.39962	validation_1-logloss:0.47397	validation_2-logloss:0.46200
+[2025-12-05T02:54:13.770+0000] {logging_mixin.py:154} INFO - [35]	validation_0-logloss:0.39732	validation_1-logloss:0.47445	validation_2-logloss:0.46209
+[2025-12-05T02:54:14.195+0000] {logging_mixin.py:154} INFO - [36]	validation_0-logloss:0.39661	validation_1-logloss:0.47464	validation_2-logloss:0.46160
+[2025-12-05T02:54:14.692+0000] {logging_mixin.py:154} INFO - [37]	validation_0-logloss:0.39476	validation_1-logloss:0.47426	validation_2-logloss:0.46080
+[2025-12-05T02:54:15.182+0000] {logging_mixin.py:154} INFO - [38]	validation_0-logloss:0.39232	validation_1-logloss:0.47330	validation_2-logloss:0.46009
+[2025-12-05T02:54:15.705+0000] {logging_mixin.py:154} INFO - [39]	validation_0-logloss:0.39026	validation_1-logloss:0.47370	validation_2-logloss:0.46063
+[2025-12-05T02:54:16.281+0000] {logging_mixin.py:154} INFO - [40]	validation_0-logloss:0.38926	validation_1-logloss:0.47392	validation_2-logloss:0.46069
+[2025-12-05T02:54:16.428+0000] {logging_mixin.py:154} INFO - [41]	validation_0-logloss:0.38925	validation_1-logloss:0.47393	validation_2-logloss:0.46071
+[2025-12-05T02:54:17.092+0000] {logging_mixin.py:154} INFO - [42]	validation_0-logloss:0.38710	validation_1-logloss:0.47344	validation_2-logloss:0.46015
+[2025-12-05T02:54:17.948+0000] {logging_mixin.py:154} INFO - [43]	validation_0-logloss:0.38496	validation_1-logloss:0.47405	validation_2-logloss:0.46045
+[2025-12-05T02:54:18.097+0000] {logging_mixin.py:154} INFO - [44]	validation_0-logloss:0.38496	validation_1-logloss:0.47403	validation_2-logloss:0.46043
+[2025-12-05T02:54:18.563+0000] {logging_mixin.py:154} INFO - [45]	validation_0-logloss:0.38412	validation_1-logloss:0.47360	validation_2-logloss:0.46093
+[2025-12-05T02:54:19.118+0000] {logging_mixin.py:154} INFO - [46]	validation_0-logloss:0.38197	validation_1-logloss:0.47355	validation_2-logloss:0.46046
+[2025-12-05T02:54:19.289+0000] {logging_mixin.py:154} INFO - [47]	validation_0-logloss:0.38197	validation_1-logloss:0.47355	validation_2-logloss:0.46046
+[2025-12-05T02:54:19.833+0000] {logging_mixin.py:154} INFO - [48]	validation_0-logloss:0.38096	validation_1-logloss:0.47344	validation_2-logloss:0.46027
+[2025-12-05T02:54:20.332+0000] {logging_mixin.py:154} INFO - [49]	validation_0-logloss:0.37837	validation_1-logloss:0.47354	validation_2-logloss:0.46145
+[2025-12-05T02:54:18.494+0000] {logging_mixin.py:154} INFO - [50]	validation_0-logloss:0.37811	validation_1-logloss:0.47338	validation_2-logloss:0.46119
+[2025-12-05T02:54:18.732+0000] {logging_mixin.py:154} INFO - [51]	validation_0-logloss:0.37806	validation_1-logloss:0.47340	validation_2-logloss:0.46113
+[2025-12-05T02:54:19.319+0000] {logging_mixin.py:154} INFO - [52]	validation_0-logloss:0.37617	validation_1-logloss:0.47385	validation_2-logloss:0.46095
+[2025-12-05T02:54:19.987+0000] {logging_mixin.py:154} INFO - [53]	validation_0-logloss:0.37568	validation_1-logloss:0.47433	validation_2-logloss:0.46076
+[2025-12-05T02:54:20.696+0000] {logging_mixin.py:154} INFO - [54]	validation_0-logloss:0.37464	validation_1-logloss:0.47456	validation_2-logloss:0.46068
+[2025-12-05T02:54:21.628+0000] {logging_mixin.py:154} INFO - [55]	validation_0-logloss:0.37370	validation_1-logloss:0.47405	validation_2-logloss:0.46094
+[2025-12-05T02:54:21.782+0000] {logging_mixin.py:154} INFO - [56]	validation_0-logloss:0.37370	validation_1-logloss:0.47405	validation_2-logloss:0.46095
+[2025-12-05T02:54:22.285+0000] {logging_mixin.py:154} INFO - [57]	validation_0-logloss:0.37268	validation_1-logloss:0.47422	validation_2-logloss:0.46098
+[2025-12-05T02:54:22.408+0000] {logging_mixin.py:154} INFO - [58]	validation_0-logloss:0.37269	validation_1-logloss:0.47422	validation_2-logloss:0.46097
+[2025-12-05T02:54:22.537+0000] {logging_mixin.py:154} INFO - [59]	validation_0-logloss:0.37268	validation_1-logloss:0.47424	validation_2-logloss:0.46100
+[2025-12-05T02:54:23.076+0000] {logging_mixin.py:154} INFO - [60]	validation_0-logloss:0.37144	validation_1-logloss:0.47434	validation_2-logloss:0.46006
+[2025-12-05T02:54:23.710+0000] {logging_mixin.py:154} INFO - [61]	validation_0-logloss:0.37091	validation_1-logloss:0.47435	validation_2-logloss:0.45995
+[2025-12-05T02:54:24.407+0000] {logging_mixin.py:154} INFO - [62]	validation_0-logloss:0.36931	validation_1-logloss:0.47415	validation_2-logloss:0.46039
+[2025-12-05T02:54:25.204+0000] {logging_mixin.py:154} INFO - [63]	validation_0-logloss:0.36873	validation_1-logloss:0.47407	validation_2-logloss:0.46000
+[2025-12-05T02:54:25.409+0000] {logging_mixin.py:154} INFO - [64]	validation_0-logloss:0.36873	validation_1-logloss:0.47410	validation_2-logloss:0.46004
+[2025-12-05T02:54:25.580+0000] {logging_mixin.py:154} INFO - [65]	validation_0-logloss:0.36873	validation_1-logloss:0.47412	validation_2-logloss:0.46007
+[2025-12-05T02:54:26.086+0000] {logging_mixin.py:154} INFO - [66]	validation_0-logloss:0.36683	validation_1-logloss:0.47415	validation_2-logloss:0.46023
+[2025-12-05T02:54:26.634+0000] {logging_mixin.py:154} INFO - [67]	validation_0-logloss:0.36600	validation_1-logloss:0.47364	validation_2-logloss:0.45978
+[2025-12-05T02:54:27.269+0000] {logging_mixin.py:154} INFO - [68]	validation_0-logloss:0.36552	validation_1-logloss:0.47385	validation_2-logloss:0.45983
+[2025-12-05T02:54:27.895+0000] {logging_mixin.py:154} INFO - [69]	validation_0-logloss:0.36458	validation_1-logloss:0.47416	validation_2-logloss:0.45945
+[2025-12-05T02:54:28.482+0000] {logging_mixin.py:154} INFO - [70]	validation_0-logloss:0.36370	validation_1-logloss:0.47437	validation_2-logloss:0.45950
+[2025-12-05T02:54:28.768+0000] {logging_mixin.py:154} INFO - [71]	validation_0-logloss:0.36370	validation_1-logloss:0.47437	validation_2-logloss:0.45950
+[2025-12-05T02:54:29.064+0000] {logging_mixin.py:154} INFO - [72]	validation_0-logloss:0.36370	validation_1-logloss:0.47437	validation_2-logloss:0.45950
+[2025-12-05T02:54:29.241+0000] {logging_mixin.py:154} INFO - [73]	validation_0-logloss:0.36370	validation_1-logloss:0.47435	validation_2-logloss:0.45947
+[2025-12-05T02:54:29.708+0000] {logging_mixin.py:154} INFO - [74]	validation_0-logloss:0.36283	validation_1-logloss:0.47441	validation_2-logloss:0.45947
+[2025-12-05T02:54:30.223+0000] {logging_mixin.py:154} INFO - [75]	validation_0-logloss:0.36130	validation_1-logloss:0.47506	validation_2-logloss:0.45912
+[2025-12-05T02:54:30.247+0000] {model_training.py:516} INFO - 📊 Evaluando modelo en conjunto de TEST...
+[2025-12-05T02:54:30.283+0000] {model_training.py:529} INFO - 🎯 Métricas de TEST:
+[2025-12-05T02:54:30.284+0000] {model_training.py:530} INFO -    - Accuracy: 0.7920
+[2025-12-05T02:54:30.284+0000] {model_training.py:531} INFO -    - Precision: 0.7737
+[2025-12-05T02:54:30.284+0000] {model_training.py:532} INFO -    - Recall: 0.8254
+[2025-12-05T02:54:30.284+0000] {model_training.py:533} INFO -    - F1-Score: 0.7987
+[2025-12-05T02:54:30.284+0000] {model_training.py:534} INFO -    - ROC-AUC: 0.8594
+[2025-12-05T02:54:30.285+0000] {model_training.py:276} INFO - 📈 Generando gráficos de interpretabilidad con SHAP...
+[2025-12-05T02:54:30.286+0000] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.10/site-packages/xgboost/core.py:160 UserWarning: [02:54:30] WARNING: /workspace/src/c_api/c_api.cc:1240: Saving into deprecated binary model format, please consider using `json` or `ubj`. Model format will default to JSON in XGBoost 2.2 if not specified.
+[2025-12-05T02:54:30.754+0000] {model_training.py:301} INFO -    ✓ Summary plot guardado: /opt/***/diagrams/shap_summary.png
+[2025-12-05T02:54:30.970+0000] {model_training.py:312} INFO -    ✓ Feature importance plot guardado: /opt/***/diagrams/shap_feature_importance.png
+[2025-12-05T02:54:31.490+0000] {model_training.py:328} INFO -    ✓ Waterfall plot guardado: /opt/***/diagrams/shap_waterfall.png
+[2025-12-05T02:54:31.491+0000] {model_training.py:330} INFO - ✅ Gráficos SHAP generados exitosamente
+[2025-12-05T02:54:31.588+0000] {model_training.py:359} INFO -    ✓ Confusion matrix guardada: /opt/***/diagrams/confusion_matrix.png
+[2025-12-05T02:54:31.588+0000] {model_training.py:548} INFO - 📦 Registrando artifacts en MLflow...
+[2025-12-05T02:54:31.592+0000] {model_training.py:553} INFO -    ✅ shap_summary.png registrado
+[2025-12-05T02:54:31.592+0000] {model_training.py:553} INFO -    ✅ shap_feature_importance.png registrado
+[2025-12-05T02:54:31.593+0000] {model_training.py:553} INFO -    ✅ shap_waterfall.png registrado
+[2025-12-05T02:54:31.594+0000] {model_training.py:559} INFO -    ✅ Confusion matrix registrada
+[2025-12-05T02:54:31.594+0000] {model_training.py:567} INFO -    ✅ hyperparameter_importance.png registrado
+[2025-12-05T02:54:31.595+0000] {model_training.py:567} INFO -    ✅ hyperparameter_importance.json registrado
+[2025-12-05T02:54:31.595+0000] {model_training.py:567} INFO -    ✅ optimization_history.png registrado
+[2025-12-05T02:54:31.595+0000] {model_training.py:567} INFO -    ✅ optimization_history.json registrado
+[2025-12-05T02:54:31.603+0000] {model_training.py:590} INFO - 🔍 Modelo existente detectado. Comparando rendimiento...
+[2025-12-05T02:54:31.604+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tasks/model_training.py", line 596, in train_model
+    existing_f1 = existing_metadata['test_metrics']['f1']
+KeyError: 'f1'
+[2025-12-05T02:54:31.611+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=sodai_drinks_production_pipeline, task_id=train_model, execution_date=20251205T025143, start_date=20251205T025245, end_date=20251205T025431
+[2025-12-05T02:54:31.620+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 11 for task train_model ('f1'; 694)
+[2025-12-05T02:54:31.688+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-12-05T02:54:31.705+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

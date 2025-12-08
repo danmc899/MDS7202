@@ -1,0 +1,155 @@
+[2025-12-05T02:52:28.745+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:52:28.750+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:52:28.750+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:52:28.757+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T02:52:28.768+0000] {standard_task_runner.py:57} INFO - Started process 454 to run task
+[2025-12-05T02:52:28.772+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'extract_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpc0dkhyg7']
+[2025-12-05T02:52:28.775+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask extract_data
+[2025-12-05T02:52:28.811+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 77cc39016fd2
+[2025-12-05T02:52:28.878+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T02:52:28.880+0000] {data_extraction.py:89} INFO - ============================================================
+[2025-12-05T02:52:28.880+0000] {data_extraction.py:90} INFO - 📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar
+[2025-12-05T02:52:28.880+0000] {data_extraction.py:91} INFO - ============================================================
+[2025-12-05T02:52:28.880+0000] {data_extraction.py:111} INFO - 📅 Batches disponibles: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03']
+[2025-12-05T02:52:28.880+0000] {data_extraction.py:115} INFO - ✅ Ya procesados: ninguno
+[2025-12-05T02:52:28.892+0000] {data_extraction.py:133} INFO - 📦 Procesando batch: 2024-W51 (batch_2024-W51.parquet)
+[2025-12-05T02:52:28.892+0000] {data_extraction.py:143} INFO - 🔵 MODO: Entrenamiento inicial (no hay best_model.pkl)
+[2025-12-05T02:52:28.892+0000] {data_extraction.py:155} INFO -    📖 Leyendo: batch_2024-W51.parquet
+[2025-12-05T02:52:29.146+0000] {data_extraction.py:170} INFO - 📊 Datos del batch 2024-W51:
+[2025-12-05T02:52:29.147+0000] {data_extraction.py:171} INFO -    Rango fechas: 2024-12-16 → 2024-12-22
+[2025-12-05T02:52:29.147+0000] {data_extraction.py:172} INFO -    Transacciones: 10,075
+[2025-12-05T02:52:29.147+0000] {data_extraction.py:173} INFO -    Clientes únicos: 1,181
+[2025-12-05T02:52:29.147+0000] {data_extraction.py:174} INFO -    Productos únicos: 65
+[2025-12-05T02:52:29.147+0000] {data_extraction.py:175} INFO -    Pares cliente-producto: 6,960
+[2025-12-05T02:52:29.152+0000] {data_extraction.py:183} INFO -    💾 Guardado: current_batch_2024-W51_train.parquet
+[2025-12-05T02:52:29.152+0000] {data_extraction.py:193} INFO -    ✅ Marcado como procesado: 2024-W51
+[2025-12-05T02:52:29.221+0000] {data_extraction.py:206} INFO - ✅ Extracción completada - Week ID: 2024-W51_train
+[2025-12-05T02:52:29.221+0000] {data_extraction.py:207} INFO - ============================================================
+[2025-12-05T02:52:29.221+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'week_id': '2024-W51_train', 'batch_week': '2024-W51', 'transacciones_count': 10075, 'pares_count': 6960, 'clientes_count': 1181, 'productos_count': 65, 'is_first_training': True, 'fecha_inicio': '2024-12-16T00:00:00', 'fecha_fin': '2024-12-22T00:00:00', 'batches_disponibles': ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03'], 'batches_procesados': ['2024-W51']}
+[2025-12-05T02:52:29.233+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=extract_data, execution_date=20251123T000000, start_date=20251205T025228, end_date=20251205T025229
+[2025-12-05T02:52:29.269+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T02:52:29.290+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T02:58:06.966+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:58:06.973+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:58:06.973+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:58:06.981+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T02:58:06.995+0000] {standard_task_runner.py:57} INFO - Started process 331 to run task
+[2025-12-05T02:58:07.000+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'extract_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmp20epf5fz']
+[2025-12-05T02:58:07.003+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask extract_data
+[2025-12-05T02:58:07.041+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 5c90aa578e5c
+[2025-12-05T02:58:07.092+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T02:58:07.093+0000] {data_extraction.py:89} INFO - ============================================================
+[2025-12-05T02:58:07.093+0000] {data_extraction.py:90} INFO - 📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar
+[2025-12-05T02:58:07.093+0000] {data_extraction.py:91} INFO - ============================================================
+[2025-12-05T02:58:07.094+0000] {data_extraction.py:111} INFO - 📅 Batches disponibles: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03']
+[2025-12-05T02:58:07.094+0000] {data_extraction.py:115} INFO - ✅ Ya procesados: ninguno
+[2025-12-05T02:58:07.105+0000] {data_extraction.py:133} INFO - 📦 Procesando batch: 2024-W51 (batch_2024-W51.parquet)
+[2025-12-05T02:58:07.106+0000] {data_extraction.py:143} INFO - 🔵 MODO: Entrenamiento inicial (no hay best_model.pkl)
+[2025-12-05T02:58:07.106+0000] {data_extraction.py:155} INFO -    📖 Leyendo: batch_2024-W51.parquet
+[2025-12-05T02:58:07.389+0000] {data_extraction.py:170} INFO - 📊 Datos del batch 2024-W51:
+[2025-12-05T02:58:07.389+0000] {data_extraction.py:171} INFO -    Rango fechas: 2024-12-16 → 2024-12-22
+[2025-12-05T02:58:07.389+0000] {data_extraction.py:172} INFO -    Transacciones: 10,075
+[2025-12-05T02:58:07.389+0000] {data_extraction.py:173} INFO -    Clientes únicos: 1,181
+[2025-12-05T02:58:07.390+0000] {data_extraction.py:174} INFO -    Productos únicos: 65
+[2025-12-05T02:58:07.390+0000] {data_extraction.py:175} INFO -    Pares cliente-producto: 6,960
+[2025-12-05T02:58:07.394+0000] {data_extraction.py:183} INFO -    💾 Guardado: current_batch_2024-W51_train.parquet
+[2025-12-05T02:58:07.394+0000] {data_extraction.py:193} INFO -    ✅ Marcado como procesado: 2024-W51
+[2025-12-05T02:58:07.456+0000] {data_extraction.py:206} INFO - ✅ Extracción completada - Week ID: 2024-W51_train
+[2025-12-05T02:58:07.457+0000] {data_extraction.py:207} INFO - ============================================================
+[2025-12-05T02:58:07.457+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'week_id': '2024-W51_train', 'batch_week': '2024-W51', 'transacciones_count': 10075, 'pares_count': 6960, 'clientes_count': 1181, 'productos_count': 65, 'is_first_training': True, 'fecha_inicio': '2024-12-16T00:00:00', 'fecha_fin': '2024-12-22T00:00:00', 'batches_disponibles': ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03'], 'batches_procesados': ['2024-W51']}
+[2025-12-05T02:58:07.470+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=extract_data, execution_date=20251123T000000, start_date=20251205T025806, end_date=20251205T025807
+[2025-12-05T02:58:07.539+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T02:58:07.559+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T03:08:21.453+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:08:21.459+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:08:21.459+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:08:21.467+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T03:08:21.477+0000] {standard_task_runner.py:57} INFO - Started process 419 to run task
+[2025-12-05T03:08:21.482+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'extract_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpprzhum_g']
+[2025-12-05T03:08:21.485+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask extract_data
+[2025-12-05T03:08:21.524+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host a9e85da0c338
+[2025-12-05T03:08:21.580+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T03:08:21.581+0000] {data_extraction.py:89} INFO - ============================================================
+[2025-12-05T03:08:21.582+0000] {data_extraction.py:90} INFO - 📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar
+[2025-12-05T03:08:21.582+0000] {data_extraction.py:91} INFO - ============================================================
+[2025-12-05T03:08:21.582+0000] {data_extraction.py:111} INFO - 📅 Batches disponibles: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03']
+[2025-12-05T03:08:21.582+0000] {data_extraction.py:115} INFO - ✅ Ya procesados: ninguno
+[2025-12-05T03:08:21.591+0000] {data_extraction.py:133} INFO - 📦 Procesando batch: 2024-W51 (batch_2024-W51.parquet)
+[2025-12-05T03:08:21.592+0000] {data_extraction.py:143} INFO - 🔵 MODO: Entrenamiento inicial (no hay best_model.pkl)
+[2025-12-05T03:08:21.592+0000] {data_extraction.py:155} INFO -    📖 Leyendo: batch_2024-W51.parquet
+[2025-12-05T03:08:21.864+0000] {data_extraction.py:170} INFO - 📊 Datos del batch 2024-W51:
+[2025-12-05T03:08:21.864+0000] {data_extraction.py:171} INFO -    Rango fechas: 2024-12-16 → 2024-12-22
+[2025-12-05T03:08:21.864+0000] {data_extraction.py:172} INFO -    Transacciones: 10,075
+[2025-12-05T03:08:21.864+0000] {data_extraction.py:173} INFO -    Clientes únicos: 1,181
+[2025-12-05T03:08:21.864+0000] {data_extraction.py:174} INFO -    Productos únicos: 65
+[2025-12-05T03:08:21.864+0000] {data_extraction.py:175} INFO -    Pares cliente-producto: 6,960
+[2025-12-05T03:08:21.869+0000] {data_extraction.py:183} INFO -    💾 Guardado: current_batch_2024-W51_train.parquet
+[2025-12-05T03:08:21.870+0000] {data_extraction.py:193} INFO -    ✅ Marcado como procesado: 2024-W51
+[2025-12-05T03:08:21.942+0000] {data_extraction.py:206} INFO - ✅ Extracción completada - Week ID: 2024-W51_train
+[2025-12-05T03:08:21.942+0000] {data_extraction.py:207} INFO - ============================================================
+[2025-12-05T03:08:21.943+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'week_id': '2024-W51_train', 'batch_week': '2024-W51', 'transacciones_count': 10075, 'pares_count': 6960, 'clientes_count': 1181, 'productos_count': 65, 'is_first_training': True, 'fecha_inicio': '2024-12-16T00:00:00', 'fecha_fin': '2024-12-22T00:00:00', 'batches_disponibles': ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03'], 'batches_procesados': ['2024-W51']}
+[2025-12-05T03:08:21.956+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=extract_data, execution_date=20251123T000000, start_date=20251205T030821, end_date=20251205T030821
+[2025-12-05T03:08:22.017+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:08:22.037+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T03:14:15.024+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:14:15.032+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:14:15.032+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:14:15.044+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T03:14:15.054+0000] {standard_task_runner.py:57} INFO - Started process 792 to run task
+[2025-12-05T03:14:15.057+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'extract_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpavfqpmz7']
+[2025-12-05T03:14:15.059+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask extract_data
+[2025-12-05T03:14:15.102+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 3a77f8ebbc0f
+[2025-12-05T03:14:15.158+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T03:14:15.159+0000] {data_extraction.py:89} INFO - ============================================================
+[2025-12-05T03:14:15.159+0000] {data_extraction.py:90} INFO - 📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar
+[2025-12-05T03:14:15.159+0000] {data_extraction.py:91} INFO - ============================================================
+[2025-12-05T03:14:15.160+0000] {data_extraction.py:111} INFO - 📅 Batches disponibles: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03']
+[2025-12-05T03:14:15.160+0000] {data_extraction.py:115} INFO - ✅ Ya procesados: ninguno
+[2025-12-05T03:14:15.170+0000] {data_extraction.py:133} INFO - 📦 Procesando batch: 2024-W51 (batch_2024-W51.parquet)
+[2025-12-05T03:14:15.170+0000] {data_extraction.py:143} INFO - 🔵 MODO: Entrenamiento inicial (no hay best_model.pkl)
+[2025-12-05T03:14:15.171+0000] {data_extraction.py:155} INFO -    📖 Leyendo: batch_2024-W51.parquet
+[2025-12-05T03:14:15.443+0000] {data_extraction.py:170} INFO - 📊 Datos del batch 2024-W51:
+[2025-12-05T03:14:15.443+0000] {data_extraction.py:171} INFO -    Rango fechas: 2024-12-16 → 2024-12-22
+[2025-12-05T03:14:15.443+0000] {data_extraction.py:172} INFO -    Transacciones: 10,075
+[2025-12-05T03:14:15.443+0000] {data_extraction.py:173} INFO -    Clientes únicos: 1,181
+[2025-12-05T03:14:15.443+0000] {data_extraction.py:174} INFO -    Productos únicos: 65
+[2025-12-05T03:14:15.443+0000] {data_extraction.py:175} INFO -    Pares cliente-producto: 6,960
+[2025-12-05T03:14:15.447+0000] {data_extraction.py:183} INFO -    💾 Guardado: current_batch_2024-W51_train.parquet
+[2025-12-05T03:14:15.448+0000] {data_extraction.py:193} INFO -    ✅ Marcado como procesado: 2024-W51
+[2025-12-05T03:14:15.519+0000] {data_extraction.py:206} INFO - ✅ Extracción completada - Week ID: 2024-W51_train
+[2025-12-05T03:14:15.520+0000] {data_extraction.py:207} INFO - ============================================================
+[2025-12-05T03:14:15.520+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'week_id': '2024-W51_train', 'batch_week': '2024-W51', 'transacciones_count': 10075, 'pares_count': 6960, 'clientes_count': 1181, 'productos_count': 65, 'is_first_training': True, 'fecha_inicio': '2024-12-16T00:00:00', 'fecha_fin': '2024-12-22T00:00:00', 'batches_disponibles': ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03'], 'batches_procesados': ['2024-W51']}
+[2025-12-05T03:14:15.533+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=extract_data, execution_date=20251123T000000, start_date=20251205T031415, end_date=20251205T031415
+[2025-12-05T03:14:15.591+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:14:15.613+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T03:16:22.294+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:16:22.301+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:16:22.301+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:16:22.311+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T03:16:22.322+0000] {standard_task_runner.py:57} INFO - Started process 387 to run task
+[2025-12-05T03:16:22.327+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'extract_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpkto76itr']
+[2025-12-05T03:16:22.330+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask extract_data
+[2025-12-05T03:16:22.370+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.extract_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 7f6fe514df37
+[2025-12-05T03:16:22.425+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='extract_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T03:16:22.426+0000] {data_extraction.py:89} INFO - ============================================================
+[2025-12-05T03:16:22.426+0000] {data_extraction.py:90} INFO - 📂 EXTRACCIÓN DE DATOS - Buscando batch a procesar
+[2025-12-05T03:16:22.426+0000] {data_extraction.py:91} INFO - ============================================================
+[2025-12-05T03:16:22.426+0000] {data_extraction.py:111} INFO - 📅 Batches disponibles: ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03']
+[2025-12-05T03:16:22.426+0000] {data_extraction.py:115} INFO - ✅ Ya procesados: ninguno
+[2025-12-05T03:16:22.436+0000] {data_extraction.py:133} INFO - 📦 Procesando batch: 2024-W51 (batch_2024-W51.parquet)
+[2025-12-05T03:16:22.436+0000] {data_extraction.py:143} INFO - 🔵 MODO: Entrenamiento inicial (no hay best_model.pkl)
+[2025-12-05T03:16:22.436+0000] {data_extraction.py:155} INFO -    📖 Leyendo: batch_2024-W51.parquet
+[2025-12-05T03:16:22.746+0000] {data_extraction.py:170} INFO - 📊 Datos del batch 2024-W51:
+[2025-12-05T03:16:22.747+0000] {data_extraction.py:171} INFO -    Rango fechas: 2024-12-16 → 2024-12-22
+[2025-12-05T03:16:22.747+0000] {data_extraction.py:172} INFO -    Transacciones: 10,075
+[2025-12-05T03:16:22.747+0000] {data_extraction.py:173} INFO -    Clientes únicos: 1,181
+[2025-12-05T03:16:22.747+0000] {data_extraction.py:174} INFO -    Productos únicos: 65
+[2025-12-05T03:16:22.747+0000] {data_extraction.py:175} INFO -    Pares cliente-producto: 6,960
+[2025-12-05T03:16:22.753+0000] {data_extraction.py:183} INFO -    💾 Guardado: current_batch_2024-W51_train.parquet
+[2025-12-05T03:16:22.754+0000] {data_extraction.py:193} INFO -    ✅ Marcado como procesado: 2024-W51
+[2025-12-05T03:16:22.846+0000] {data_extraction.py:206} INFO - ✅ Extracción completada - Week ID: 2024-W51_train
+[2025-12-05T03:16:22.847+0000] {data_extraction.py:207} INFO - ============================================================
+[2025-12-05T03:16:22.847+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'week_id': '2024-W51_train', 'batch_week': '2024-W51', 'transacciones_count': 10075, 'pares_count': 6960, 'clientes_count': 1181, 'productos_count': 65, 'is_first_training': True, 'fecha_inicio': '2024-12-16T00:00:00', 'fecha_fin': '2024-12-22T00:00:00', 'batches_disponibles': ['2024-W51', '2024-W52', '2025-W01', '2025-W02', '2025-W03'], 'batches_procesados': ['2024-W51']}
+[2025-12-05T03:16:22.865+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=extract_data, execution_date=20251123T000000, start_date=20251205T031622, end_date=20251205T031622
+[2025-12-05T03:16:22.948+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:16:22.974+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

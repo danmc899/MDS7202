@@ -1,0 +1,161 @@
+[2025-12-08T15:25:02.677+0000] {processor.py:157} INFO - Started process (PID=170) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:25:02.678+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:25:02.679+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:02.678+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:25:06.144+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:25:06.194+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:06.193+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:25:06.211+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:06.210+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:25:06.261+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 3.587 seconds
+[2025-12-08T15:25:37.254+0000] {processor.py:157} INFO - Started process (PID=254) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:25:37.255+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:25:37.256+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:37.256+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:25:38.441+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:25:38.454+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:38.454+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:25:38.460+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:25:38.460+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:25:38.470+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.219 seconds
+[2025-12-08T15:26:08.661+0000] {processor.py:157} INFO - Started process (PID=313) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:26:08.662+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:26:08.663+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:08.663+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:26:10.063+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:26:10.077+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:10.077+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:26:10.083+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:10.083+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:26:10.093+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.434 seconds
+[2025-12-08T15:26:40.545+0000] {processor.py:157} INFO - Started process (PID=365) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:26:40.546+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:26:40.547+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:40.547+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:26:41.793+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:26:41.808+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:41.808+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:26:41.814+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:26:41.813+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:26:41.823+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.281 seconds
+[2025-12-08T15:27:12.356+0000] {processor.py:157} INFO - Started process (PID=431) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:27:12.357+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:27:12.357+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:12.357+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:27:13.500+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:27:13.516+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:13.516+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:27:13.521+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:13.521+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:27:13.531+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.179 seconds
+[2025-12-08T15:27:43.617+0000] {processor.py:157} INFO - Started process (PID=490) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:27:43.618+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:27:43.619+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:43.619+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:27:44.858+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:27:44.874+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:44.874+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:27:44.881+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:27:44.880+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:27:44.890+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.276 seconds
+[2025-12-08T15:28:15.513+0000] {processor.py:157} INFO - Started process (PID=549) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:28:15.514+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:28:15.514+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:15.514+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:28:16.687+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:28:16.702+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:16.701+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:28:16.707+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:16.707+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:28:16.717+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.207 seconds
+[2025-12-08T15:28:46.863+0000] {processor.py:157} INFO - Started process (PID=609) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:28:46.864+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:28:46.864+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:46.864+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:28:48.075+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:28:48.089+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:48.089+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:28:48.095+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:28:48.095+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:28:48.104+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.244 seconds
+[2025-12-08T15:29:18.250+0000] {processor.py:157} INFO - Started process (PID=668) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:29:18.251+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:29:18.252+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:18.251+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:29:19.445+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:29:19.461+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:19.461+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:29:19.467+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:19.467+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:29:19.476+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.230 seconds
+[2025-12-08T15:29:50.154+0000] {processor.py:157} INFO - Started process (PID=727) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:29:50.155+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:29:50.155+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:50.155+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:29:51.476+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:29:51.490+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:51.490+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:29:51.495+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:29:51.495+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:29:51.504+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.354 seconds
+[2025-12-08T15:30:22.266+0000] {processor.py:157} INFO - Started process (PID=786) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:30:22.267+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:30:22.267+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:22.267+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:30:23.485+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:30:23.501+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:23.501+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:30:23.507+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:23.507+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:30:23.517+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.254 seconds
+[2025-12-08T15:30:54.048+0000] {processor.py:157} INFO - Started process (PID=845) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:30:54.050+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:30:54.050+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:54.050+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:30:55.248+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:30:55.264+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:55.264+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:30:55.270+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:30:55.270+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:30:55.281+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.235 seconds
+[2025-12-08T15:31:26.151+0000] {processor.py:157} INFO - Started process (PID=904) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:31:26.152+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:31:26.153+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:26.153+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:31:27.298+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:31:27.312+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:27.312+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:31:27.318+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:27.318+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:31:27.327+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.178 seconds
+[2025-12-08T15:31:57.437+0000] {processor.py:157} INFO - Started process (PID=963) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:31:57.438+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:31:57.439+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:57.438+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:31:58.797+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:31:58.814+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:58.814+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:31:58.820+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:31:58.820+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:31:58.830+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.395 seconds
+[2025-12-08T15:32:29.314+0000] {processor.py:157} INFO - Started process (PID=1022) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:32:29.316+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:32:29.316+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:32:29.316+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:32:30.791+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:32:30.810+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:32:30.809+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:32:30.816+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:32:30.816+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:32:30.828+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.516 seconds
+[2025-12-08T15:33:01.441+0000] {processor.py:157} INFO - Started process (PID=1081) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:33:01.442+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:33:01.442+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:01.442+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:33:02.864+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:33:02.880+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:02.880+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:33:02.887+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:02.887+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:33:02.898+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.460 seconds
+[2025-12-08T15:33:33.531+0000] {processor.py:157} INFO - Started process (PID=1140) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:33:33.532+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:33:33.532+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:33.532+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:33:34.933+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:33:34.952+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:34.952+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:33:34.959+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:33:34.959+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:33:34.971+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.443 seconds
+[2025-12-08T15:34:05.663+0000] {processor.py:157} INFO - Started process (PID=1199) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:34:05.665+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:34:05.665+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:05.665+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:34:07.040+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:34:07.056+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:07.056+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:34:07.064+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:07.064+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:34:07.074+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.414 seconds
+[2025-12-08T15:34:37.701+0000] {processor.py:157} INFO - Started process (PID=1273) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:34:37.703+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:34:37.703+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:37.703+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:34:39.132+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:34:39.148+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:39.147+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:34:39.155+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:34:39.155+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:34:39.165+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.467 seconds
+[2025-12-08T15:35:10.104+0000] {processor.py:157} INFO - Started process (PID=1332) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:35:10.104+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:35:10.105+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:10.105+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:35:11.279+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:35:11.294+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:11.294+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:35:11.300+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:11.300+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:35:11.310+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.209 seconds
+[2025-12-08T15:35:42.207+0000] {processor.py:157} INFO - Started process (PID=1391) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:35:42.209+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:35:42.209+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:42.209+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:35:43.422+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:35:43.437+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:43.437+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:35:43.444+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:35:43.444+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:35:43.455+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.251 seconds
+[2025-12-08T15:36:14.375+0000] {processor.py:157} INFO - Started process (PID=1450) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:36:14.376+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:36:14.376+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:14.376+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:36:15.575+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:36:15.590+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:15.590+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:36:15.596+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:15.596+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:36:15.605+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.234 seconds
+[2025-12-08T15:36:46.477+0000] {processor.py:157} INFO - Started process (PID=1509) to work on /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:36:46.478+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/pipeline_productivo.py for tasks to queue
+[2025-12-08T15:36:46.478+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:46.478+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:36:48.005+0000] {processor.py:839} INFO - DAG(s) dict_keys(['sodai_drinks_production_pipeline']) retrieved from /opt/airflow/dags/pipeline_productivo.py
+[2025-12-08T15:36:48.022+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:48.022+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-12-08T15:36:48.029+0000] {logging_mixin.py:154} INFO - [2025-12-08T15:36:48.029+0000] {dag.py:3722} INFO - Setting next_dagrun for sodai_drinks_production_pipeline to None, run_after=None
+[2025-12-08T15:36:48.040+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/pipeline_productivo.py took 1.566 seconds

@@ -1,0 +1,37 @@
+{
+  "Y": {
+    "ks_statistic": 0.0,
+    "ks_p_value": 1.0,
+    "ks_drift": false,
+    "psi": 0.0,
+    "psi_drift": false
+  },
+  "X": {
+    "ks_statistic": 0.0,
+    "ks_p_value": 1.0,
+    "ks_drift": false,
+    "psi": 0.0,
+    "psi_drift": false
+  },
+  "size": {
+    "ks_statistic": 0.0,
+    "ks_p_value": 1.0,
+    "ks_drift": false,
+    "psi": 0.0,
+    "psi_drift": false
+  },
+  "num_deliver_per_week": {
+    "ks_statistic": 0.0,
+    "ks_p_value": 1.0,
+    "ks_drift": false,
+    "psi": 0.0,
+    "psi_drift": false
+  },
+  "segment": {
+    "ks_statistic": 0.0,
+    "ks_p_value": 1.0,
+    "ks_drift": false,
+    "psi": 0.0,
+    "psi_drift": false
+  }
+}

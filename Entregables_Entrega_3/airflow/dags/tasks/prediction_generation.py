@@ -150,9 +150,7 @@ def generate_predictions(**context):
     
     # ========================================
     # GENERAR ARCHIVO PARA CONDABENCH
-    # Formato: CSV sin header, customer_id y product_id como enteros,
-    # ordenados por probabilidad descendente (solo predicciones positivas)
-    # Nombre incluye week_id para identificar claramente qué datos se usaron
+   
     # ========================================
     logger.info("📦 Generando archivo de submission para Condabench...")
     

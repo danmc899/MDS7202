@@ -1,0 +1,76 @@
+[2025-12-05T03:23:33.501+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.generate_predictions manual__2025-12-05T03:22:53+00:00 [queued]>
+[2025-12-05T03:23:33.506+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.generate_predictions manual__2025-12-05T03:22:53+00:00 [queued]>
+[2025-12-05T03:23:33.506+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:23:33.513+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): generate_predictions> on 2025-12-05 03:22:53+00:00
+[2025-12-05T03:23:33.523+0000] {standard_task_runner.py:57} INFO - Started process 1368 to run task
+[2025-12-05T03:23:33.527+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'generate_predictions', 'manual__2025-12-05T03:22:53+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpuknp9qch']
+[2025-12-05T03:23:33.530+0000] {standard_task_runner.py:85} INFO - Job 14: Subtask generate_predictions
+[2025-12-05T03:23:33.565+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.generate_predictions manual__2025-12-05T03:22:53+00:00 [running]> on host d63631a18ada
+[2025-12-05T03:23:33.623+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='generate_predictions' AIRFLOW_CTX_EXECUTION_DATE='2025-12-05T03:22:53+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-05T03:22:53+00:00'
+[2025-12-05T03:23:33.625+0000] {prediction_generation.py:27} INFO - Iniciando generación de predicciones...
+[2025-12-05T03:23:33.872+0000] {prediction_generation.py:35} INFO - Week ID para esta ejecución: 2024-W52_predict
+[2025-12-05T03:23:33.872+0000] {prediction_generation.py:51} INFO - Usando modelo del XCom: /opt/***/models/best_model.pkl
+[2025-12-05T03:23:33.897+0000] {prediction_generation.py:57} INFO - Cargando modelo desde: /opt/***/models/best_model.pkl
+[2025-12-05T03:23:33.914+0000] {prediction_generation.py:77} INFO - Generando predicciones para 11596 combinaciones cliente-producto...
+[2025-12-05T03:23:33.955+0000] {prediction_generation.py:98} INFO - Predicciones positivas: 6436 de 11596
+[2025-12-05T03:23:33.955+0000] {prediction_generation.py:99} INFO - Tasa de predicciones positivas: 55.50%
+[2025-12-05T03:23:33.957+0000] {prediction_generation.py:120} INFO - Top 20 clientes con más compras predichas:
+[2025-12-05T03:23:33.959+0000] {prediction_generation.py:121} INFO - 
+     customer_id  predicted_purchases  avg_probability
+287       183105                   30         0.859901
+487       204189                   29         0.836859
+258       176403                   25         0.838796
+1          25749                   24         0.777762
+378       194229                   23         0.800398
+551       206748                   22         0.786496
+398       197286                   22         0.780630
+340       187806                   22         0.795428
+684       211533                   21         0.792584
+344       188331                   21         0.757808
+289       183213                   21         0.813092
+336       187707                   20         0.787022
+66         72930                   19         0.798357
+562       206940                   19         0.778697
+888       238032                   18         0.826162
+397       196845                   18         0.712466
+683       211527                   18         0.748300
+413       198882                   18         0.828690
+739       217782                   17         0.796019
+783       224169                   17         0.769626
+[2025-12-05T03:23:33.960+0000] {prediction_generation.py:131} INFO - Top 20 productos con más compradores predichos:
+[2025-12-05T03:23:33.961+0000] {prediction_generation.py:132} INFO - 
+    product_id  predicted_buyers  avg_probability
+3         1370               675         0.795235
+8        11262               590         0.904797
+29       56714               571         0.891223
+2         1304               570         0.767989
+30       57414               505         0.733005
+51       63510               413         0.802053
+10       30500               384         0.701669
+46       63188               334         0.673699
+6        10652               268         0.652515
+22       50718               163         0.673374
+14       35732               161         0.643970
+13       33886               161         0.632251
+38       62074               158         0.678632
+17       39186               138         0.659629
+40       62376               123         0.761434
+4         1372               106         0.635950
+41       62378               104         0.714411
+34       59822                96         0.739186
+28       56696                89         0.667171
+33       59396                87         0.629514
+[2025-12-05T03:23:33.961+0000] {prediction_generation.py:149} INFO -    ✓ Estadísticas guardadas: prediction_stats_2024-W52_predict_20251205_032333.json
+[2025-12-05T03:23:33.961+0000] {prediction_generation.py:157} INFO - 📦 Generando archivo de submission para Condabench...
+[2025-12-05T03:23:33.967+0000] {prediction_generation.py:170} INFO -    ✓ CSV de submission guardado: /opt/***/data/predictions/submissions/submission_2024-W52_predict_20251205_032333.csv
+[2025-12-05T03:23:33.967+0000] {prediction_generation.py:171} INFO -    ✓ Total filas: 6,436
+[2025-12-05T03:23:33.970+0000] {prediction_generation.py:179} INFO -    ✓ ZIP de submission creado: /opt/***/data/predictions/submissions/submission_2024-W52_predict_20251205_032333.zip
+[2025-12-05T03:23:33.970+0000] {prediction_generation.py:180} INFO - 
+[2025-12-05T03:23:33.970+0000] {prediction_generation.py:181} INFO - 🎯 ARCHIVO PARA CONDABENCH: /opt/***/data/predictions/submissions/submission_2024-W52_predict_20251205_032333.zip
+[2025-12-05T03:23:33.970+0000] {prediction_generation.py:182} INFO -    Week ID: 2024-W52_predict
+[2025-12-05T03:23:33.971+0000] {prediction_generation.py:183} INFO -    Contiene: submission.csv (6,436 predicciones positivas)
+[2025-12-05T03:23:33.996+0000] {prediction_generation.py:190} INFO - ✅ Generación de predicciones completada exitosamente
+[2025-12-05T03:23:33.996+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'total_predictions': 11596, 'positive_predictions': 6436, 'submission_zip': '/opt/***/data/predictions/submissions/submission_2024-W52_predict_20251205_032333.zip', 'week_id': '2024-W52_predict'}
+[2025-12-05T03:23:34.011+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=generate_predictions, execution_date=20251205T032253, start_date=20251205T032333, end_date=20251205T032334
+[2025-12-05T03:23:34.068+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:23:34.088+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

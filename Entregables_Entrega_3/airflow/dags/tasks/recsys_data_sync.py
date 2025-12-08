@@ -49,14 +49,14 @@ def sync_recsys_data(**context):
     for name, source_path in files_to_copy.items():
         if source_path and Path(source_path).exists():
             dest_file = recsys_data_dir / f"{Path(source_path).name}"
-            shutil.copy2(source_path, dest_file)
-            logger.info(f"✅ Copiado {name}: {source_path} → {dest_file}")
+            shutil.copyfile(source_path, dest_file)
+            logger.info(f"Copiado {name}: {source_path} → {dest_file}")
             
             # Verificar tamaño del archivo copiado
             df = pd.read_parquet(dest_file)
-            logger.info(f"   📊 Registros en {name}: {len(df)}")
+            logger.info(f"Registros en {name}: {len(df)}")
         else:
-            logger.warning(f"⚠️ Archivo no encontrado: {source_path}")
+            logger.warning(f"Archivo no encontrado: {source_path}")
     
     # Llamar al endpoint de reentrenamiento del RecSys
     recsys_url = "http://sodai-recsys-backend:8001/api/v1/retrain"

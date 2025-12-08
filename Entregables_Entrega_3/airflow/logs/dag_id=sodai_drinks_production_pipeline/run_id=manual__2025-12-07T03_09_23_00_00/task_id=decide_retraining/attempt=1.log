@@ -1,0 +1,19 @@
+[2025-12-07T03:14:38.982+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.decide_retraining manual__2025-12-07T03:09:23+00:00 [queued]>
+[2025-12-07T03:14:38.988+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.decide_retraining manual__2025-12-07T03:09:23+00:00 [queued]>
+[2025-12-07T03:14:38.988+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-07T03:14:38.997+0000] {taskinstance.py:1382} INFO - Executing <Task(BranchPythonOperator): decide_retraining> on 2025-12-07 03:09:23+00:00
+[2025-12-07T03:14:39.008+0000] {standard_task_runner.py:57} INFO - Started process 2223 to run task
+[2025-12-07T03:14:39.013+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'decide_retraining', 'manual__2025-12-07T03:09:23+00:00', '--job-id', '57', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpzv08f7oi']
+[2025-12-07T03:14:39.017+0000] {standard_task_runner.py:85} INFO - Job 57: Subtask decide_retraining
+[2025-12-07T03:14:39.058+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.decide_retraining manual__2025-12-07T03:09:23+00:00 [running]> on host d63631a18ada
+[2025-12-07T03:14:39.116+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='decide_retraining' AIRFLOW_CTX_EXECUTION_DATE='2025-12-07T03:09:23+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-07T03:09:23+00:00'
+[2025-12-07T03:14:39.131+0000] {pipeline_productivo.py:58} INFO - Evaluando necesidad de reentrenamiento...
+[2025-12-07T03:14:39.132+0000] {pipeline_productivo.py:59} INFO - Drift detectado: False, Razón: no_drift
+[2025-12-07T03:14:39.132+0000] {pipeline_productivo.py:82} INFO - No se detectó drift - Se omitirá el reentrenamiento
+[2025-12-07T03:14:39.132+0000] {python.py:194} INFO - Done. Returned value was: skip_training
+[2025-12-07T03:14:39.132+0000] {python.py:227} INFO - Branch callable return skip_training
+[2025-12-07T03:14:39.132+0000] {skipmixin.py:173} INFO - Following branch skip_training
+[2025-12-07T03:14:39.145+0000] {skipmixin.py:239} INFO - Skipping tasks [('train_model', -1)]
+[2025-12-07T03:14:39.176+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=decide_retraining, execution_date=20251207T030923, start_date=20251207T031438, end_date=20251207T031439
+[2025-12-07T03:14:39.225+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-07T03:14:39.247+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

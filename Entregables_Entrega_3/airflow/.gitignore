@@ -1,25 +1,6 @@
 # Environment variables (específico de cada máquina)
 .env
 
-# Logs de Airflow
-logs/
-*.log
-
-# MLflow artifacts
-mlruns/
-
-# Modelos entrenados
-models/*.pkl
-models/*.json
-
-# Datos procesados
-data/processed/
-data/raw/
-
-# Diagramas generados
-diagrams/*.png
-diagrams/*.pdf
-
 # Python
 __pycache__/
 *.py[cod]
@@ -35,5 +16,6 @@ __pycache__/
 *.swo
 *~
 
-# Docker
-.dockerignore
+# Archivos temporales de sistema
+.DS_Store
+Thumbs.db

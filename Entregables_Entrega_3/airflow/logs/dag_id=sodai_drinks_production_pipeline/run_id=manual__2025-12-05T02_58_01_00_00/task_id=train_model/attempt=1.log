@@ -1,0 +1,42 @@
+[2025-12-05T02:58:22.719+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-12-05T02:58:01+00:00 [queued]>
+[2025-12-05T02:58:22.725+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-12-05T02:58:01+00:00 [queued]>
+[2025-12-05T02:58:22.725+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:58:22.732+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): train_model> on 2025-12-05 02:58:01+00:00
+[2025-12-05T02:58:22.741+0000] {standard_task_runner.py:57} INFO - Started process 566 to run task
+[2025-12-05T02:58:22.744+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'train_model', 'manual__2025-12-05T02:58:01+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpmyt9sbaz']
+[2025-12-05T02:58:22.747+0000] {standard_task_runner.py:85} INFO - Job 11: Subtask train_model
+[2025-12-05T02:58:22.779+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.train_model manual__2025-12-05T02:58:01+00:00 [running]> on host 5c90aa578e5c
+[2025-12-05T02:58:22.826+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-12-05T02:58:01+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-05T02:58:01+00:00'
+[2025-12-05T02:58:22.827+0000] {model_training.py:373} INFO - 🚀 Iniciando entrenamiento del modelo XGBoost...
+[2025-12-05T02:58:23.062+0000] {model_training.py:395} INFO - 📊 Dataset cargado:
+[2025-12-05T02:58:23.063+0000] {model_training.py:396} INFO -    - Features: 15
+[2025-12-05T02:58:23.063+0000] {model_training.py:397} INFO -    - Registros: 13920
+[2025-12-05T02:58:23.063+0000] {model_training.py:398} INFO -    - Distribución de clases - Clase 0: 6960, Clase 1: 6960
+[2025-12-05T02:58:23.072+0000] {model_training.py:408} INFO - 📂 Splits creados:
+[2025-12-05T02:58:23.072+0000] {model_training.py:409} INFO -    - Train: 8352 muestras
+[2025-12-05T02:58:23.072+0000] {model_training.py:410} INFO -    - Validation: 2784 muestras
+[2025-12-05T02:58:23.072+0000] {model_training.py:411} INFO -    - Test: 2784 muestras
+[2025-12-05T02:58:23.076+0000] {logging_mixin.py:154} WARNING - 2025/12/05 02:58:23 INFO mlflow.tracking.fluent: Experiment with name 'sodai_drinks_xgboost' does not exist. Creating a new experiment.
+[2025-12-05T02:58:23.078+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/tasks/model_training.py", line 415, in train_model
+    mlflow.set_experiment("sodai_drinks_xgboost")
+  File "/home/airflow/.local/lib/python3.10/site-packages/mlflow/tracking/fluent.py", line 144, in set_experiment
+    experiment_id = client.create_experiment(experiment_name)
+  File "/home/airflow/.local/lib/python3.10/site-packages/mlflow/tracking/client.py", line 563, in create_experiment
+    return self._tracking_client.create_experiment(name, artifact_location, tags)
+  File "/home/airflow/.local/lib/python3.10/site-packages/mlflow/tracking/_tracking_service/client.py", line 235, in create_experiment
+    return self.store.create_experiment(
+  File "/home/airflow/.local/lib/python3.10/site-packages/mlflow/store/tracking/file_store.py", line 379, in create_experiment
+    self._validate_experiment_does_not_exist(name)
+  File "/home/airflow/.local/lib/python3.10/site-packages/mlflow/store/tracking/file_store.py", line 371, in _validate_experiment_does_not_exist
+    raise MlflowException(
+mlflow.exceptions.MlflowException: Experiment 'sodai_drinks_xgboost' already exists.
+[2025-12-05T02:58:23.087+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=sodai_drinks_production_pipeline, task_id=train_model, execution_date=20251205T025801, start_date=20251205T025822, end_date=20251205T025823
+[2025-12-05T02:58:23.094+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 11 for task train_model (Experiment 'sodai_drinks_xgboost' already exists.; 566)
+[2025-12-05T02:58:23.159+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-12-05T02:58:23.176+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

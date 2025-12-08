@@ -1,0 +1,170 @@
+[2025-12-05T02:52:31.519+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:52:31.525+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:52:31.525+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:52:31.532+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T02:52:31.549+0000] {standard_task_runner.py:57} INFO - Started process 512 to run task
+[2025-12-05T02:52:31.553+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpdt41pxnp']
+[2025-12-05T02:52:31.557+0000] {standard_task_runner.py:85} INFO - Job 4: Subtask process_data
+[2025-12-05T02:52:31.635+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 77cc39016fd2
+[2025-12-05T02:52:31.690+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T02:52:31.691+0000] {data_processing.py:169} INFO - Iniciando procesamiento de datos...
+[2025-12-05T02:52:31.972+0000] {data_processing.py:181} INFO - Datos cargados - Transacciones: 10075, Clientes: 1569, Productos: 971
+[2025-12-05T02:52:31.981+0000] {data_processing.py:188} INFO - Predicción para semana: 2024-52
+[2025-12-05T02:52:31.981+0000] {data_processing.py:73} INFO - Creando variable target...
+[2025-12-05T02:52:32.025+0000] {data_processing.py:90} INFO - ✅ Ejemplos positivos (compraron): 6,960
+[2025-12-05T02:52:32.027+0000] {data_processing.py:105} INFO - 🎲 Generando 69,600 ejemplos negativos (ratio 10.0:1)...
+[2025-12-05T02:52:38.739+0000] {data_processing.py:133} INFO - ⚖️ Aplicando undersampling con RandomUnderSampler...
+[2025-12-05T02:52:38.740+0000] {data_processing.py:134} INFO -    Antes: 69,600 negativos
+[2025-12-05T02:52:38.757+0000] {data_processing.py:151} INFO -    Después: 6,960 negativos
+[2025-12-05T02:52:38.757+0000] {data_processing.py:155} INFO - 📊 Dataset balanceado:
+[2025-12-05T02:52:38.758+0000] {data_processing.py:156} INFO -    - Positivos: 6,960
+[2025-12-05T02:52:38.758+0000] {data_processing.py:157} INFO -    - Negativos: 6,960
+[2025-12-05T02:52:38.758+0000] {data_processing.py:158} INFO -    - Total: 13,920
+[2025-12-05T02:52:38.779+0000] {data_processing.py:197} INFO - Dataset merged: (13920, 17)
+[2025-12-05T02:52:38.780+0000] {data_processing.py:208} INFO - Features: ['customer_type', 'Y', 'X', 'num_deliver_per_week', 'brand', 'category', 'sub_category', 'segment', 'package', 'size']
+[2025-12-05T02:52:38.781+0000] {data_processing.py:209} INFO - Distribución de clases - 0: 6960, 1: 6960
+[2025-12-05T02:52:38.791+0000] {data_processing.py:217} INFO - Columna 'brand' convertida a 'brand_num' (numérica)
+[2025-12-05T02:52:38.797+0000] {data_processing.py:263} INFO - Ajustando preprocessor...
+[2025-12-05T02:52:38.817+0000] {data_processing.py:295} INFO - Datos transformados: (13920, 18)
+[2025-12-05T02:52:38.818+0000] {data_processing.py:296} INFO - Verificación de clases - 0: 6960, 1: 6960
+[2025-12-05T02:52:38.857+0000] {data_processing.py:323} INFO - Preprocessing completado exitosamente
+[2025-12-05T02:52:38.859+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'processed_records': 13920, 'num_features': 15, 'positive_class': 6960, 'negative_class': 6960, 'prediction_week': '2024-12-29T00:00:00'}
+[2025-12-05T02:52:38.874+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251123T000000, start_date=20251205T025231, end_date=20251205T025238
+[2025-12-05T02:52:38.955+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T02:52:38.973+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T02:58:09.965+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:58:09.973+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T02:58:09.973+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T02:58:09.981+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T02:58:09.992+0000] {standard_task_runner.py:57} INFO - Started process 388 to run task
+[2025-12-05T02:58:09.995+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmplm3ausav']
+[2025-12-05T02:58:09.999+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask process_data
+[2025-12-05T02:58:10.038+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 5c90aa578e5c
+[2025-12-05T02:58:10.096+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T02:58:10.098+0000] {data_processing.py:169} INFO - Iniciando procesamiento de datos...
+[2025-12-05T02:58:10.384+0000] {data_processing.py:181} INFO - Datos cargados - Transacciones: 10075, Clientes: 1569, Productos: 971
+[2025-12-05T02:58:10.392+0000] {data_processing.py:188} INFO - Predicción para semana: 2024-52
+[2025-12-05T02:58:10.392+0000] {data_processing.py:73} INFO - Creando variable target...
+[2025-12-05T02:58:10.440+0000] {data_processing.py:90} INFO - ✅ Ejemplos positivos (compraron): 6,960
+[2025-12-05T02:58:10.442+0000] {data_processing.py:105} INFO - 🎲 Generando 69,600 ejemplos negativos (ratio 10.0:1)...
+[2025-12-05T02:58:16.923+0000] {data_processing.py:133} INFO - ⚖️ Aplicando undersampling con RandomUnderSampler...
+[2025-12-05T02:58:16.923+0000] {data_processing.py:134} INFO -    Antes: 69,600 negativos
+[2025-12-05T02:58:16.940+0000] {data_processing.py:151} INFO -    Después: 6,960 negativos
+[2025-12-05T02:58:16.941+0000] {data_processing.py:155} INFO - 📊 Dataset balanceado:
+[2025-12-05T02:58:16.941+0000] {data_processing.py:156} INFO -    - Positivos: 6,960
+[2025-12-05T02:58:16.941+0000] {data_processing.py:157} INFO -    - Negativos: 6,960
+[2025-12-05T02:58:16.941+0000] {data_processing.py:158} INFO -    - Total: 13,920
+[2025-12-05T02:58:16.959+0000] {data_processing.py:197} INFO - Dataset merged: (13920, 17)
+[2025-12-05T02:58:16.961+0000] {data_processing.py:208} INFO - Features: ['customer_type', 'Y', 'X', 'num_deliver_per_week', 'brand', 'category', 'sub_category', 'segment', 'package', 'size']
+[2025-12-05T02:58:16.961+0000] {data_processing.py:209} INFO - Distribución de clases - 0: 6960, 1: 6960
+[2025-12-05T02:58:16.970+0000] {data_processing.py:217} INFO - Columna 'brand' convertida a 'brand_num' (numérica)
+[2025-12-05T02:58:16.975+0000] {data_processing.py:263} INFO - Ajustando preprocessor...
+[2025-12-05T02:58:16.996+0000] {data_processing.py:295} INFO - Datos transformados: (13920, 18)
+[2025-12-05T02:58:16.996+0000] {data_processing.py:296} INFO - Verificación de clases - 0: 6960, 1: 6960
+[2025-12-05T02:58:17.036+0000] {data_processing.py:323} INFO - Preprocessing completado exitosamente
+[2025-12-05T02:58:17.038+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'processed_records': 13920, 'num_features': 15, 'positive_class': 6960, 'negative_class': 6960, 'prediction_week': '2024-12-29T00:00:00'}
+[2025-12-05T02:58:17.052+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251123T000000, start_date=20251205T025809, end_date=20251205T025817
+[2025-12-05T02:58:17.127+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T02:58:17.144+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T03:08:23.407+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:08:23.414+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:08:23.414+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:08:23.421+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T03:08:23.432+0000] {standard_task_runner.py:57} INFO - Started process 478 to run task
+[2025-12-05T03:08:23.436+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmppgbip3tb']
+[2025-12-05T03:08:23.439+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask process_data
+[2025-12-05T03:08:23.474+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host a9e85da0c338
+[2025-12-05T03:08:23.526+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T03:08:23.528+0000] {data_processing.py:169} INFO - Iniciando procesamiento de datos...
+[2025-12-05T03:08:23.816+0000] {data_processing.py:181} INFO - Datos cargados - Transacciones: 10075, Clientes: 1569, Productos: 971
+[2025-12-05T03:08:23.823+0000] {data_processing.py:188} INFO - Predicción para semana: 2024-52
+[2025-12-05T03:08:23.823+0000] {data_processing.py:73} INFO - Creando variable target...
+[2025-12-05T03:08:23.863+0000] {data_processing.py:90} INFO - ✅ Ejemplos positivos (compraron): 6,960
+[2025-12-05T03:08:23.866+0000] {data_processing.py:105} INFO - 🎲 Generando 69,600 ejemplos negativos (ratio 10.0:1)...
+[2025-12-05T03:08:30.509+0000] {data_processing.py:133} INFO - ⚖️ Aplicando undersampling con RandomUnderSampler...
+[2025-12-05T03:08:30.509+0000] {data_processing.py:134} INFO -    Antes: 69,600 negativos
+[2025-12-05T03:08:30.529+0000] {data_processing.py:151} INFO -    Después: 6,960 negativos
+[2025-12-05T03:08:30.530+0000] {data_processing.py:155} INFO - 📊 Dataset balanceado:
+[2025-12-05T03:08:30.530+0000] {data_processing.py:156} INFO -    - Positivos: 6,960
+[2025-12-05T03:08:30.530+0000] {data_processing.py:157} INFO -    - Negativos: 6,960
+[2025-12-05T03:08:30.530+0000] {data_processing.py:158} INFO -    - Total: 13,920
+[2025-12-05T03:08:30.547+0000] {data_processing.py:197} INFO - Dataset merged: (13920, 17)
+[2025-12-05T03:08:30.548+0000] {data_processing.py:208} INFO - Features: ['customer_type', 'Y', 'X', 'num_deliver_per_week', 'brand', 'category', 'sub_category', 'segment', 'package', 'size']
+[2025-12-05T03:08:30.549+0000] {data_processing.py:209} INFO - Distribución de clases - 0: 6960, 1: 6960
+[2025-12-05T03:08:30.558+0000] {data_processing.py:217} INFO - Columna 'brand' convertida a 'brand_num' (numérica)
+[2025-12-05T03:08:30.564+0000] {data_processing.py:263} INFO - Ajustando preprocessor...
+[2025-12-05T03:08:30.584+0000] {data_processing.py:295} INFO - Datos transformados: (13920, 18)
+[2025-12-05T03:08:30.584+0000] {data_processing.py:296} INFO - Verificación de clases - 0: 6960, 1: 6960
+[2025-12-05T03:08:30.622+0000] {data_processing.py:323} INFO - Preprocessing completado exitosamente
+[2025-12-05T03:08:30.624+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'processed_records': 13920, 'num_features': 15, 'positive_class': 6960, 'negative_class': 6960, 'prediction_week': '2024-12-29T00:00:00'}
+[2025-12-05T03:08:30.637+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251123T000000, start_date=20251205T030823, end_date=20251205T030830
+[2025-12-05T03:08:30.709+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:08:30.727+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T03:14:17.058+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:14:17.064+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:14:17.064+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:14:17.070+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T03:14:17.081+0000] {standard_task_runner.py:57} INFO - Started process 821 to run task
+[2025-12-05T03:14:17.084+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmpyb09op7a']
+[2025-12-05T03:14:17.087+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask process_data
+[2025-12-05T03:14:17.124+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 3a77f8ebbc0f
+[2025-12-05T03:14:17.180+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T03:14:17.181+0000] {data_processing.py:169} INFO - Iniciando procesamiento de datos...
+[2025-12-05T03:14:17.430+0000] {data_processing.py:181} INFO - Datos cargados - Transacciones: 10075, Clientes: 1569, Productos: 971
+[2025-12-05T03:14:17.436+0000] {data_processing.py:188} INFO - Predicción para semana: 2024-52
+[2025-12-05T03:14:17.436+0000] {data_processing.py:73} INFO - Creando variable target...
+[2025-12-05T03:14:17.474+0000] {data_processing.py:90} INFO - ✅ Ejemplos positivos (compraron): 6,960
+[2025-12-05T03:14:17.476+0000] {data_processing.py:105} INFO - 🎲 Generando 69,600 ejemplos negativos (ratio 10.0:1)...
+[2025-12-05T03:14:24.093+0000] {data_processing.py:133} INFO - ⚖️ Aplicando undersampling con RandomUnderSampler...
+[2025-12-05T03:14:24.093+0000] {data_processing.py:134} INFO -    Antes: 69,600 negativos
+[2025-12-05T03:14:24.112+0000] {data_processing.py:151} INFO -    Después: 6,960 negativos
+[2025-12-05T03:14:24.112+0000] {data_processing.py:155} INFO - 📊 Dataset balanceado:
+[2025-12-05T03:14:24.112+0000] {data_processing.py:156} INFO -    - Positivos: 6,960
+[2025-12-05T03:14:24.112+0000] {data_processing.py:157} INFO -    - Negativos: 6,960
+[2025-12-05T03:14:24.112+0000] {data_processing.py:158} INFO -    - Total: 13,920
+[2025-12-05T03:14:24.132+0000] {data_processing.py:197} INFO - Dataset merged: (13920, 17)
+[2025-12-05T03:14:24.133+0000] {data_processing.py:208} INFO - Features: ['customer_type', 'Y', 'X', 'num_deliver_per_week', 'brand', 'category', 'sub_category', 'segment', 'package', 'size']
+[2025-12-05T03:14:24.134+0000] {data_processing.py:209} INFO - Distribución de clases - 0: 6960, 1: 6960
+[2025-12-05T03:14:24.144+0000] {data_processing.py:217} INFO - Columna 'brand' convertida a 'brand_num' (numérica)
+[2025-12-05T03:14:24.149+0000] {data_processing.py:263} INFO - Ajustando preprocessor...
+[2025-12-05T03:14:24.167+0000] {data_processing.py:295} INFO - Datos transformados: (13920, 18)
+[2025-12-05T03:14:24.167+0000] {data_processing.py:296} INFO - Verificación de clases - 0: 6960, 1: 6960
+[2025-12-05T03:14:24.205+0000] {data_processing.py:323} INFO - Preprocessing completado exitosamente
+[2025-12-05T03:14:24.207+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'processed_records': 13920, 'num_features': 15, 'positive_class': 6960, 'negative_class': 6960, 'prediction_week': '2024-12-29T00:00:00'}
+[2025-12-05T03:14:24.220+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251123T000000, start_date=20251205T031417, end_date=20251205T031424
+[2025-12-05T03:14:24.272+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:14:24.292+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-05T03:16:25.376+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:16:25.382+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-12-05T03:16:25.382+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-12-05T03:16:25.390+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): process_data> on 2025-11-23 00:00:00+00:00
+[2025-12-05T03:16:25.401+0000] {standard_task_runner.py:57} INFO - Started process 458 to run task
+[2025-12-05T03:16:25.406+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'sodai_drinks_production_pipeline', 'process_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_productivo.py', '--cfg-path', '/tmp/tmp1r1xg1w4']
+[2025-12-05T03:16:25.409+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask process_data
+[2025-12-05T03:16:25.451+0000] {task_command.py:416} INFO - Running <TaskInstance: sodai_drinks_production_pipeline.process_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host 7f6fe514df37
+[2025-12-05T03:16:25.505+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='team@sodaidrinks.com' AIRFLOW_CTX_DAG_OWNER='sodai_drinks_team' AIRFLOW_CTX_DAG_ID='sodai_drinks_production_pipeline' AIRFLOW_CTX_TASK_ID='process_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-12-05T03:16:25.506+0000] {data_processing.py:169} INFO - Iniciando procesamiento de datos...
+[2025-12-05T03:16:25.804+0000] {data_processing.py:181} INFO - Datos cargados - Transacciones: 10075, Clientes: 1569, Productos: 971
+[2025-12-05T03:16:25.812+0000] {data_processing.py:188} INFO - Predicción para semana: 2024-52
+[2025-12-05T03:16:25.812+0000] {data_processing.py:73} INFO - Creando variable target...
+[2025-12-05T03:16:25.859+0000] {data_processing.py:90} INFO - ✅ Ejemplos positivos (compraron): 6,960
+[2025-12-05T03:16:25.861+0000] {data_processing.py:105} INFO - 🎲 Generando 69,600 ejemplos negativos (ratio 10.0:1)...
+[2025-12-05T03:16:30.441+0000] {data_processing.py:133} INFO - ⚖️ Aplicando undersampling con RandomUnderSampler...
+[2025-12-05T03:16:30.441+0000] {data_processing.py:134} INFO -    Antes: 69,600 negativos
+[2025-12-05T03:16:30.459+0000] {data_processing.py:151} INFO -    Después: 6,960 negativos
+[2025-12-05T03:16:30.460+0000] {data_processing.py:155} INFO - 📊 Dataset balanceado:
+[2025-12-05T03:16:30.460+0000] {data_processing.py:156} INFO -    - Positivos: 6,960
+[2025-12-05T03:16:30.460+0000] {data_processing.py:157} INFO -    - Negativos: 6,960
+[2025-12-05T03:16:30.460+0000] {data_processing.py:158} INFO -    - Total: 13,920
+[2025-12-05T03:16:30.479+0000] {data_processing.py:197} INFO - Dataset merged: (13920, 17)
+[2025-12-05T03:16:30.480+0000] {data_processing.py:208} INFO - Features: ['customer_type', 'Y', 'X', 'num_deliver_per_week', 'brand', 'category', 'sub_category', 'segment', 'package', 'size']
+[2025-12-05T03:16:30.481+0000] {data_processing.py:209} INFO - Distribución de clases - 0: 6960, 1: 6960
+[2025-12-05T03:16:30.491+0000] {data_processing.py:217} INFO - Columna 'brand' convertida a 'brand_num' (numérica)
+[2025-12-05T03:16:30.496+0000] {data_processing.py:263} INFO - Ajustando preprocessor...
+[2025-12-05T03:16:30.516+0000] {data_processing.py:295} INFO - Datos transformados: (13920, 18)
+[2025-12-05T03:16:30.516+0000] {data_processing.py:296} INFO - Verificación de clases - 0: 6960, 1: 6960
+[2025-12-05T03:16:30.556+0000] {data_processing.py:323} INFO - Preprocessing completado exitosamente
+[2025-12-05T03:16:30.558+0000] {python.py:194} INFO - Done. Returned value was: {'status': 'success', 'processed_records': 13920, 'num_features': 15, 'positive_class': 6960, 'negative_class': 6960, 'prediction_week': '2024-12-29T00:00:00'}
+[2025-12-05T03:16:30.573+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=sodai_drinks_production_pipeline, task_id=process_data, execution_date=20251123T000000, start_date=20251205T031625, end_date=20251205T031630
+[2025-12-05T03:16:30.631+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-12-05T03:16:30.651+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check
